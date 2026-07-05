@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaezyth – Premium Pet Products</title>
+    <!-- On-screen Error Logger for Debugging -->
+    <script>
+        // Check if opened via file:// protocol
+        if (window.location.protocol === 'file:') {
+            window.addEventListener('DOMContentLoaded', () => {
+                document.body.innerHTML = `
+                    <div style="font-family: 'Outfit', sans-serif; background: #0F172A; color: white; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box;">
+                        <div style="max-width: 500px; background: #1E293B; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
+                            <h2 style="color: #EF4444; margin-bottom: 16px; font-size: 24px; font-weight: 800;">⚠️ Open via Local Server</h2>
+                            <p style="color: #94A3B8; font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+                                Opening HTML files directly (file://) blocks security requests needed to load React components. Please access the store through the local server:
+                            </p>
+                            <a href="http://localhost:8080" target="_blank" style="display: block; background: #0F172A; padding: 14px; border-radius: 6px; font-family: monospace; font-size: 16px; color: #22C55E; text-decoration: none; font-weight: bold; margin-bottom: 24px; border: 1px solid rgba(34, 197, 94, 0.2);">
+                                http://localhost:8080
+                            </a>
+                            <p style="color: #64748B; font-size: 12px;">
+                                (Click the link above or type it in your browser address bar)
+                            </p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.onerror = function(message, source, lineno, colno, error) {
+            // Suppress standard script errors if we already handled file protocol warning
+            if (window.location.protocol === 'file:') return true;
+            
+            var div = document.createElement('div');
+            div.style.color = '#ff6b6b';
+            div.style.padding = '20px';
+            div.style.background = '#1a1f2c';
+            div.style.border = '2px solid #ff6b6b';
+            div.style.position = 'fixed';
+            div.style.top = '20px';
+            div.style.left = '20px';
+            div.style.right = '20px';
+            div.style.zIndex = '99999';
+            div.style.fontFamily = 'monospace';
+            div.style.borderRadius = '8px';
+            div.innerHTML = '<h3 style="margin-bottom:10px;">⚠️ Browser JavaScript Error</h3>' +
+                '<p><strong>Message:</strong> ' + message + '</p>' +
+                '<p><strong>Source:</strong> ' + source + '</p>' +
+                '<p><strong>Line:</strong> ' + lineno + ':' + colno + '</p>' +
+                '<p style="margin-top:10px;font-size:12px;opacity:0.8;">Please send a screenshot or description of this error to get it fixed instantly.</p>';
+            document.body.appendChild(div);
+            return false;
+        };
+    </script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css?v=4.0.0">
+    <!-- React & Babel CDNs -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.23.5/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.300.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div id="root"></div>
+    <script type="text/babel" src="app.js?v=4.0.0"></script>
+</body>
+</html>
