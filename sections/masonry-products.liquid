@@ -44,8 +44,8 @@
       </div>
       <a href="{{ products[1].url | default: '#' }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 440px; background: #F8F8F8; border-radius: 24px; padding: 24px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
         <div style="flex: 1; display: flex; align-items: flex-start; justify-content: center; margin-bottom: 24px; overflow: hidden; border-radius: 16px;">
-          <!-- Using mix-blend-mode multiply to seamlessly integrate white background studio shots -->
-          <img src="{{ 'bottle_use.jpg' | asset_url }}" alt="{{ products[1].title | escape }}" style="width: 100%; height: 100%; max-height: 280px; object-fit: cover; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
+          <!-- Removed mix-blend-mode for the full lifestyle photo to preserve natural colors -->
+          <img src="{{ 'bottle_lifestyle.jpg' | asset_url }}" alt="{{ products[1].title | escape }}" style="width: 100%; height: 100%; max-height: 280px; object-fit: cover; border-radius: 16px;" onerror="this.style.display='none'" />
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #131110;">
@@ -73,7 +73,7 @@
       <a href="{{ products[2].url | default: '#' }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 280px; background: #F8F8F8; border-radius: 24px; padding: 24px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
         <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <!-- Using mix-blend-mode multiply to seamlessly integrate white background studio shots -->
-          <img src="{{ 'leash_1.jpg' | asset_url }}" alt="{{ products[2].title | escape }}" style="width: 100%; height: 100%; max-height: 140px; object-fit: contain; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
+          <img src="{{ 'poop_bags.jpg' | asset_url }}" alt="{{ products[2].title | escape }}" style="width: 100%; height: 100%; max-height: 140px; object-fit: contain; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #131110;">
