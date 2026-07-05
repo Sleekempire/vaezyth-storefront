@@ -1,6 +1,78 @@
-<footer style="text-align: center; padding: 40px 0; border-top: 1px solid #ddd; margin-top: 60px; color: #777; font-size: 12px;">
-  &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All Rights Reserved.
+<footer style="background-color: #0c0a09; color: #fff; padding: 100px 5% 0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden;">
+  <div style="max-width: 1400px; margin: 0 auto;">
+    
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-bottom: 120px;">
+      
+      <!-- Columns 1 to 4: Links -->
+      {% for i in (1..4) %}
+        <div>
+          <h4 style="color: #666; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; font-weight: 700;">
+            {% if forloop.index == 2 %}SUPPORT{% else %}IMPORTANT LINK{% endif %}
+          </h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;">
+            {% assign links = "HOME,ABOUT US,PROJECTS,NEWS,TEAM" | split: "," %}
+            {% if forloop.index == 2 %}
+              {% assign links = "FAQS,PRIVACY POLICY,TERMS OF SERVICES,TERMS OF CASE" | split: "," %}
+            {% endif %}
+            
+            {% for link in links %}
+              <li>
+                <a href="#" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">
+                  {{ link }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+
+      <!-- Column 5: Subscribe -->
+      <div style="display: flex; flex-direction: column; align-items: flex-end; text-align: right;">
+        <h3 style="font-family: 'Outfit', serif; font-size: 28px; font-weight: normal; margin-bottom: 12px; color: #fff;">Subscribe</h3>
+        <p style="font-size: 11px; color: #888; margin-bottom: 32px;">Join our newsletter for updates.</p>
+        <div style="width: 100%; max-width: 240px; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; padding-bottom: 8px;">
+          <input type="email" placeholder="Your email" style="background: transparent; border: none; outline: none; color: #fff; font-size: 12px; width: 100%; font-family: 'Plus Jakarta Sans', sans-serif;">
+          <button style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Huge Typography Marquee -->
+    <div style="position: relative; width: 100%; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; padding-bottom: 20px;">
+      <div style="display: flex; white-space: nowrap; font-family: 'Outfit', serif; font-size: clamp(80px, 15vw, 240px); font-weight: normal; color: #fff; line-height: 0.8; letter-spacing: -2px;">
+        <span style="display: inline-block;">
+          {{ shop.name }} <span style="color: #C5A880; font-family: 'Plus Jakarta Sans', sans-serif;">*</span> {{ shop.name }}
+        </span>
+      </div>
+    </div>
+
+  </div>
 </footer>
+
+<style>
+  @media (max-width: 900px) {
+    footer > div > div:first-child {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    footer > div > div:first-child > div:last-child {
+      grid-column: span 2;
+      align-items: flex-start !important;
+      text-align: left !important;
+      margin-top: 40px;
+    }
+  }
+  @media (max-width: 500px) {
+    footer > div > div:first-child {
+      grid-template-columns: 1fr !important;
+    }
+    footer > div > div:first-child > div:last-child {
+      grid-column: span 1;
+    }
+  }
+</style>
 
 {% schema %}
 {

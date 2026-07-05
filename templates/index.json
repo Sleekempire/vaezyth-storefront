@@ -38,12 +38,17 @@
         "title": "Best Sellers",
         "collection": "frontpage"
       }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
     }
   },
   "order": [
     "hero",
     "marquee",
     "masonry_products",
-    "featured_collection"
+    "featured_collection",
+    "faq"
   ]
 }

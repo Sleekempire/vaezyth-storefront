@@ -1,0 +1,145 @@
+<div class="faq-section" style="background-color: #f6f5f0; padding: 100px 5%; font-family: 'Plus Jakarta Sans', sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 style="font-family: 'Outfit', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: #111; text-align: center; margin-bottom: 80px;">
+      {{ section.settings.title }}
+    </h2>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start;">
+      
+      <!-- Left Column -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="width: 280px; height: 280px; background-color: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+          <div style="width: 140px; height: 140px; background: url('{{ 'leash_luxury_hero.jpg' | asset_url }}') center/cover; border-radius: 12px; border: 4px solid #333;"></div>
+        </div>
+        <p style="font-size: 10px; color: #666; line-height: 1.6; max-width: 280px; text-transform: uppercase; letter-spacing: 0.5px;">
+          {{ section.settings.left_text }}
+        </p>
+      </div>
+
+      <!-- Right Column: Accordion -->
+      <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 16px;">
+        {% for block in section.blocks %}
+          <div class="faq-item" style="border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px;">
+            <button class="faq-toggle" style="width: 100%; display: flex; align-items: center; justify-content: space-between; background: transparent; border: none; padding: 16px 24px; cursor: pointer; border-radius: 50px; transition: all 0.3s ease;">
+              <span style="font-size: 11px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 1px;">
+                0{{ forloop.index }} / {{ block.settings.question }}
+              </span>
+              <span class="faq-icon" style="width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: transparent; color: #111; transition: all 0.3s ease;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+              <p style="padding: 0 24px 24px; font-size: 12px; color: #666; line-height: 1.6;">
+                {{ block.settings.answer }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .faq-item.active .faq-toggle {
+    background: #111 !important;
+  }
+  .faq-item.active .faq-toggle span {
+    color: #fff !important;
+  }
+  .faq-item.active .faq-icon {
+    background: #fff !important;
+    color: #111 !important;
+    transform: rotate(180deg);
+  }
+  @media (max-width: 900px) {
+    .faq-section > div > div {
+      grid-template-columns: 1fr !important;
+      gap: 48px !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item, index) => {
+      const toggle = item.querySelector('.faq-toggle');
+      toggle.addEventListener('click', () => {
+        // Close others
+        faqItems.forEach(other => {
+          if (other !== item && other.classList.contains('active')) {
+            other.classList.remove('active');
+            other.querySelector('.faq-content').style.maxHeight = null;
+          }
+        });
+        
+        // Toggle current
+        item.classList.toggle('active');
+        const content = item.querySelector('.faq-content');
+        if (item.classList.contains('active')) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+          content.style.maxHeight = null;
+        }
+      });
+
+      // Open second item by default to match screenshot
+      if (index === 1) {
+        toggle.click();
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "left_text",
+      "label": "Left Column Text",
+      "default": "We value clear communication and transparency to ensure your experience with our products is seamless and inspiring."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "WHAT MATERIAL IS IT MADE OF?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Our products are designed to provide the best aesthetic and functionality for your modern home."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "WHERE ARE YOU LOCATED?", "answer": "We are an online store shipping globally from our central fulfillment centers." } },
+        { "type": "faq", "settings": { "question": "WHAT MATERIALS ARE YOUR PRODUCTS MADE OF?", "answer": "We use highly durable, premium materials designed for both aesthetic appeal and rigorous daily use." } },
+        { "type": "faq", "settings": { "question": "HOW LONG DOES DELIVERY TAKE?", "answer": "Standard delivery typically takes 3-5 business days depending on your location." } },
+        { "type": "faq", "settings": { "question": "DO YOU OFFER RETURNS?", "answer": "Yes, we offer a 30-day money-back guarantee for all unused items in their original packaging." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
