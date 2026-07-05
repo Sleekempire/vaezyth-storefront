@@ -43,7 +43,7 @@
     <div class="bento-grid">
       
       <!-- Left: Large Card (Product 1) -->
-      {% assign product_1 = target_collection.products[0] %}
+      {% assign product_1 = target_collection.products[3] %}
       <div class="bento-hover-card" style="background: #fff; border-radius: 24px; padding: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
         <a href="{{ product_1.url }}" style="text-decoration: none; color: inherit; display: block; width: 100%;">
           <div style="height: 320px; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; border-radius: 16px; overflow: hidden;">
@@ -64,7 +64,7 @@
       <div style="display: flex; flex-direction: column; gap: 24px;">
         
         <!-- Right Top: Wide Dark Card (Product 2) -->
-        {% assign product_2 = target_collection.products[1] %}
+        {% assign product_2 = target_collection.products[0] %}
         <div class="bento-hover-card" style="background: #282828; border-radius: 24px; padding: 40px; color: #fff; display: flex; align-items: center; gap: 24px; flex: 1;">
           <div style="flex: 1;">
             <a href="{{ product_2.url }}" style="text-decoration: none; color: inherit;">
@@ -86,7 +86,7 @@
         <div class="bento-bottom-split">
           
           <!-- Product 3 -->
-          {% assign product_3 = target_collection.products[3] %}
+          {% assign product_3 = target_collection.products[2] %}
           <div class="bento-hover-card" style="background: #fff; border-radius: 24px; padding: 32px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
             <a href="{{ product_3.url }}" style="text-decoration: none; color: inherit;">
               <div style="height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border-radius: 16px; overflow: hidden;">
