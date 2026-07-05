@@ -1,0 +1,23 @@
+<div id="CartDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.5); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;">
+  <div id="CartDrawer" style="position: absolute; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100%; background-color: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; pointer-events: auto;">
+    <div style="padding: 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="margin: 0; font-size: 20px;">Your Cart</h3>
+      <button class="cart-close-btn" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+    </div>
+    
+    <div id="CartDrawerItems" style="padding: 24px; flex: 1; overflow-y: auto;">
+      <!-- AJAX items will be injected here -->
+      <p style="color: #777;">Your cart is loading...</p>
+    </div>
+    
+    <div style="padding: 24px; border-top: 1px solid #eee; background: #fafafa;">
+      <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 16px;">
+        <span>Total</span>
+        <span id="CartDrawerTotal">£0.00</span>
+      </div>
+      <form action="/checkout" method="post" novalidate>
+        <button type="submit" style="width: 100%; padding: 16px; background: #1c1917; color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase;">Checkout</button>
+      </form>
+    </div>
+  </div>
+</div>

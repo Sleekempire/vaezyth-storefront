@@ -1,0 +1,22 @@
+<div class="product-page" style="max-width: 1200px; margin: 0 auto; padding: 40px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+  <div class="product-image">
+    <img src="{{ product.featured_image | img_url: '1024x1024' }}" alt="{{ product.title }}" style="width: 100%; border-radius: 16px; background: #f9f9f9;" />
+  </div>
+  <div class="product-details">
+    <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 8px;">{{ product.title }}</h1>
+    <p style="font-size: 24px; color: #555; margin-bottom: 24px;">{{ product.price | money }}</p>
+    <div style="margin-bottom: 32px;">{{ product.description }}</div>
+    
+    <form method="post" action="/cart/add">
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+      <button type="submit" class="btn-dark" style="width: 100%; padding: 16px; background: #1c1917; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Add to Cart</button>
+    </form>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": []
+}
+{% endschema %}
