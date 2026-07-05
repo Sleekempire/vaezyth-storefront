@@ -1,8 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-banner",
-      "settings": {}
+      "settings": {
+        "heading": "Vaezyth",
+        "description": "Discover elegant, modern, and highly durable pet gear crafted to elevate every walk and complement your home.",
+        "button_text": "Shop Collection",
+        "button_link": "",
+        "badge_sub": "5.0M NYLON TAPE",
+        "badge_title": "Integrated Dispenser & LED",
+        "badge_price": "£24.99"
+      }
     },
     "marquee": {
       "type": "marquee",
@@ -15,7 +32,8 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Best Sellers"
+        "title": "Best Sellers",
+        "collection": "frontpage"
       }
     }
   },
