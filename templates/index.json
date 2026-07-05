@@ -25,9 +25,12 @@
       "type": "marquee",
       "settings": {}
     },
-    "benefits": {
-      "type": "benefits",
-      "settings": {}
+    "masonry_products": {
+      "type": "masonry-products",
+      "settings": {
+        "title": "Best Sellers",
+        "collection": "frontpage"
+      }
     },
     "featured_collection": {
       "type": "featured-collection",
@@ -40,7 +43,7 @@
   "order": [
     "hero",
     "marquee",
-    "benefits",
+    "masonry_products",
     "featured_collection"
   ]
 }
