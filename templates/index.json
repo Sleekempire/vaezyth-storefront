@@ -41,7 +41,10 @@
     },
     "faq": {
       "type": "faq",
-      "settings": {}
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "left_text": "We value clear communication and transparency to ensure your experience with our products is seamless and inspiring."
+      }
     }
   },
   "order": [
