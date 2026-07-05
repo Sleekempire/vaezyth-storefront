@@ -1,17 +1,17 @@
-<div class="template-hero" style="display: grid; grid-template-columns: 1fr 1fr; background: #C5A880; margin-bottom: 32px; padding: 100px 48px 24px 48px; align-items: center; gap: 40px; width: 100vw;">
+<div class="template-hero" style="display: grid; grid-template-columns: 1fr 1fr; background: #1c1917; margin-bottom: 32px; padding: 100px 48px 24px 48px; align-items: center; gap: 40px; width: 100vw;">
   <div class="hero-left-panel" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-    <a href="{{ section.settings.button_link }}" class="btn-hero-cta" style="background: #131110; color: #fff; border-radius: 50px; border: 1px solid #131110; padding: 12px 32px; letter-spacing: 1px; text-transform: uppercase; font-size: 11px; font-weight: bold; text-decoration: none; display: inline-block; margin-bottom: 24px; transition: background 0.3s;">
+    <a href="{{ section.settings.button_link }}" class="btn-hero-cta" style="background: #222; color: #fff; border-radius: 50px; border: 1px solid #444; padding: 12px 32px; letter-spacing: 1px; text-transform: uppercase; font-size: 11px; font-weight: bold; text-decoration: none; display: inline-block; margin-bottom: 24px; transition: background 0.3s;">
       {{ section.settings.button_text }} ↗
     </a>
     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-      <span style="border: 1px solid rgba(0,0,0,0.15); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #131110; font-weight: 600;">Durable Materials *</span>
-      <span style="border: 1px solid rgba(0,0,0,0.15); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #131110; font-weight: 600;">Modern Aesthetics *</span>
-      <span style="border: 1px solid rgba(0,0,0,0.15); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #131110; font-weight: 600;">Everyday Comfort *</span>
-      <span style="border: 1px solid rgba(0,0,0,0.15); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #131110; font-weight: 600;">Built to Last *</span>
+      <span style="border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #fff; font-weight: 600;">Durable Materials *</span>
+      <span style="border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #fff; font-weight: 600;">Modern Aesthetics *</span>
+      <span style="border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #fff; font-weight: 600;">Everyday Comfort *</span>
+      <span style="border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 50px; font-size: 10px; color: #fff; font-weight: 600;">Built to Last *</span>
     </div>
   </div>
   <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center; height: 100%;">
-    <p style="color: #131110; font-size: 16px; max-width: 320px; text-align: right; margin-bottom: 32px; line-height: 1.6;">
+    <p style="color: #fff; font-size: 16px; max-width: 320px; text-align: right; margin-bottom: 32px; line-height: 1.6;">
       {{ section.settings.description }}
     </p>
     <div class="hero-right-media" style="position: relative; border-radius: 16px; overflow: hidden; width: 100%; max-height: 320px;">
@@ -20,8 +20,8 @@
       {% else %}
         <img src="{{ 'leash_luxury_hero.jpg' | asset_url }}" alt="Leash" style="width: 100%; height: 100%; object-fit: cover;" />
       {% endif %}
-      <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding: 16px; border-radius: 12px; color: #131110; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-        <div style="font-size: 9px; font-weight: bold; letter-spacing: 1px; margin-bottom: 4px; color: #666;">{{ section.settings.badge_sub }}</div>
+      <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 16px; border-radius: 12px; color: #fff; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="font-size: 9px; font-weight: bold; letter-spacing: 1px; margin-bottom: 4px; color: #fff;">{{ section.settings.badge_sub }}</div>
         <div style="font-size: 14px; font-weight: bold; margin-bottom: 8px;">{{ section.settings.badge_title }}</div>
         <div style="font-size: 16px; font-weight: bold;">{{ section.settings.badge_price }}</div>
       </div>
