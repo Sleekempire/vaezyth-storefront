@@ -4,9 +4,9 @@
       <a href="/" class="brand-logo-text" style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 800; font-style: italic; text-decoration: none; color: #1c1917;">Vaezyth</a>
     </div>
     <div class="nav-links" style="background: #fff; border-radius: 50px; padding: 6px 20px; border: 1px solid #e0e0e0; display: flex; gap: 24px;">
-      {% for link in linklists.main-menu.links %}
-        <a href="{{ link.url }}" class="nav-link {% if link.active %}active{% endif %}" style="text-decoration: none; color: #1c1917;">{{ link.title }}</a>
-      {% endfor %}
+      <a href="/" class="nav-link">Home</a>
+      <a href="/collections/all" class="nav-link">Catalog</a>
+      <a href="/pages/contact" class="nav-link">Contact</a>
     </div>
     <div class="nav-actions">
       <button class="btn-nav-action cart-toggle-btn" style="position: relative; border: none; background: none; cursor: pointer;">

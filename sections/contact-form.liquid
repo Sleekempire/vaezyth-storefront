@@ -1,0 +1,47 @@
+<div class="app-container" style="padding-top: 60px; padding-bottom: 80px;">
+  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 48px; border-radius: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.05); border: 1px solid #E8E2D7;">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: normal; font-style: italic; color: #131110; margin-bottom: 16px; text-align: center;">
+      Get in Touch
+    </h1>
+    <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 15px;">
+      Have a question about our products or your order? Fill out the form below and our team will assist you within 24 hours.
+    </p>
+
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <div style="background: #e6f4ea; color: #1e8e3e; padding: 16px; border-radius: 8px; margin-bottom: 24px; text-align: center; font-weight: bold;">
+          Thanks for reaching out! We'll get back to you soon.
+        </div>
+      {% endif %}
+
+      {{ form.errors | default_errors }}
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div style="display: flex; flex-direction: column;">
+          <label for="ContactFormName" style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #131110; margin-bottom: 8px;">Name</label>
+          <input type="text" id="ContactFormName" name="contact[name]" style="padding: 14px 16px; border: 1px solid #E8E2D7; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none; background: #FAF7F2;">
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <label for="ContactFormEmail" style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #131110; margin-bottom: 8px;">Email *</label>
+          <input type="email" id="ContactFormEmail" name="contact[email]" required style="padding: 14px 16px; border: 1px solid #E8E2D7; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none; background: #FAF7F2;">
+        </div>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; margin-bottom: 24px;">
+        <label for="ContactFormMessage" style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #131110; margin-bottom: 8px;">Message *</label>
+        <textarea rows="6" id="ContactFormMessage" name="contact[body]" required style="padding: 14px 16px; border: 1px solid #E8E2D7; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none; background: #FAF7F2; resize: vertical;"></textarea>
+      </div>
+
+      <button type="submit" style="width: 100%; background: #131110; color: #ffffff; padding: 16px; border: none; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: background 0.3s ease;">
+        Send Message
+      </button>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": []
+}
+{% endschema %}
