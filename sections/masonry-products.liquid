@@ -41,16 +41,16 @@
         <p style="font-size: 10px; font-weight: bold; color: #C5A880; letter-spacing: 1px; margin-bottom: 8px;">EST 2026</p>
         <p style="font-size: 12px; color: #666; line-height: 1.6;">Our collection of modern, timeless, and smart pet gear is designed to add warmth, comfort, and beauty to your home.</p>
       </div>
-      <a href="{{ collections[section.settings.collection].url }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 440px; background: #0c0a09; border-radius: 24px; padding: 24px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; overflow: hidden;">
-          <!-- Using object-fit: contain and mix-blend-mode: lighten to seamlessly blend the dark studio shot -->
-          <img src="{{ 'bottle_use.jpg' | asset_url }}" alt="Smart Pet Water Bottle" style="width: 100%; height: 100%; max-height: 280px; object-fit: contain; mix-blend-mode: lighten;" onerror="this.style.display='none'" />
+      <a href="{{ collections[section.settings.collection].url }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 440px; background: #0c0a09; border-radius: 24px; overflow: hidden; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <div style="flex: 1; width: 100%; overflow: hidden;">
+          <!-- Using full-bleed cover to perfectly frame the dark grey studio background without awkward blending artifacts -->
+          <img src="{{ 'bottle_use.jpg' | asset_url }}" alt="Smart Pet Water Bottle" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" />
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #fff;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #fff; padding: 24px;">
           <div style="flex: 1; padding-right: 12px;">
             <h4 style="font-family: 'Outfit', sans-serif; font-size: 16px; margin-bottom: 4px; font-weight: 700;">Smart Pet Water Bottle</h4>
-            <p style="font-size: 12px; color: #888;">Price - £18.99</p>
+            <p style="font-size: 12px; color: rgba(255,255,255,0.6);">Price - £18.99</p>
           </div>
           <div style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0;">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
