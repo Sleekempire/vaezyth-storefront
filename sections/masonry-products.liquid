@@ -10,72 +10,78 @@
   </div>
 
   <div class="masonry-grid" style="display: flex; gap: 24px; align-items: flex-end;">
-    <!-- Left Column: Tall -->
+    <!-- Left Column: Tall Dark Card (Perfect for the black litter mat) -->
     <div class="masonry-col" style="flex: 1.2;">
-      <a href="{{ products[0].url | default: '#' }}" class="masonry-card" style="display: block; position: relative; height: 600px; border-radius: 24px; overflow: hidden; text-decoration: none; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease;">
-        <img src="{{ products[0].featured_image | img_url: 'master' }}" alt="{{ products[0].title | escape }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" onerror="this.src='https://via.placeholder.com/600x800'" />
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);"></div>
+      <a href="{{ products[0].url | default: '#' }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 600px; background: #0c0a09; border-radius: 24px; padding: 32px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <div style="color: #fff; position: relative; z-index: 2;">
+          <p style="font-size: 10px; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; color: #888;">Explore Collections</p>
+          <p style="font-size: 14px; font-weight: bold;">21/05/25</p>
+        </div>
         
-        <div style="position: absolute; top: 32px; left: 32px; color: #fff;">
-          <p style="font-size: 12px; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Explore Collections</p>
-          <p style="font-size: 12px; opacity: 0.8; font-weight: 500;">Best Sellers</p>
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin: 24px 0; overflow: hidden;">
+          <!-- Using object-fit: contain ensures the studio shot fits perfectly without cropping -->
+          <img src="{{ products[0].featured_image | img_url: 'master' }}" alt="{{ products[0].title | escape }}" style="width: 100%; height: 100%; max-height: 360px; object-fit: contain; border-radius: 16px; mix-blend-mode: screen;" onerror="this.style.display='none'" />
         </div>
 
-        <div style="position: absolute; bottom: 24px; left: 24px; right: 24px; background: rgba(255,255,255,0.15); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.3); border-radius: 24px; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; color: #fff;">
-          <div>
-            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; margin-bottom: 4px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">{{ products[0].title | default: 'Premium Pet Mat' }}</h4>
-            <p style="font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500;">{{ products[0].price | money | default: '£24.99' }}</p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #fff; position: relative; z-index: 2;">
+          <div style="flex: 1; padding-right: 16px;">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; margin-bottom: 4px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ products[0].title | default: 'Premium Pet Mat' }}</h4>
+            <p style="font-size: 12px; color: #888;">Price - {{ products[0].price | money | default: '£24.99' }}</p>
           </div>
-          <div style="width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #131110; box-shadow: 0 4px 12px rgba(0,0,0,0.2); flex-shrink: 0; margin-left: 16px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- Middle Column: Medium -->
+    <!-- Middle Column: Medium Light Card (Perfect for the dog or green bottle) -->
     <div class="masonry-col" style="flex: 1; display: flex; flex-direction: column;">
-      <div style="margin-bottom: 24px; padding: 0 16px;">
-        <p style="font-size: 10px; font-weight: 800; color: #C5A880; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;">EST 2026</p>
-        <p style="font-size: 13px; color: #666; line-height: 1.6; font-family: 'Outfit', sans-serif;">Our collection of smart, timeless pet gear is meticulously designed to add warmth, comfort, and architectural beauty to your home.</p>
+      <div style="margin-bottom: 24px; padding: 0 8px;">
+        <p style="font-size: 10px; font-weight: bold; color: #C5A880; letter-spacing: 1px; margin-bottom: 8px;">EST 2026</p>
+        <p style="font-size: 12px; color: #666; line-height: 1.6;">Our collection of modern, timeless, and smart pet gear is designed to add warmth, comfort, and beauty to your home.</p>
       </div>
-      <a href="{{ products[1].url | default: '#' }}" class="masonry-card" style="display: block; position: relative; height: 460px; border-radius: 24px; overflow: hidden; text-decoration: none; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease;">
-        <img src="{{ products[1].featured_image | img_url: 'master' }}" alt="{{ products[1].title | escape }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" onerror="this.src='https://via.placeholder.com/600x600'" />
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);"></div>
+      <a href="{{ products[1].url | default: '#' }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 440px; background: #F8F8F8; border-radius: 24px; padding: 24px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <div style="flex: 1; display: flex; align-items: flex-start; justify-content: center; margin-bottom: 24px; overflow: hidden; border-radius: 16px;">
+          <!-- Using mix-blend-mode multiply to seamlessly integrate white background studio shots -->
+          <img src="{{ products[1].featured_image | img_url: 'master' }}" alt="{{ products[1].title | escape }}" style="width: 100%; height: 100%; max-height: 280px; object-fit: cover; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
+        </div>
 
-        <div style="position: absolute; bottom: 24px; left: 24px; right: 24px; background: rgba(255,255,255,0.15); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.3); border-radius: 24px; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; color: #fff;">
-          <div>
-            <h4 style="font-family: 'Outfit', sans-serif; font-size: 16px; margin-bottom: 4px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">{{ products[1].title | default: 'Smart Auto Feeder' }}</h4>
-            <p style="font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500;">{{ products[1].price | money | default: '£189.99' }}</p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #131110;">
+          <div style="flex: 1; padding-right: 12px;">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 16px; margin-bottom: 4px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ products[1].title | default: 'Pet Water Bottle' }}</h4>
+            <p style="font-size: 12px; color: #666;">Price - {{ products[1].price | money | default: '£18.99' }}</p>
           </div>
-          <div style="width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #131110; box-shadow: 0 4px 12px rgba(0,0,0,0.2); flex-shrink: 0; margin-left: 16px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <div style="width: 36px; height: 36px; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #131110; flex-shrink: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- Right Column: Small -->
+    <!-- Right Column: Small Light Card (Perfect for the leash) -->
     <div class="masonry-col" style="flex: 1; display: flex; flex-direction: column;">
-      <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 24px;">
-        <button style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #666; transition: background 0.3s;">
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 24px;">
+        <button style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #666;">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <button style="width: 36px; height: 36px; border-radius: 50%; border: none; background: #C5A880; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; transition: background 0.3s; box-shadow: 0 4px 12px rgba(197, 168, 128, 0.4);">
+        <button style="width: 32px; height: 32px; border-radius: 50%; border: none; background: #C5A880; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff;">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
-      <a href="{{ products[2].url | default: '#' }}" class="masonry-card" style="display: block; position: relative; height: 320px; border-radius: 24px; overflow: hidden; text-decoration: none; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease;">
-        <img src="{{ products[2].featured_image | img_url: 'master' }}" alt="{{ products[2].title | escape }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" onerror="this.src='https://via.placeholder.com/600x400'" />
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);"></div>
+      <a href="{{ products[2].url | default: '#' }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 280px; background: #F8F8F8; border-radius: 24px; padding: 24px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+          <!-- Using mix-blend-mode multiply to seamlessly integrate white background studio shots -->
+          <img src="{{ products[2].featured_image | img_url: 'master' }}" alt="{{ products[2].title | escape }}" style="width: 100%; height: 100%; max-height: 140px; object-fit: contain; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
+        </div>
 
-        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(255,255,255,0.15); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.3); border-radius: 24px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; color: #fff;">
-          <div>
-            <h4 style="font-family: 'Outfit', sans-serif; font-size: 15px; margin-bottom: 2px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">{{ products[2].title | default: 'Luxury Leather Leash' }}</h4>
-            <p style="font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 500;">{{ products[2].price | money | default: '£65.00' }}</p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #131110;">
+          <div style="flex: 1; padding-right: 12px;">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 14px; margin-bottom: 2px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ products[2].title | default: 'Retractable Leash' }}</h4>
+            <p style="font-size: 11px; color: #666;">Price - {{ products[2].price | money | default: '£22.50' }}</p>
           </div>
-          <div style="width: 32px; height: 32px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #131110; box-shadow: 0 4px 12px rgba(0,0,0,0.2); flex-shrink: 0; margin-left: 12px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <div style="width: 32px; height: 32px; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #131110; flex-shrink: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           </div>
         </div>
       </a>
