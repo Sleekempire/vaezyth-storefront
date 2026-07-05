@@ -4,6 +4,14 @@
       "type": "hero-banner",
       "settings": {}
     },
+    "marquee": {
+      "type": "marquee",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {}
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -13,6 +21,8 @@
   },
   "order": [
     "hero",
+    "marquee",
+    "benefits",
     "featured_collection"
   ]
 }
