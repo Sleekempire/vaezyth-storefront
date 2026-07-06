@@ -1,0 +1,67 @@
+<div style="background-color: #f6f5f0; padding: 120px 5%; font-family: 'Plus Jakarta Sans', sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+      <!-- Image Column -->
+      <div style="width: 100%; height: 600px; background: url('{{ 'leash_luxury_hero.jpg' | asset_url }}') center/cover; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></div>
+      
+      <!-- Text Column -->
+      <div style="display: flex; flex-direction: column;">
+        <h2 style="font-family: 'Outfit', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 400; color: #111; margin-bottom: 32px; line-height: 1.1;">
+          {{ section.settings.heading }}
+        </h2>
+        <p style="font-size: 16px; color: #666; line-height: 1.8; margin-bottom: 24px;">
+          {{ section.settings.paragraph_1 }}
+        </p>
+        <p style="font-size: 16px; color: #666; line-height: 1.8; margin-bottom: 40px;">
+          {{ section.settings.paragraph_2 }}
+        </p>
+        <a href="/collections/all" style="display: inline-block; background-color: #111; color: #fff; padding: 18px 40px; text-decoration: none; border-radius: 50px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; width: fit-content; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+          Explore Collections
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @media (max-width: 900px) {
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+      gap: 48px !important;
+    }
+    div[style*="height: 600px"] {
+      height: 400px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Elevating the everyday."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "At Vaezyth, we believe that the objects we interact with daily should not only be highly functional but also remarkably beautiful. Our journey began with a simple idea: to redesign the essentials."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "Every product we craft is a testament to our commitment to quality, aesthetic precision, and modern living. We source the finest materials to ensure durability while maintaining a sleek, minimalist profile that fits effortlessly into your lifestyle."
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us"
+    }
+  ]
+}
+{% endschema %}
