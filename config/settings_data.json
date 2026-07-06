@@ -15,7 +15,10 @@
     "sections": {
       "header": {
         "type": "header",
-        "settings": {}
+        "settings": {
+          "logo": "shopify://shop_images/logo_for_brand.png",
+          "logo_max_height": 40
+        }
       },
       "footer": {
         "type": "footer",
