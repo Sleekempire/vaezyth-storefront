@@ -1,5 +1,33 @@
+<style>
+  .btn-nav-action:hover {
+    background: rgba(255,255,255,0.2) !important;
+    border-color: rgba(255,255,255,0.4) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  @media (max-width: 900px) {
+    .site-header { padding: 16px 20px !important; }
+    .mobile-menu-toggle { display: block !important; }
+    .nav-links { 
+      display: none !important; 
+      position: absolute; 
+      top: 100%; 
+      left: 0; 
+      width: 100%; 
+      background: #1c1917; 
+      flex-direction: column; 
+      padding: 24px !important; 
+      border-radius: 0 0 16px 16px; 
+      border: none !important; 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      z-index: 200;
+    }
+    .nav-links.active { display: flex !important; }
+  }
+</style>
+
 <div class="brand-logo-group" style="cursor: pointer; flex: 1; display: flex; align-items: center;">
-  <div class="mobile-menu-toggle" style="display: none; cursor: pointer; color: #ffffff; margin-right: 16px; padding: 8px;">
+  <div class="mobile-menu-toggle" onclick="this.parentElement.nextElementSibling.classList.toggle('active')" style="display: none; cursor: pointer; color: #ffffff; margin-right: 16px; padding: 8px;">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
   </div>
   <a href="/" class="brand-logo-link" style="text-decoration: none; display: inline-block;">
