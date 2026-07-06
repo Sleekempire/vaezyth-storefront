@@ -30,6 +30,28 @@
   </div>
 </div>
 
+<style>
+  @media (max-width: 900px) {
+    .template-hero {
+      grid-template-columns: 1fr !important;
+      padding: 120px 24px 24px 24px !important;
+      text-align: center !important;
+    }
+    .hero-left-panel {
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .hero-left-panel > div {
+      justify-content: center !important;
+    }
+    .template-hero > div:last-of-type {
+      align-items: center !important;
+    }
+    .template-hero > div:last-of-type p {
+      text-align: center !important;
+    }
+  }
+</style>
 {% schema %}
 {
   "name": "Hero Banner",
