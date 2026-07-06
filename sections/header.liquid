@@ -8,8 +8,14 @@
 </style>
 
 <header class="site-header" style="position: absolute; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; background: transparent;">
-  <div class="brand-logo-group" style="cursor: pointer; flex: 1;">
-    <a href="/" class="brand-logo-text" style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -1px; text-decoration: none; color: #ffffff;">VAEZYTH</a>
+  <div class="brand-logo-group" style="cursor: pointer; flex: 1; display: flex; align-items: center;">
+    <a href="/" class="brand-logo-link" style="text-decoration: none; display: inline-block;">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ shop.name }}" style="max-height: {{ section.settings.logo_max_height }}px; width: auto; object-fit: contain;">
+      {% else %}
+        <span class="brand-logo-text" style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -1px; color: #ffffff;">VAEZYTH</span>
+      {% endif %}
+    </a>
   </div>
   <div class="nav-links" style="display: flex; gap: 32px; background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); padding: 12px 32px; border-radius: 50px;">
     <a href="/" class="nav-link" style="text-decoration: none; color: #ffffff; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Home</a>
@@ -30,6 +36,22 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_height",
+      "label": "Custom logo height",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    }
+  ]
 }
 {% endschema %}
