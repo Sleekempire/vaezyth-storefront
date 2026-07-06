@@ -1,5 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "current": "Default",
+  "current": {
+    "color_primary": "#1c1917",
+    "color_secondary": "#ffffff",
+    "color_background": "#FAF7F2",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "15779431959803902476": {
+        "type": "shopify://apps/teemdrop-dropshipping/blocks/cart-replacer-global/bc06b585-387a-4e30-b058-9045d37e3f95",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
   "presets": {
     "Default": {
       "color_primary": "#1c1917",
