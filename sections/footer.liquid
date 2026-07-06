@@ -1,4 +1,4 @@
-<footer style="background-color: #0c0a09; color: #fff; padding: 40px 5% 0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden;">
+<footer style="background-color: #0c0a09; color: #fff; padding: 32px 5% 0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden;">
   <div style="max-width: 1400px; margin: 0 auto;">
     
     <div style="display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 32px;">
@@ -30,8 +30,8 @@
 
       <!-- Column 3: Subscribe -->
       <div style="display: flex; flex-direction: column; align-items: flex-end; text-align: right;">
-        <h3 style="font-family: 'Outfit', serif; font-size: 28px; font-weight: normal; margin-bottom: 12px; color: #fff;">Subscribe</h3>
-        <p style="font-size: 11px; color: #888; margin-bottom: 32px;">Join our newsletter for updates.</p>
+        <h3 class="footer-subscribe-title" style="font-family: 'Outfit', serif; font-size: 28px; font-weight: normal; margin-bottom: 12px; color: #fff;">Subscribe</h3>
+        <p class="footer-subscribe-desc" style="font-size: 11px; color: #888; margin-bottom: 32px;">Join our newsletter for updates.</p>
         <div style="width: 100%; max-width: 240px; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; padding-bottom: 8px;">
           <input type="email" placeholder="Your email" style="background: transparent; border: none; outline: none; color: #fff; font-size: 12px; width: 100%; font-family: 'Plus Jakarta Sans', sans-serif;">
           <button style="background: transparent; border: none; color: #fff; cursor: pointer; padding: 0;">
@@ -56,21 +56,17 @@
   @media (max-width: 900px) {
     footer > div > div:first-child {
       grid-template-columns: repeat(2, 1fr) !important;
+      gap: 24px !important;
+      margin-bottom: 24px !important;
     }
     footer > div > div:first-child > div:last-child {
       grid-column: span 2;
       align-items: flex-start !important;
       text-align: left !important;
-      margin-top: 40px;
+      margin-top: 16px;
     }
-  }
-  @media (max-width: 500px) {
-    footer > div > div:first-child {
-      grid-template-columns: 1fr !important;
-    }
-    footer > div > div:first-child > div:last-child {
-      grid-column: span 1;
-    }
+    .footer-subscribe-title { font-size: 20px !important; margin-bottom: 8px !important; }
+    .footer-subscribe-desc { margin-bottom: 16px !important; }
   }
 </style>
 
