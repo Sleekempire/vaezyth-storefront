@@ -1,0 +1,86 @@
+<div class="page-container" style="max-width: 800px; margin: 0 auto; padding: 120px 24px 80px; font-family: 'Plus Jakarta Sans', sans-serif;">
+  <div class="page-header" style="text-align: center; margin-bottom: 64px;">
+    <h1 class="page-title" style="font-family: 'Outfit', serif; font-size: 48px; font-weight: 800; color: #131110; margin-bottom: 16px; letter-spacing: -1px; text-transform: uppercase;">
+      {{ page.title }}
+    </h1>
+    <div style="width: 40px; height: 3px; background-color: #C5A880; margin: 0 auto;"></div>
+  </div>
+
+  <div class="page-content rte" style="font-size: 16px; line-height: 1.8; color: #333;">
+    {{ page.content }}
+  </div>
+</div>
+
+<style>
+  /* Rich Text Editor Formatting for Premium Readability */
+  .rte h1, .rte h2, .rte h3, .rte h4, .rte h5, .rte h6 {
+    font-family: 'Outfit', sans-serif;
+    color: #131110;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  
+  .rte h2 {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+  
+  .rte h3 {
+    font-size: 22px;
+  }
+
+  .rte p {
+    margin-bottom: 24px;
+    color: #5A5249;
+  }
+
+  .rte ul, .rte ol {
+    margin-bottom: 24px;
+    padding-left: 24px;
+    color: #5A5249;
+  }
+
+  .rte li {
+    margin-bottom: 12px;
+  }
+
+  .rte a {
+    color: #C5A880;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+
+  .rte a:hover {
+    border-bottom-color: #C5A880;
+    color: #131110;
+  }
+
+  .rte blockquote {
+    border-left: 4px solid #C5A880;
+    padding-left: 24px;
+    margin-left: 0;
+    font-style: italic;
+    color: #131110;
+    font-size: 18px;
+    background: rgba(197, 168, 128, 0.05);
+    padding: 24px;
+    border-radius: 0 12px 12px 0;
+  }
+
+  .rte img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 32px 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}
