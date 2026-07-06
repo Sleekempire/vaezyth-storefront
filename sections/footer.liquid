@@ -1,32 +1,43 @@
 <footer style="background-color: #0c0a09; color: #fff; padding: 100px 5% 0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden;">
   <div style="max-width: 1400px; margin: 0 auto;">
     
-    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-bottom: 120px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 120px;">
       
-      <!-- Columns 1 to 4: Links -->
-      {% for i in (1..4) %}
-        <div>
-          <h4 style="color: #666; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; font-weight: 700;">
-            {% if forloop.index == 2 %}SUPPORT{% else %}IMPORTANT LINK{% endif %}
-          </h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;">
-            {% assign links = "HOME,ABOUT US,PROJECTS,NEWS,TEAM" | split: "," %}
-            {% if forloop.index == 2 %}
-              {% assign links = "FAQS,PRIVACY POLICY,TERMS OF SERVICES,TERMS OF CASE" | split: "," %}
-            {% endif %}
-            
-            {% for link in links %}
-              <li>
-                <a href="#" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">
-                  {{ link }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endfor %}
+      <!-- Column 1: Shop -->
+      <div>
+        <h4 style="color: #666; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; font-weight: 700;">
+          SHOP
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;">
+          {% assign links = "HOME,COLLECTIONS,ABOUT US,CONTACT" | split: "," %}
+          {% for link in links %}
+            <li>
+              <a href="#" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">
+                {{ link }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
 
-      <!-- Column 5: Subscribe -->
+      <!-- Column 2: Support -->
+      <div>
+        <h4 style="color: #666; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; font-weight: 700;">
+          SUPPORT
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;">
+          {% assign links = "FAQS,SHIPPING & RETURNS,PRIVACY POLICY,TERMS OF SERVICE" | split: "," %}
+          {% for link in links %}
+            <li>
+              <a href="#" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">
+                {{ link }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Column 3: Subscribe -->
       <div style="display: flex; flex-direction: column; align-items: flex-end; text-align: right;">
         <h3 style="font-family: 'Outfit', serif; font-size: 28px; font-weight: normal; margin-bottom: 12px; color: #fff;">Subscribe</h3>
         <p style="font-size: 11px; color: #888; margin-bottom: 32px;">Join our newsletter for updates.</p>
