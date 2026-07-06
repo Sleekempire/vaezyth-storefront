@@ -1,7 +1,7 @@
-<footer style="background-color: #0c0a09; color: #fff; padding: 100px 5% 0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden;">
+<footer style="background-color: #0c0a09; color: #fff; padding: 60px 5% 0; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden;">
   <div style="max-width: 1400px; margin: 0 auto;">
     
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 120px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 60px;">
       
       <!-- Column 1: Shop -->
       <div>
@@ -9,14 +9,10 @@
           SHOP
         </h4>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;">
-          {% assign links = "HOME,COLLECTIONS,ABOUT US,CONTACT" | split: "," %}
-          {% for link in links %}
-            <li>
-              <a href="#" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">
-                {{ link }}
-              </a>
-            </li>
-          {% endfor %}
+          <li><a href="/" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">HOME</a></li>
+          <li><a href="/collections/all" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">COLLECTIONS</a></li>
+          <li><a href="/pages/about-us" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">ABOUT US</a></li>
+          <li><a href="/pages/contact" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">CONTACT</a></li>
         </ul>
       </div>
 
@@ -26,14 +22,10 @@
           SUPPORT
         </h4>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;">
-          {% assign links = "FAQS,SHIPPING & RETURNS,PRIVACY POLICY,TERMS OF SERVICE" | split: "," %}
-          {% for link in links %}
-            <li>
-              <a href="#" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">
-                {{ link }}
-              </a>
-            </li>
-          {% endfor %}
+          <li><a href="/pages/faqs" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">FAQS</a></li>
+          <li><a href="/policies/shipping-policy" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">SHIPPING & RETURNS</a></li>
+          <li><a href="/policies/privacy-policy" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">PRIVACY POLICY</a></li>
+          <li><a href="/policies/terms-of-service" style="color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease;" onmouseover="this.style.color='#C5A880'" onmouseout="this.style.color='#fff'">TERMS OF SERVICE</a></li>
         </ul>
       </div>
 
