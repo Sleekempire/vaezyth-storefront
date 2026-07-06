@@ -51,13 +51,11 @@
 
     </div>
 
-    <!-- Huge Typography Marquee -->
-    <div style="position: relative; width: 100%; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; padding-bottom: 20px;">
-      <div style="display: flex; white-space: nowrap; font-family: 'Outfit', serif; font-size: clamp(80px, 15vw, 240px); font-weight: normal; color: #fff; line-height: 0.8; letter-spacing: -2px;">
-        <span style="display: inline-block;">
-          {{ shop.name }} <span style="color: #C5A880; font-family: 'Plus Jakarta Sans', sans-serif;">*</span> {{ shop.name }}
-        </span>
-      </div>
+    <!-- Copyright Section -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; padding-bottom: 40px; text-align: center;">
+      <p style="font-size: 11px; color: #666; margin: 0; letter-spacing: 0.5px;">
+        &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All Rights Reserved.
+      </p>
     </div>
 
   </div>
