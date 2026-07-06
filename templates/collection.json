@@ -9,12 +9,17 @@
  */
 {
   "sections": {
+    "hero": {
+      "type": "collection-hero",
+      "settings": {}
+    },
     "main": {
       "type": "main-collection",
       "settings": {}
     }
   },
   "order": [
+    "hero",
     "main"
   ]
 }
