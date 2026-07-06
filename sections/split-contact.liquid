@@ -1,10 +1,10 @@
-<div class="split-contact-section" style="background-color: #f6f5f0; padding: 100px 5%; font-family: 'Plus Jakarta Sans', sans-serif;">
+<div class="split-contact-section split-contact-container" style="background-color: #f6f5f0; font-family: 'Plus Jakarta Sans', sans-serif;">
   <div style="max-width: 1200px; margin: 0 auto;">
-    <h2 style="font-family: 'Outfit', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: #111; text-align: center; margin-bottom: 80px;">
+    <h2 class="split-contact-title">
       {{ section.settings.title }}
     </h2>
     
-    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start;">
+    <div class="split-contact-grid">
       
       <!-- Left Column -->
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -27,7 +27,7 @@
 
           {{ form.errors | default_errors }}
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+          <div class="contact-form-row">
             <div style="display: flex; flex-direction: column;">
               <input type="text" id="ContactFormName" name="contact[name]" placeholder="Name" style="padding: 16px 24px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; outline: none; background: transparent; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#111'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
             </div>
@@ -51,11 +51,24 @@
 </div>
 
 <style>
+  .split-contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+  .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .split-contact-title { font-family: 'Outfit', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: #111; text-align: center; margin-bottom: 80px; }
+  .split-contact-container { padding: 100px 5%; }
+  .contact-form-wrapper { background: #fff; padding: 48px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+
   @media (max-width: 900px) {
-    .split-contact-section > div > div {
+    .split-contact-container { padding: 40px 5% !important; }
+    .split-contact-grid {
       grid-template-columns: 1fr !important;
       gap: 48px !important;
     }
+    .contact-form-row {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+    .split-contact-title { font-size: 32px !important; margin-bottom: 40px !important; }
+    .contact-form-wrapper { padding: 24px !important; }
   }
 </style>
 

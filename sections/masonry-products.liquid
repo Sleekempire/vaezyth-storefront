@@ -1,7 +1,31 @@
+<style>
+  .masonry-app-container {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .masonry-grid-wrapper {
+    display: flex;
+    gap: 24px;
+    align-items: flex-end;
+  }
+  .masonry-col-1 { flex: 1.2; }
+  .masonry-col-2, .masonry-col-3 { flex: 1; display: flex; flex-direction: column; }
+  .masonry-header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+  .masonry-title { font-family: 'Outfit', serif; font-size: 48px; font-weight: normal; color: #131110; margin: 0; letter-spacing: -1px; }
+  
+  @media (max-width: 900px) {
+    .masonry-app-container { padding-top: 40px !important; padding-bottom: 40px !important; padding-left: 20px !important; padding-right: 20px !important; }
+    .masonry-grid-wrapper { flex-direction: column; align-items: stretch !important; gap: 16px !important; }
+    .masonry-col-1, .masonry-col-2, .masonry-col-3 { flex: none !important; width: 100% !important; }
+    .masonry-header-flex { flex-direction: column; align-items: flex-start !important; gap: 16px; margin-bottom: 32px !important; }
+    .masonry-title { font-size: 32px !important; }
+    .masonry-card { height: auto !important; min-height: 300px; padding: 24px !important; }
+  }
+</style>
 {% assign products = collections[section.settings.collection].products %}
-<div class="app-container" style="padding-top: 80px; padding-bottom: 80px;">
-  <div class="masonry-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px;">
-    <h2 style="font-family: 'Outfit', serif; font-size: 48px; font-weight: normal; color: #131110; margin: 0; letter-spacing: -1px;">
+<div class="masonry-app-container">
+  <div class="masonry-header-flex">
+    <h2 class="masonry-title">
       {{ section.settings.title }}
     </h2>
     <a href="{{ collections[section.settings.collection].url }}" style="background: transparent; border: 1px solid #ddd; padding: 10px 24px; border-radius: 50px; font-size: 11px; font-weight: 700; cursor: pointer; text-decoration: none; color: #131110; display: inline-flex; align-items: center; gap: 8px; transition: background 0.3s;">
@@ -10,9 +34,9 @@
     </a>
   </div>
 
-  <div class="masonry-grid" style="display: flex; gap: 24px; align-items: flex-end;">
+  <div class="masonry-grid-wrapper">
     <!-- Left Column: Tall Black Card -->
-    <div class="masonry-col" style="flex: 1.2;">
+    <div class="masonry-col-1">
       <a href="{{ collections[section.settings.collection].url }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 600px; background: #0c0a09; border-radius: 24px; padding: 32px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;">
         <div style="color: #fff; position: relative; z-index: 2;">
           <p style="font-size: 10px; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; color: #C5A880;">Explore Collections</p>
@@ -37,7 +61,7 @@
     </div>
 
     <!-- Middle Column: Medium Black Card -->
-    <div class="masonry-col" style="flex: 1; display: flex; flex-direction: column;">
+    <div class="masonry-col-2">
       <div style="margin-bottom: 24px; padding: 0 8px;">
         <p style="font-size: 10px; font-weight: bold; color: #C5A880; letter-spacing: 1px; margin-bottom: 8px;">EST 2026</p>
         <p style="font-size: 12px; color: #666; line-height: 1.6;">Our collection of modern, timeless, and smart pet gear is designed to add warmth, comfort, and beauty to your home.</p>
@@ -61,7 +85,7 @@
     </div>
 
     <!-- Right Column: Small Black Card -->
-    <div class="masonry-col" style="flex: 1; display: flex; flex-direction: column;">
+    <div class="masonry-col-3">
       <div style="display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 24px;">
         <button style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #666;">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
