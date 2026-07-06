@@ -54,19 +54,28 @@
 
 <style>
   @media (max-width: 900px) {
+    footer {
+      padding: 24px 5% 0 !important;
+    }
     footer > div > div:first-child {
       grid-template-columns: repeat(2, 1fr) !important;
-      gap: 24px !important;
-      margin-bottom: 24px !important;
+      gap: 16px !important;
+      margin-bottom: 16px !important;
     }
     footer > div > div:first-child > div:last-child {
       grid-column: span 2;
       align-items: flex-start !important;
       text-align: left !important;
-      margin-top: 16px;
+      margin-top: 8px;
     }
-    .footer-subscribe-title { font-size: 20px !important; margin-bottom: 8px !important; }
-    .footer-subscribe-desc { margin-bottom: 16px !important; }
+    .footer-subscribe-title { font-size: 16px !important; margin-bottom: 4px !important; }
+    .footer-subscribe-desc { margin-bottom: 8px !important; font-size: 10px !important; }
+    footer h4 { margin-bottom: 12px !important; }
+    footer ul { gap: 8px !important; }
+    footer > div > div:last-child {
+      padding-top: 16px !important;
+      padding-bottom: 16px !important;
+    }
   }
 </style>
 
