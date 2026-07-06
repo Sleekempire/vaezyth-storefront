@@ -1,14 +1,7 @@
 <div class="collection-hero-section" style="position: relative; width: 100%; height: 50vh; min-height: 400px; display: flex; align-items: center; justify-content: center; background: url('{% if section.settings.image %}{{ section.settings.image | img_url: 'master' }}{% else %}{{ 'mat_lifestyle_bg.jpg' | asset_url }}{% endif %}') center/cover no-repeat;">
   <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3);"></div>
-  <div style="position: relative; z-index: 1; text-align: center; color: #fff; padding: 0 5%;">
-    <h1 style="font-family: 'Outfit', serif; font-size: clamp(48px, 8vw, 80px); font-weight: 400; margin-bottom: 16px; letter-spacing: -1px;">
-      {{ collection.title | default: 'All Products' }}
-    </h1>
-    {% if collection.description != blank %}
-      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; opacity: 0.9;">
-        {{ collection.description }}
-      </div>
-    {% endif %}
+  <div style="position: relative; z-index: 1; text-align: center; color: #fff; padding: 0 5%; display: none;">
+    <!-- Text removed per request -->
   </div>
 </div>
 
