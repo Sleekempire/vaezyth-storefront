@@ -6,7 +6,7 @@
   </div>
   
   <div class="hero-left-panel" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-    <a href="{{ section.settings.button_link }}" class="btn-hero-cta" style="background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50px; padding: 6px 6px 6px 24px; letter-spacing: 1px; text-transform: uppercase; font-size: 11px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; transition: background 0.3s;">
+    <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn-hero-cta" style="background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50px; padding: 6px 6px 6px 24px; letter-spacing: 1px; text-transform: uppercase; font-size: 11px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; transition: background 0.3s;">
       {{ section.settings.button_text }}
       <span style="background: #ffffff; color: #111; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">↗</span>
     </a>
