@@ -1,0 +1,87 @@
+<div style="background-color: #0c0a09; min-height: 80vh; padding: 64px 24px; color: #fff;">
+  <div style="max-width: 1000px; margin: 0 auto;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
+      <div>
+        <h1 style="font-family: 'Outfit', serif; font-size: 42px; margin-bottom: 8px;">My Account</h1>
+        <p style="color: #888; font-size: 16px; margin: 0;">Welcome back, {{ customer.first_name | default: 'Friend' }}!</p>
+      </div>
+      <a href="{{ routes.account_logout_url }}" style="color: #C5A880; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; font-size: 12px; border: 1px solid #C5A880; padding: 10px 24px; border-radius: 50px; transition: all 0.3s;" onmouseover="this.style.background='#C5A880'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A880';">Log Out</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 48px;">
+      
+      <!-- Order History -->
+      <div>
+        <h2 style="font-family: 'Outfit', serif; font-size: 24px; margin-bottom: 24px;">Order History</h2>
+        
+        {% if customer.orders.size != 0 %}
+          <div style="background: #131110; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+              <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #888;">
+                  <th style="padding: 16px 24px; font-weight: normal;">Order</th>
+                  <th style="padding: 16px 24px; font-weight: normal;">Date</th>
+                  <th style="padding: 16px 24px; font-weight: normal;">Status</th>
+                  <th style="padding: 16px 24px; font-weight: normal;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in customer.orders %}
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <td style="padding: 16px 24px;"><a href="{{ order.customer_url }}" style="color: #fff; text-decoration: none; font-weight: bold;">{{ order.name }}</a></td>
+                    <td style="padding: 16px 24px; color: #aaa;">{{ order.created_at | date: "%b %d, %Y" }}</td>
+                    <td style="padding: 16px 24px; color: #aaa;">{{ order.fulfillment_status_label }}</td>
+                    <td style="padding: 16px 24px; font-weight: bold;">{{ order.total_price | money }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <div style="background: #131110; padding: 48px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05);">
+            <p style="color: #888; margin-bottom: 24px;">You haven't placed any orders yet.</p>
+            <a href="/collections/all" style="display: inline-block; background: #fff; color: #0c0a09; padding: 12px 32px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Start Shopping</a>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Account Details -->
+      <div>
+        <h2 style="font-family: 'Outfit', serif; font-size: 24px; margin-bottom: 24px;">Account Details</h2>
+        <div style="background: #131110; padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
+          <h3 style="font-size: 18px; margin-bottom: 16px; font-weight: 700;">{{ customer.name }}</h3>
+          
+          {% if customer.default_address %}
+            <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+              {{ customer.default_address.address1 }}<br>
+              {% if customer.default_address.address2 != "" %}
+                {{ customer.default_address.address2 }}<br>
+              {% endif %}
+              {{ customer.default_address.city }}, {% if address.province_code %}{{ customer.default_address.province_code }}, {% endif %}{{ customer.default_address.country }}<br>
+              {{ customer.default_address.zip }}
+            </p>
+          {% else %}
+            <p style="color: #aaa; font-size: 14px; margin-bottom: 24px;">No default address saved.</p>
+          {% endif %}
+
+          <a href="{{ routes.account_addresses_url }}" style="color: #fff; font-size: 13px; text-decoration: none; border-bottom: 1px solid #fff; padding-bottom: 2px; font-weight: bold;">View Addresses ({{ customer.addresses_count }})</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  @media (max-width: 900px) {
+    div[style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="justify-content: space-between"] {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+<div style="background-color: #0c0a09; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 24px; color: #fff;">
+  <div style="max-width: 480px; width: 100%; background: #131110; padding: 48px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 24px 64px rgba(0,0,0,0.5);">
+    
+    <h1 style="font-family: 'Outfit', serif; font-size: 36px; text-align: center; margin-bottom: 8px;">Create Account</h1>
+    <p style="text-align: center; color: #888; font-size: 14px; margin-bottom: 32px;">Join Vaezyth for exclusive perks and faster checkout.</p>
+
+    {% form 'create_customer' %}
+      {{ form.errors | default_errors | replace: 'class="errors"', 'style="background: rgba(220,53,69,0.1); color: #dc3545; padding: 12px; border-radius: 8px; margin-bottom: 24px; font-size: 13px;"' }}
+      
+      <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+        <input type="text" name="customer[first_name]" id="FirstName" placeholder="First Name" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none;">
+        <input type="text" name="customer[last_name]" id="LastName" placeholder="Last Name" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none;">
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <input type="email" name="customer[email]" id="Email" placeholder="Email Address *" required autocorrect="off" autocapitalize="off" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none;">
+      </div>
+
+      <div style="margin-bottom: 32px;">
+        <input type="password" name="customer[password]" id="CreatePassword" placeholder="Password *" required style="width: 100%; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none;">
+      </div>
+
+      <button type="submit" style="width: 100%; padding: 16px; background: #fff; color: #0c0a09; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: background 0.3s;">
+        Create Account
+      </button>
+
+      <div style="text-align: center; margin-top: 24px; font-size: 14px; color: #888;">
+        Already have an account? <a href="/account/login" style="color: #fff; font-weight: bold; text-decoration: none; border-bottom: 1px solid #fff; padding-bottom: 2px;">Sign in</a>
+      </div>
+    {% endform %}
+
+  </div>
+</div>
