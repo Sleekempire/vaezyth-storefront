@@ -1,87 +1,457 @@
-<div style="background-color: #0c0a09; min-height: 80vh; padding: 64px 24px; color: #fff;">
-  <div style="max-width: 1000px; margin: 0 auto;">
-    
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-      <div>
-        <h1 style="font-family: 'Outfit', serif; font-size: 42px; margin-bottom: 8px;">My Account</h1>
-        <p style="color: #888; font-size: 16px; margin: 0;">Welcome back, {{ customer.first_name | default: 'Friend' }}!</p>
+{% comment %}
+  Vaezyth – Customer Account Dashboard
+  A premium, dark-mode account page matching the brand aesthetic.
+{% endcomment %}
+
+<style>
+  :root {
+    --bg: #0c0a09;
+    --surface: #161412;
+    --surface-2: #1e1c1a;
+    --border: rgba(255,255,255,0.07);
+    --gold: #C5A880;
+    --text: #fff;
+    --muted: #888;
+  }
+
+  .acct-wrap {
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 48px 24px 80px;
+  }
+
+  .acct-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ─── Header ─── */
+  .acct-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .acct-greeting h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -1px;
+  }
+
+  .acct-greeting p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .acct-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .acct-logout:hover {
+    background: var(--gold);
+    color: #fff;
+  }
+
+  /* ─── Stats Row ─── */
+  .acct-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+  }
+
+  .stat-card .stat-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+
+  .stat-card .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* ─── Two-col layout ─── */
+  .acct-body {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* ─── Section card ─── */
+  .acct-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .acct-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .acct-card-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .acct-card-header a {
+    font-size: 12px;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* ─── Order table ─── */
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .order-table thead tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .order-table thead th {
+    padding: 14px 28px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
+  }
+
+  .order-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .order-table tbody tr:hover { background: var(--surface-2); }
+  .order-table tbody tr:last-child { border-bottom: none; }
+
+  .order-table tbody td {
+    padding: 16px 28px;
+    color: var(--muted);
+  }
+
+  .order-table tbody td.order-name a {
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .order-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(197,168,128,0.12);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .order-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .order-price {
+    color: var(--text) !important;
+    font-weight: 700;
+  }
+
+  /* ─── Empty state ─── */
+  .empty-orders {
+    padding: 64px 28px;
+    text-align: center;
+  }
+
+  .empty-icon {
+    width: 72px;
+    height: 72px;
+    background: var(--surface-2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--muted);
+  }
+
+  .empty-orders p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .btn-shop {
+    display: inline-block;
+    background: #fff;
+    color: #0c0a09;
+    padding: 12px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-shop:hover { opacity: 0.85; }
+
+  /* ─── Sidebar ─── */
+  .sidebar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    margin: 0 0 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sidebar-card h3 svg {
+    color: var(--gold);
+  }
+
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .profile-avatar {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #C5A880, #8B6E50);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .profile-info p { margin: 0; }
+  .profile-info .pname { font-weight: 700; font-size: 15px; }
+  .profile-info .pemail { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  .address-text {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ─── Mobile ─── */
+  @media (max-width: 860px) {
+    .acct-body { grid-template-columns: 1fr; }
+    .acct-stats { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .acct-stats { grid-template-columns: 1fr; }
+    .acct-wrap { padding: 24px 16px 60px; }
+    .order-table thead th, .order-table tbody td { padding: 12px 16px; }
+    .sidebar-card { padding: 20px; }
+  }
+</style>
+
+<div class="acct-wrap">
+  <div class="acct-inner">
+
+    <!-- Header -->
+    <div class="acct-header">
+      <div class="acct-greeting">
+        <h1>Hey, {{ customer.first_name | default: 'there' }} 👋</h1>
+        <p>Here's everything happening with your Vaezyth account.</p>
       </div>
-      <a href="{{ routes.account_logout_url }}" style="color: #C5A880; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; font-size: 12px; border: 1px solid #C5A880; padding: 10px 24px; border-radius: 50px; transition: all 0.3s;" onmouseover="this.style.background='#C5A880'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#C5A880';">Log Out</a>
+      <a href="{{ routes.account_logout_url }}" class="acct-logout">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Log Out
+      </a>
     </div>
 
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 48px;">
-      
+    <!-- Stats -->
+    <div class="acct-stats">
+      <div class="stat-card">
+        <span class="stat-number">{{ customer.orders_count }}</span>
+        <span class="stat-label">Orders Placed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ customer.total_spent | money | remove: '.00' }}</span>
+        <span class="stat-label">Total Spent</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ customer.addresses_count }}</span>
+        <span class="stat-label">Addresses</span>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="acct-body">
+
       <!-- Order History -->
-      <div>
-        <h2 style="font-family: 'Outfit', serif; font-size: 24px; margin-bottom: 24px;">Order History</h2>
-        
-        {% if customer.orders.size != 0 %}
-          <div style="background: #131110; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
-            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
-              <thead>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #888;">
-                  <th style="padding: 16px 24px; font-weight: normal;">Order</th>
-                  <th style="padding: 16px 24px; font-weight: normal;">Date</th>
-                  <th style="padding: 16px 24px; font-weight: normal;">Status</th>
-                  <th style="padding: 16px 24px; font-weight: normal;">Total</th>
+      <div class="acct-card">
+        <div class="acct-card-header">
+          <h2>Order History</h2>
+          <a href="/collections/all">+ Shop More</a>
+        </div>
+
+        {% if customer.orders.size > 0 %}
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <td class="order-name"><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | date: "%b %d, %Y" }}</td>
+                  <td><span class="order-badge">{{ order.fulfillment_status_label }}</span></td>
+                  <td class="order-price">{{ order.total_price | money }}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {% for order in customer.orders %}
-                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <td style="padding: 16px 24px;"><a href="{{ order.customer_url }}" style="color: #fff; text-decoration: none; font-weight: bold;">{{ order.name }}</a></td>
-                    <td style="padding: 16px 24px; color: #aaa;">{{ order.created_at | date: "%b %d, %Y" }}</td>
-                    <td style="padding: 16px 24px; color: #aaa;">{{ order.fulfillment_status_label }}</td>
-                    <td style="padding: 16px 24px; font-weight: bold;">{{ order.total_price | money }}</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+              {% endfor %}
+            </tbody>
+          </table>
         {% else %}
-          <div style="background: #131110; padding: 48px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05);">
-            <p style="color: #888; margin-bottom: 24px;">You haven't placed any orders yet.</p>
-            <a href="/collections/all" style="display: inline-block; background: #fff; color: #0c0a09; padding: 12px 32px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Start Shopping</a>
+          <div class="empty-orders">
+            <div class="empty-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <p>No orders yet. Start your first order!</p>
+            <a href="/collections/all" class="btn-shop">Browse Products</a>
           </div>
         {% endif %}
       </div>
 
-      <!-- Account Details -->
+      <!-- Sidebar -->
       <div>
-        <h2 style="font-family: 'Outfit', serif; font-size: 24px; margin-bottom: 24px;">Account Details</h2>
-        <div style="background: #131110; padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
-          <h3 style="font-size: 18px; margin-bottom: 16px; font-weight: 700;">{{ customer.name }}</h3>
-          
+
+        <!-- Profile -->
+        <div class="sidebar-card">
+          <div class="profile-row">
+            <div class="profile-avatar">
+              {{ customer.first_name | slice: 0 | upcase }}{{ customer.last_name | slice: 0 | upcase }}
+            </div>
+            <div class="profile-info">
+              <p class="pname">{{ customer.name }}</p>
+              <p class="pemail">{{ customer.email }}</p>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; font-weight: 600;">Member Since</p>
+            <p style="font-size: 14px; margin: 0;">{{ customer.created_at | date: "%B %Y" }}</p>
+          </div>
+        </div>
+
+        <!-- Default Address -->
+        <div class="sidebar-card">
+          <h3>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Default Address
+          </h3>
+
           {% if customer.default_address %}
-            <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+            <div class="address-text">
+              {{ customer.default_address.name }}<br>
               {{ customer.default_address.address1 }}<br>
-              {% if customer.default_address.address2 != "" %}
+              {% if customer.default_address.address2 and customer.default_address.address2 != '' %}
                 {{ customer.default_address.address2 }}<br>
               {% endif %}
-              {{ customer.default_address.city }}, {% if address.province_code %}{{ customer.default_address.province_code }}, {% endif %}{{ customer.default_address.country }}<br>
+              {{ customer.default_address.city }}, {{ customer.default_address.country }}<br>
               {{ customer.default_address.zip }}
-            </p>
+            </div>
           {% else %}
-            <p style="color: #aaa; font-size: 14px; margin-bottom: 24px;">No default address saved.</p>
+            <p class="address-text">No address saved yet.</p>
           {% endif %}
 
-          <a href="{{ routes.account_addresses_url }}" style="color: #fff; font-size: 13px; text-decoration: none; border-bottom: 1px solid #fff; padding-bottom: 2px; font-weight: bold;">View Addresses ({{ customer.addresses_count }})</a>
+          <a href="{{ routes.account_addresses_url }}" class="btn-outline">Manage Addresses</a>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </div>
-
-<style>
-  @media (max-width: 900px) {
-    div[style*="grid-template-columns"] {
-      grid-template-columns: 1fr !important;
-    }
-    div[style*="justify-content: space-between"] {
-      flex-direction: column;
-      align-items: flex-start !important;
-      gap: 24px;
-    }
-  }
-</style>
