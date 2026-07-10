@@ -16,9 +16,9 @@
           Pet Type
         </h4>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
-          <label style="font-size: 13px; color: #444; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: #f97316;"> Dogs</label>
-          <label style="font-size: 13px; color: #444; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: #f97316;"> Cats</label>
-          <label style="font-size: 13px; color: #444; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: #f97316;"> Birds</label>
+          <label style="font-size: 13px; color: #444; display: flex; align-items: center; gap: 8px;"><input type="checkbox" class="filter-type" value="dog" style="accent-color: #f97316;" onchange="applyFilters()"> Dogs</label>
+          <label style="font-size: 13px; color: #444; display: flex; align-items: center; gap: 8px;"><input type="checkbox" class="filter-type" value="cat" style="accent-color: #f97316;" onchange="applyFilters()"> Cats</label>
+          <label style="font-size: 13px; color: #444; display: flex; align-items: center; gap: 8px;"><input type="checkbox" class="filter-type" value="bird" style="accent-color: #f97316;" onchange="applyFilters()"> Birds</label>
         </div>
         
         <!-- Category -->
@@ -26,11 +26,11 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
           Category
         </h4>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
-          <span style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444;">Leashes</span>
-          <span style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444;">Toys</span>
-          <span style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444;">Bowls</span>
-          <span style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444;">Beds</span>
+        <div class="category-filters" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+          <span class="filter-category" data-value="leash" onclick="this.classList.toggle('active-cat'); applyFilters();" style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444; cursor: pointer; transition: 0.3s;">Leashes</span>
+          <span class="filter-category" data-value="toy" onclick="this.classList.toggle('active-cat'); applyFilters();" style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444; cursor: pointer; transition: 0.3s;">Toys</span>
+          <span class="filter-category" data-value="bowl" onclick="this.classList.toggle('active-cat'); applyFilters();" style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444; cursor: pointer; transition: 0.3s;">Bowls</span>
+          <span class="filter-category" data-value="bed" onclick="this.classList.toggle('active-cat'); applyFilters();" style="font-size: 11px; background: #e5e3db; padding: 4px 10px; border-radius: 50px; color: #444; cursor: pointer; transition: 0.3s;">Beds</span>
         </div>
         
         <!-- Price Range -->
@@ -39,18 +39,16 @@
           Price Range
         </h4>
         <div style="margin-bottom: 24px;">
-          <div style="height: 4px; background: #d1d5db; border-radius: 2px; position: relative; margin-bottom: 12px;">
-            <div style="position: absolute; left: 20%; right: 40%; height: 100%; background: #2a5a5a;"></div>
-            <div style="position: absolute; left: 20%; top: -4px; width: 12px; height: 12px; background: #2a5a5a; border-radius: 50%;"></div>
-            <div style="position: absolute; right: 40%; top: -4px; width: 12px; height: 12px; background: #2a5a5a; border-radius: 50%;"></div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <input type="range" id="priceRange" min="0" max="500" value="500" oninput="document.getElementById('priceDisplay').innerText = '$' + this.value; applyFilters();" style="width: 100%; accent-color: #2a5a5a;">
           </div>
           <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #666;">
             <span>$0</span>
-            <span>$500+</span>
+            <span id="priceDisplay">$500+</span>
           </div>
         </div>
         
-        <button style="width: 100%; background: transparent; border: 1px solid #ccc; padding: 8px; border-radius: 50px; font-size: 11px; font-weight: 700; color: #555; cursor: pointer;">Clear All</button>
+        <button onclick="clearFilters()" style="width: 100%; background: transparent; border: 1px solid #ccc; padding: 8px; border-radius: 50px; font-size: 11px; font-weight: 700; color: #555; cursor: pointer;">Clear All</button>
       </div>
     </div>
     
@@ -85,7 +83,7 @@
       <div class="products-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
         {% paginate collection.products by 24 %}
           {% for product in collection.products %}
-            <div class="premium-card" style="background: #fff; border-radius: 12px; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+            <div class="premium-card" data-price="{{ product.price | divided_by: 100 }}" data-type="{{ product.type | downcase }}" data-tags="{{ product.tags | join: ',' | downcase }}" data-title="{{ product.title | downcase }}" style="background: #fff; border-radius: 12px; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
               <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;">
                 
                 <!-- Image Section -->
@@ -109,7 +107,7 @@
                   {% endif %}
 
                   <!-- Heart Icon -->
-                  <div class="heart-icon" style="position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #888; z-index: 2; transition: color 0.3s ease;">
+                  <div class="heart-icon" data-product-id="{{ product.id }}" style="position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #888; z-index: 2; transition: color 0.3s ease;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                   </div>
 
@@ -238,14 +236,81 @@
       font-size: 15px !important;
       color: #1e4b52 !important;
     }
+  .filter-category.active-cat {
+    background: #f97316 !important;
+    color: #fff !important;
   }
 </style>
 
 <script>
+  // Mobile drawer toggle
   function toggleMobileFilters(e) {
     if (e) e.preventDefault();
     document.querySelector('.sidebar-filters').classList.toggle('mobile-active');
   }
+
+  // Client-side filtering logic
+  function applyFilters() {
+    const maxPrice = parseInt(document.getElementById('priceRange').value) || 500;
+    const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(cb => cb.value);
+    const selectedCategories = Array.from(document.querySelectorAll('.filter-category.active-cat')).map(span => span.getAttribute('data-value'));
+
+    document.querySelectorAll('.premium-card').forEach(card => {
+      const price = parseFloat(card.getAttribute('data-price')) || 0;
+      const type = card.getAttribute('data-type') || '';
+      const tags = card.getAttribute('data-tags') || '';
+      const title = card.getAttribute('data-title') || '';
+      
+      let isPriceValid = price <= maxPrice;
+      let isTypeValid = selectedTypes.length === 0 || selectedTypes.some(t => type.includes(t) || tags.includes(t) || title.includes(t));
+      let isCatValid = selectedCategories.length === 0 || selectedCategories.some(c => type.includes(c) || tags.includes(c) || title.includes(c));
+
+      if (isPriceValid && isTypeValid && isCatValid) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function clearFilters() {
+    document.querySelectorAll('.filter-type').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.filter-category').forEach(span => span.classList.remove('active-cat'));
+    document.getElementById('priceRange').value = 500;
+    document.getElementById('priceDisplay').innerText = '$500+';
+    applyFilters();
+  }
+
+  // Wishlist persistence using localStorage
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.heart-icon').forEach(icon => {
+      const pid = icon.getAttribute('data-product-id');
+      
+      // Load saved state
+      if (localStorage.getItem('wishlist_' + pid)) {
+        icon.classList.add('liked');
+        icon.querySelector('svg').setAttribute('fill', 'currentColor');
+        icon.style.color = '#ef4444';
+      }
+      
+      // Toggle state on click
+      icon.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); // prevent navigating to product
+        if (icon.classList.contains('liked')) {
+          icon.classList.remove('liked');
+          localStorage.removeItem('wishlist_' + pid);
+          icon.querySelector('svg').setAttribute('fill', 'none');
+          icon.style.color = '#888';
+        } else {
+          icon.classList.add('liked');
+          localStorage.setItem('wishlist_' + pid, 'true');
+          icon.querySelector('svg').setAttribute('fill', 'currentColor');
+          icon.style.color = '#ef4444';
+        }
+      });
+    });
+  });
 </script>
 
 {% schema %}
