@@ -1,5 +1,25 @@
+<style>
+  .contact-form-card {
+    padding: 48px;
+  }
+  .contact-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 600px) {
+    .contact-form-card {
+      padding: 24px;
+    }
+    .contact-form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 <div class="app-container" style="padding-top: 60px; padding-bottom: 80px;">
-  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 48px; border-radius: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.05); border: 1px solid #E8E2D7;">
+  <div class="contact-form-card" style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.05); border: 1px solid #E8E2D7;">
     <h1 style="font-family: 'Outfit', sans-serif; font-size: 42px; font-weight: 800; color: #131110; margin-bottom: 16px; text-align: center;">
       Get in Touch
     </h1>
@@ -16,7 +36,7 @@
 
       {{ form.errors | default_errors }}
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+      <div class="contact-form-grid">
         <div style="display: flex; flex-direction: column;">
           <label for="ContactFormName" style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #131110; margin-bottom: 8px;">Name</label>
           <input type="text" id="ContactFormName" name="contact[name]" style="padding: 14px 16px; border: 1px solid #E8E2D7; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; outline: none; background: #FAF7F2;">
