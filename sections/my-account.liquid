@@ -1,0 +1,675 @@
+{% comment %} Vaezyth – Custom My Account Page {% endcomment %}
+
+<style>
+  .va-acct {
+    background: #0c0a09;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 0 0 100px;
+  }
+
+  /* ── Hero Banner ── */
+  .va-hero {
+    background: linear-gradient(135deg, #131110 0%, #1a1714 50%, #0c0a09 100%);
+    border-bottom: 1px solid rgba(197,168,128,0.15);
+    padding: 48px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .va-hero::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(197,168,128,0.07) 0%, transparent 65%);
+    top: -200px;
+    right: -100px;
+    pointer-events: none;
+  }
+
+  .va-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .va-avatar-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .va-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C5A880, #8B6E50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(197,168,128,0.3);
+  }
+
+  .va-hero-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(24px, 5vw, 40px);
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -0.5px;
+  }
+
+  .va-hero-email {
+    color: #888;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .va-hero-meta {
+    font-size: 12px;
+    color: #C5A880;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .va-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(197,168,128,0.4);
+    color: #C5A880;
+    padding: 11px 24px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .va-logout-btn:hover {
+    background: #C5A880;
+    color: #0c0a09;
+  }
+
+  /* ── Stats ── */
+  .va-stats-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .va-stat {
+    background: #131110;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .va-stat::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #C5A880, transparent);
+    opacity: 0.5;
+  }
+
+  .va-stat-num {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 800;
+    color: #C5A880;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .va-stat-lbl {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  /* ── Body Grid ── */
+  .va-body {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* ── Card ── */
+  .va-card {
+    background: #131110;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .va-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .va-card-head h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .va-card-head h2 svg { color: #C5A880; }
+
+  .va-card-link {
+    font-size: 12px;
+    color: #C5A880;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.2s;
+  }
+
+  .va-card-link:hover { opacity: 0.75; }
+
+  /* ── Order Table ── */
+  .va-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .va-table thead th {
+    padding: 12px 28px;
+    color: #555;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .va-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+
+  .va-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .va-table tbody tr:last-child { border-bottom: none; }
+
+  .va-table tbody td {
+    padding: 16px 28px;
+    color: #888;
+    vertical-align: middle;
+  }
+
+  .va-table .td-order a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .va-table .td-price {
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .va-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(197,168,128,0.1);
+    border: 1px solid rgba(197,168,128,0.2);
+    color: #C5A880;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .va-badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #C5A880;
+    flex-shrink: 0;
+  }
+
+  /* ── Empty Orders ── */
+  .va-empty {
+    padding: 72px 28px;
+    text-align: center;
+  }
+
+  .va-empty-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #444;
+  }
+
+  .va-empty h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+
+  .va-empty p {
+    color: #666;
+    font-size: 14px;
+    margin: 0 0 28px;
+  }
+
+  .va-btn-shop {
+    display: inline-block;
+    background: #fff;
+    color: #0c0a09;
+    padding: 14px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .va-btn-shop:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ── Sidebar Cards ── */
+  .va-side-card {
+    background: #131110;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .va-side-card:last-child { margin-bottom: 0; }
+
+  .va-side-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+  }
+
+  .va-side-title svg { color: #C5A880; }
+
+  .va-info-row {
+    margin-bottom: 14px;
+  }
+
+  .va-info-row:last-child { margin-bottom: 0; }
+
+  .va-info-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #555;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .va-info-val {
+    font-size: 14px;
+    color: #ddd;
+    font-weight: 500;
+  }
+
+  .va-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin: 20px 0;
+  }
+
+  .va-address-text {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+
+  .va-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .va-btn-outline:hover { border-color: #C5A880; color: #C5A880; }
+
+  /* ── Not Logged In ── */
+  .va-login-wall {
+    background: #0c0a09;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .va-login-box {
+    max-width: 440px;
+    width: 100%;
+  }
+
+  .va-login-box .brand {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #C5A880;
+    margin-bottom: 40px;
+  }
+
+  .va-login-box h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .va-login-box p {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 36px;
+  }
+
+  .va-btn-login {
+    display: inline-block;
+    background: #fff;
+    color: #0c0a09;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: opacity 0.2s, transform 0.15s;
+    margin-bottom: 16px;
+  }
+
+  .va-btn-login:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .va-login-box .register-link {
+    display: block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .va-login-box .register-link a {
+    color: #C5A880;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .va-body {
+      grid-template-columns: 1fr;
+    }
+
+    .va-stats-wrap {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .va-hero { padding: 32px 16px 28px; }
+    .va-stats-wrap { padding: 20px 16px 0; gap: 10px; }
+    .va-body { padding: 0 16px; margin-top: 20px; }
+    .va-stat { padding: 20px 12px; }
+    .va-stat-num { font-size: 22px; }
+    .va-avatar { width: 56px; height: 56px; font-size: 20px; }
+    .va-table thead { display: none; }
+    .va-table tbody td { display: block; padding: 8px 20px; }
+    .va-table tbody td:first-child { padding-top: 16px; }
+    .va-table tbody td:last-child { padding-bottom: 16px; }
+    .va-table tbody tr { display: block; }
+    .va-card-head { padding: 18px 20px; }
+    .va-side-card { padding: 20px; }
+  }
+</style>
+
+{% if customer %}
+
+  <div class="va-acct">
+
+    <!-- Hero -->
+    <div class="va-hero">
+      <div class="va-hero-inner">
+        <div class="va-avatar-row">
+          <div class="va-avatar">
+            {{ customer.first_name | slice: 0 | upcase }}{{ customer.last_name | slice: 0 | upcase }}
+          </div>
+          <div>
+            <h1 class="va-hero-name">Hey, {{ customer.first_name | default: 'there' }}!</h1>
+            <p class="va-hero-email">{{ customer.email }}</p>
+            <p class="va-hero-meta">Member since {{ customer.created_at | date: "%B %Y" }}</p>
+          </div>
+        </div>
+        <a href="{{ routes.account_logout_url }}" class="va-logout-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>
+          </svg>
+          Log Out
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="va-stats-wrap">
+      <div class="va-stat">
+        <span class="va-stat-num">{{ customer.orders_count }}</span>
+        <span class="va-stat-lbl">Orders Placed</span>
+      </div>
+      <div class="va-stat">
+        <span class="va-stat-num">{{ customer.total_spent | money | remove: '.00' }}</span>
+        <span class="va-stat-lbl">Total Spent</span>
+      </div>
+      <div class="va-stat">
+        <span class="va-stat-num">{{ customer.addresses_count }}</span>
+        <span class="va-stat-lbl">Addresses</span>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="va-body">
+
+      <!-- Left: Orders -->
+      <div class="va-card">
+        <div class="va-card-head">
+          <h2>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Order History
+          </h2>
+          <a href="/collections/all" class="va-card-link">
+            + Shop More
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        {% if customer.orders.size > 0 %}
+          <table class="va-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <td class="td-order">
+                    <a href="{{ order.customer_url }}">{{ order.name }}</a>
+                  </td>
+                  <td>{{ order.created_at | date: "%b %d, %Y" }}</td>
+                  <td>
+                    <span class="va-badge">{{ order.fulfillment_status_label }}</span>
+                  </td>
+                  <td class="td-price">{{ order.total_price | money }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <div class="va-empty">
+            <div class="va-empty-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <h3>No orders yet</h3>
+            <p>Looks like you haven't placed any orders.<br>Start browsing our premium pet collection!</p>
+            <a href="/collections/all" class="va-btn-shop">Browse Products</a>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right: Sidebar -->
+      <div>
+
+        <!-- Profile Card -->
+        <div class="va-side-card">
+          <h3 class="va-side-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            My Profile
+          </h3>
+
+          <div class="va-info-row">
+            <div class="va-info-label">Full Name</div>
+            <div class="va-info-val">{{ customer.name }}</div>
+          </div>
+          <div class="va-info-row">
+            <div class="va-info-label">Email</div>
+            <div class="va-info-val">{{ customer.email }}</div>
+          </div>
+          <div class="va-info-row">
+            <div class="va-info-label">Member Since</div>
+            <div class="va-info-val">{{ customer.created_at | date: "%B %d, %Y" }}</div>
+          </div>
+        </div>
+
+        <!-- Address Card -->
+        <div class="va-side-card">
+          <h3 class="va-side-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Default Address
+          </h3>
+
+          {% if customer.default_address %}
+            <div class="va-address-text">
+              {{ customer.default_address.name }}<br>
+              {{ customer.default_address.address1 }}<br>
+              {% if customer.default_address.address2 and customer.default_address.address2 != '' %}
+                {{ customer.default_address.address2 }}<br>
+              {% endif %}
+              {{ customer.default_address.city }},
+              {% if customer.default_address.province_code != '' %}{{ customer.default_address.province_code }},{% endif %}
+              {{ customer.default_address.country }}<br>
+              {{ customer.default_address.zip }}
+            </div>
+          {% else %}
+            <p class="va-address-text">No address saved yet.</p>
+          {% endif %}
+
+          <a href="{{ routes.account_addresses_url }}" class="va-btn-outline">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Manage Addresses
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{% else %}
+
+  <!-- Not logged in – show login wall -->
+  <div class="va-login-wall">
+    <div class="va-login-box">
+      <div class="brand">VAEZYTH</div>
+      <h1>My Account</h1>
+      <p>Sign in to view your orders, manage your profile, and track your deliveries.</p>
+      <a href="{{ routes.account_login_url }}?return_url=/pages/my-account" class="va-btn-login">Sign In</a>
+      <div class="register-link">
+        New customer? <a href="{{ routes.account_register_url }}">Create an account</a>
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "My Account",
+  "settings": []
+}
+{% endschema %}
