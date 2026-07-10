@@ -15,11 +15,29 @@
   
   @media (max-width: 900px) {
     .masonry-app-container { padding-top: 40px !important; padding-bottom: 40px !important; padding-left: 20px !important; padding-right: 20px !important; }
-    .masonry-grid-wrapper { flex-direction: column; align-items: stretch !important; gap: 16px !important; }
-    .masonry-col-1, .masonry-col-2, .masonry-col-3 { flex: none !important; width: 100% !important; }
+    
+    /* Make it a horizontal carousel on mobile */
+    .masonry-grid-wrapper { 
+      flex-direction: row !important; 
+      align-items: stretch !important; 
+      gap: 16px !important; 
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 24px;
+    }
+    .masonry-grid-wrapper::-webkit-scrollbar { display: none; }
+    
+    .masonry-col-1, .masonry-col-2, .masonry-col-3 { 
+      flex: 0 0 85% !important; 
+      width: 85% !important; 
+      scroll-snap-align: center;
+    }
+    
     .masonry-header-flex { flex-direction: column; align-items: flex-start !important; gap: 16px; margin-bottom: 32px !important; }
     .masonry-title { font-size: 32px !important; }
-    .masonry-card { height: auto !important; min-height: 300px; padding: 24px !important; }
+    .masonry-card { height: 400px !important; padding: 24px !important; }
   }
 </style>
 {% assign products = collections[section.settings.collection].products %}
@@ -84,11 +102,11 @@
 
     <!-- Right Column: Small Black Card -->
     <div class="masonry-col-3">
-      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 24px;">
-        <button style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #666;">
+      <div class="carousel-nav-arrows" style="display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 24px;">
+        <button onclick="scrollMasonry(-1)" style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #666;">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <button style="width: 32px; height: 32px; border-radius: 50%; border: none; background: #C5A880; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff;">
+        <button onclick="scrollMasonry(1)" style="width: 32px; height: 32px; border-radius: 50%; border: none; background: #C5A880; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff;">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
@@ -110,6 +128,19 @@
     </div>
   </div>
 </div>
+
+<script>
+  function scrollMasonry(direction) {
+    const wrapper = document.querySelector('.masonry-grid-wrapper');
+    if (wrapper) {
+      // Get the width of one card plus the gap
+      const cardWidth = wrapper.querySelector('.masonry-col-1').offsetWidth;
+      const gap = 16;
+      const scrollAmount = cardWidth + gap;
+      wrapper.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  }
+</script>
 
 {% schema %}
 {
