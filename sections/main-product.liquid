@@ -1,29 +1,175 @@
+{% comment %} Vaezyth – Main Product Section {% endcomment %}
 <style>
   .product-page-grid {
     display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 40px;
+    grid-template-columns: 45% 55%; 
+    gap: 48px;
   }
+
+  /* ── Image Carousel ── */
+  .va-product-media-wrap {
+    width: 100%;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #131110;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .va-product-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+  .va-product-carousel::-webkit-scrollbar { 
+    display: none; 
+  }
+
+  .va-media-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .va-media-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ── Product Details ── */
+  .product-details {
+    padding-top: 12px;
+  }
+
+  .product-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px; /* Reduced from 32px */
+    font-weight: 700;
+    margin: 0 0 12px;
+    line-height: 1.2;
+    color: #fff;
+  }
+
+  .product-price {
+    font-size: 22px;
+    color: #C5A880;
+    font-weight: 600;
+    margin: 0 0 24px;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* ── Buy Forms ── */
+  .va-buy-block {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+
+  .va-buy-block.bottom {
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+
+  .btn-primary {
+    width: 100%; 
+    padding: 16px; 
+    background: #C5A880; 
+    color: #0c0a09; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: 800; 
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-bottom: 12px;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .shopify-payment-button__button {
+    border-radius: 8px !important;
+  }
+
+  /* ── Description ── */
+  .product-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #bbb;
+  }
+
+  .product-desc p { margin-bottom: 16px; }
+  .product-desc ul { margin-bottom: 16px; padding-left: 20px; }
+  .product-desc li { margin-bottom: 8px; }
+
   @media (max-width: 900px) {
     .product-page-grid {
       grid-template-columns: 1fr;
+      gap: 32px;
     }
+    .product-title { font-size: 24px; }
   }
 </style>
 
 <div class="product-page product-page-grid" style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
-  <div class="product-image">
-    <img src="{{ product.featured_image | img_url: '1024x1024' }}" alt="{{ product.title }}" style="width: 100%; border-radius: 16px; background: #f9f9f9;" />
+  
+  <!-- Media Carousel -->
+  <div class="va-product-media-wrap">
+    <div class="va-product-carousel">
+      {% for media in product.media %}
+        <div class="va-media-item">
+          {% if media.media_type == 'image' %}
+            <img src="{{ media | img_url: '1024x1024' }}" alt="{{ media.alt | escape }}" loading="lazy">
+          {% else %}
+            {{ media | media_tag: style: 'width: 100%;' }}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
+
+  <!-- Details -->
   <div class="product-details">
-    <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 8px;">{{ product.title }}</h1>
-    <p style="font-size: 24px; color: #555; margin-bottom: 24px;">{{ product.price | money }}</p>
-    <div style="margin-bottom: 32px;">{{ product.description }}</div>
+    <h1 class="product-title">{{ product.title }}</h1>
+    <p class="product-price">{{ product.price | money }}</p>
+
+    <!-- Top Form -->
+    <div class="va-buy-block">
+      {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+        <button type="submit" class="btn-primary ajax-add-to-cart">Add to Cart</button>
+        {{ form | payment_button }}
+      {% endform %}
+    </div>
+
+    <!-- Description -->
+    <div class="product-desc">
+      {{ product.description }}
+    </div>
     
-    <form method="post" action="/cart/add">
-      <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-      <button type="submit" class="btn-dark ajax-add-to-cart" style="width: 100%; padding: 16px; background: #1c1917; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Add to Cart</button>
-    </form>
+    <!-- Bottom Form -->
+    <div class="va-buy-block bottom">
+      {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+        <button type="submit" class="btn-primary ajax-add-to-cart">Add to Cart</button>
+        {{ form | payment_button }}
+      {% endform %}
+    </div>
+
   </div>
 </div>
 

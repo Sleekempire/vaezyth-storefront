@@ -1,0 +1,129 @@
+{% comment %} Vaezyth – Product Recommendations {% endcomment %}
+
+<style>
+  .va-recs-section {
+    max-width: 1200px;
+    margin: 64px auto 80px;
+    padding: 0 24px;
+  }
+
+  .va-recs-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .va-recs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .va-rec-card {
+    background: #131110;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .va-rec-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    border-color: rgba(197,168,128,0.3);
+  }
+
+  .va-rec-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: #1a1714;
+  }
+
+  .va-rec-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .va-rec-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px;
+    line-height: 1.4;
+  }
+
+  .va-rec-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #C5A880;
+    margin-top: auto;
+  }
+
+  @media (max-width: 900px) {
+    .va-recs-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .va-recs-title { font-size: 24px; }
+  }
+  @media (max-width: 500px) {
+    .va-recs-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="va-recs-section"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4&intent=related">
+  
+  {% if recommendations.performed and recommendations.products_count > 0 %}
+    <h2 class="va-recs-title">You May Also Like</h2>
+    <div class="va-recs-grid">
+      {% for product in recommendations.products %}
+        <a href="{{ product.url }}" class="va-rec-card">
+          <img class="va-rec-img" src="{{ product.featured_image | img_url: '500x500', crop: 'center' }}" alt="{{ product.title | escape }}" loading="lazy">
+          <div class="va-rec-info">
+            <h3 class="va-rec-title">{{ product.title }}</h3>
+            <span class="va-rec-price">{{ product.price | money }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  // Shopify Native Product Recommendations Fetch
+  const handleRecommendations = () => {
+    const section = document.querySelector('.va-recs-section');
+    if (!section) return;
+
+    fetch(section.dataset.url)
+      .then(response => response.text())
+      .then(text => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.va-recs-section');
+        
+        if (recommendations && recommendations.innerHTML.trim().length) {
+          section.innerHTML = recommendations.innerHTML;
+        }
+      })
+      .catch(e => console.error(e));
+  };
+  
+  document.addEventListener('DOMContentLoaded', handleRecommendations);
+</script>
+
+{% schema %}
+{
+  "name": "Recommendations",
+  "settings": []
+}
+{% endschema %}
