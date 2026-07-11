@@ -1,203 +1,451 @@
-{% comment %} Vaezyth – Main Product Section {% endcomment %}
+{% comment %} Vaezyth – Main Product Section (Reference Layout) {% endcomment %}
 <style>
   .product-page-grid {
     display: grid; 
-    grid-template-columns: 45% 55%; 
-    gap: 48px;
+    grid-template-columns: 1fr 1fr; 
+    gap: 64px;
+    align-items: start;
   }
 
-  /* ── Image Carousel ── */
-  .va-product-media-wrap {
+  /* ── Gallery ── */
+  .va-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .va-main-image {
     width: 100%;
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #131110;
+    border-radius: 12px;
+    background: #1a1714;
+    aspect-ratio: 1;
+    object-fit: cover;
     border: 1px solid rgba(255,255,255,0.05);
   }
-
-  .va-product-carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
+  .va-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
-
-  .va-product-carousel::-webkit-scrollbar { 
-    display: none; 
-  }
-
-  .va-media-item {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .va-media-item img {
+  .va-thumb {
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    background: #1a1714;
+  }
+  .va-thumb.active, .va-thumb:hover {
+    border-color: #C5A880;
   }
 
-  /* ── Product Details ── */
-  .product-details {
-    padding-top: 12px;
+  /* ── Product Info ── */
+  .va-breadcrumbs {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    margin-bottom: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
+  .va-breadcrumbs a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .va-breadcrumbs a:hover { color: #C5A880; }
 
   .product-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 26px; /* Reduced from 32px */
+    font-size: 32px;
     font-weight: 700;
-    margin: 0 0 12px;
+    margin: 0 0 16px;
     line-height: 1.2;
     color: #fff;
   }
 
+  .va-price-review-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .va-reviews {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #bbb;
+  }
+  .va-stars { color: #C5A880; font-size: 14px; }
+  
   .product-price {
-    font-size: 22px;
+    font-size: 24px;
     color: #C5A880;
     font-weight: 600;
-    margin: 0 0 24px;
     font-family: 'Outfit', sans-serif;
+    margin: 0;
   }
 
-  /* ── Buy Forms ── */
-  .va-buy-block {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 12px;
-    padding: 24px;
+  .va-short-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #bbb;
     margin-bottom: 32px;
   }
 
-  .va-buy-block.bottom {
-    margin-top: 32px;
-    margin-bottom: 0;
+  /* ── Variants ── */
+  .va-option-group {
+    margin-bottom: 24px;
+  }
+  .va-option-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .va-option-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .va-size-guide {
+    font-size: 11px;
+    font-weight: 700;
+    color: #C5A880;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .va-option-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .va-option-pill {
+    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    color: #ddd;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .va-option-pill:hover {
+    border-color: #C5A880;
+  }
+  .va-option-pill.active {
+    border-color: #C5A880;
+    color: #C5A880;
+    background: rgba(197,168,128,0.1);
+  }
+
+  /* Color Swatches */
+  .va-option-pill.color-swatch {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    padding: 0;
+    border: 2px solid transparent;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.2);
+  }
+  .va-option-pill.color-swatch.active {
+    box-shadow: 0 0 0 2px #C5A880;
+    border: 2px solid #0c0a09;
+  }
+
+  /* ── Buy Block ── */
+  .va-buy-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .va-quantity-picker {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 0 8px;
+    height: 52px;
+  }
+  .va-qty-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    width: 32px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .va-qty-input {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    width: 40px;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .va-qty-input::-webkit-outer-spin-button,
+  .va-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   .va-btn-cart {
-    width: 100%; 
-    padding: 16px; 
-    background: transparent !important; 
-    color: #C5A880 !important; 
-    border: 1px solid #C5A880 !important; 
+    flex: 1;
+    height: 52px;
+    background: #C5A880; 
+    color: #0c0a09; 
+    border: none; 
     border-radius: 8px; 
     font-weight: 800; 
     font-size: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-bottom: 12px;
-  }
-
-  .va-btn-cart:hover {
-    background: rgba(197,168,128,0.1) !important;
-  }
-
-  .va-btn-checkout {
-    width: 100%; 
-    padding: 16px; 
-    background: #C5A880 !important; 
-    color: #0c0a09 !important; 
-    border: none !important; 
-    border-radius: 8px; 
-    font-weight: 800; 
-    font-size: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
     cursor: pointer;
     transition: opacity 0.2s, transform 0.1s;
   }
-
-  .va-btn-checkout:hover {
+  .va-btn-cart:hover {
     opacity: 0.9;
     transform: translateY(-1px);
   }
 
-  /* ── Description ── */
-  .product-desc {
+  /* ── Trust Badges ── */
+  .va-trust-badges {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 32px;
+    margin-bottom: 40px;
+  }
+  .va-trust-badge {
+    text-align: center;
+  }
+  .va-trust-icon {
+    color: #C5A880;
+    margin-bottom: 8px;
+  }
+  .va-trust-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+  }
+
+  /* ── Full Description ── */
+  .va-full-desc {
     font-size: 15px;
     line-height: 1.6;
     color: #bbb;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 40px;
   }
-
-  .product-desc p { margin-bottom: 16px; }
-  .product-desc ul { margin-bottom: 16px; padding-left: 20px; }
-  .product-desc li { margin-bottom: 8px; }
-  
-  /* Hide imported AliExpress images in the description text */
-  .product-desc img { display: none !important; }
-  .product-desc iframe { display: none !important; }
+  .va-full-desc p { margin-bottom: 16px; }
+  .va-full-desc ul { margin-bottom: 16px; padding-left: 20px; }
+  .va-full-desc li { margin-bottom: 8px; }
+  .va-full-desc img, .va-full-desc iframe { display: none !important; }
 
   @media (max-width: 900px) {
-    .product-page-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .product-title { font-size: 24px; }
+    .product-page-grid { grid-template-columns: 1fr; gap: 40px; }
+    .product-title { font-size: 28px; }
+    .va-buy-row { flex-direction: column; }
+    .va-quantity-picker { width: 100%; justify-content: space-between; }
   }
 </style>
 
 <div style="background: #0c0a09; min-height: 100vh; padding-bottom: 60px;">
 <div class="product-page product-page-grid" style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
   
-  <!-- Media Carousel -->
-  <div class="va-product-media-wrap">
-    <div class="va-product-carousel" style="gap: 10px;">
-      {% for media in product.media %}
-        <div class="va-media-item">
-          {% if media.media_type == 'image' %}
-            <img src="{{ media | img_url: '1024x1024' }}" alt="{{ media.alt | escape }}" loading="lazy">
-          {% else %}
-            {{ media | media_tag: style: 'width: 100%;' }}
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
+  <!-- Gallery -->
+  <div class="va-gallery">
+    <img id="VaMainImage" class="va-main-image" src="{{ product.featured_image | img_url: '1024x1024' }}" alt="{{ product.title | escape }}">
     {% if product.media.size > 1 %}
-      <div style="text-align: center; color: #888; font-size: 11px; padding: 10px; text-transform: uppercase; letter-spacing: 1px;">
-        ← Swipe for more images →
+      <div class="va-thumbnails">
+        {% for media in product.media %}
+          {% if media.media_type == 'image' %}
+            <img class="va-thumb {% if forloop.first %}active{% endif %}" 
+                 src="{{ media | img_url: '400x400', crop: 'center' }}" 
+                 data-full="{{ media | img_url: '1024x1024' }}"
+                 alt="{{ media.alt | escape }}" 
+                 onclick="swapImage(this)">
+          {% endif %}
+        {% endfor %}
       </div>
     {% endif %}
   </div>
 
-  <!-- Details -->
+  <!-- Product Info -->
   <div class="product-details">
-    <h1 class="product-title">{{ product.title }}</h1>
-    <p class="product-price">{{ product.price | money }}</p>
-
-    <!-- Top Form -->
-    <div class="va-buy-block">
-      {% form 'product', product %}
-        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-        <button type="submit" name="add" class="va-btn-cart">Add to Cart</button>
-        <button type="submit" name="return_to" value="/checkout" class="va-btn-checkout">Proceed to Checkout</button>
-      {% endform %}
-    </div>
-
-    <!-- Description -->
-    <div class="product-desc">
-      {{ product.description }}
-    </div>
     
-    <!-- Bottom Form -->
-    <div class="va-buy-block bottom">
-      {% form 'product', product %}
-        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+    <!-- Breadcrumbs -->
+    <div class="va-breadcrumbs">
+      <a href="/">Shop</a> / 
+      <a href="{{ collection.url | default: '/collections/all' }}">{{ collection.title | default: 'Products' }}</a> / 
+      <span style="color: #fff;">{{ product.title | truncate: 25 }}</span>
+    </div>
+
+    <h1 class="product-title">{{ product.title }}</h1>
+    
+    <div class="va-price-review-row">
+      <div class="va-reviews">
+        <div class="va-stars">★★★★★</div>
+        <span>4.8/5 (124 reviews)</span>
+      </div>
+      <p class="product-price">{{ product.price | money }}</p>
+    </div>
+
+    <div class="va-short-desc">
+      {{ product.description | strip_html | truncatewords: 30 }}
+    </div>
+
+    <!-- Buy Form -->
+    {% form 'product', product %}
+      <input type="hidden" name="id" id="VariantId" value="{{ product.variants.first.id }}" />
+      
+      <!-- Variant Selectors -->
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+          <div class="va-option-group" data-index="option{{ forloop.index }}">
+            <div class="va-option-header">
+              <span class="va-option-label">{{ option.name }}</span>
+              {% if option.name == 'Size' or option.name == 'Length' %}
+                <a href="#" class="va-size-guide">Size Guide</a>
+              {% endif %}
+            </div>
+            
+            <div class="va-option-values">
+              {% for value in option.values %}
+                {% assign is_color = false %}
+                {% assign d_name = option.name | downcase %}
+                {% if d_name contains 'color' or d_name contains 'colour' %}
+                  {% assign is_color = true %}
+                {% endif %}
+
+                <button type="button" 
+                        class="va-option-pill {% if is_color %}color-swatch{% endif %} {% if option.selected_value == value %}active{% endif %}" 
+                        data-value="{{ value | escape }}"
+                        {% if is_color %}
+                          style="background-color: {{ value | downcase | remove: ' ' }};"
+                          title="{{ value }}"
+                        {% endif %}>
+                  {% unless is_color %}{{ value }}{% endunless %}
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endunless %}
+
+      <!-- Quantity & Submit -->
+      <div class="va-buy-row">
+        <div class="va-quantity-picker">
+          <button type="button" class="va-qty-btn" onclick="updateQty(-1)">−</button>
+          <input type="number" class="va-qty-input" name="quantity" id="Quantity" value="1" min="1">
+          <button type="button" class="va-qty-btn" onclick="updateQty(1)">+</button>
+        </div>
         <button type="submit" name="add" class="va-btn-cart">Add to Cart</button>
-        <button type="submit" name="return_to" value="/checkout" class="va-btn-checkout">Proceed to Checkout</button>
-      {% endform %}
+      </div>
+
+    {% endform %}
+
+    <!-- Trust Badges -->
+    <div class="va-trust-badges">
+      <div class="va-trust-badge">
+        <div class="va-trust-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="va-trust-text">Premium<br>Quality</div>
+      </div>
+      <div class="va-trust-badge">
+        <div class="va-trust-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        </div>
+        <div class="va-trust-text">Fast<br>Shipping</div>
+      </div>
+      <div class="va-trust-badge">
+        <div class="va-trust-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <div class="va-trust-text">Secure<br>Checkout</div>
+      </div>
+    </div>
+
+    <!-- Full Description -->
+    <div class="va-full-desc">
+      {{ product.description }}
     </div>
 
   </div>
 </div>
 </div>
+
+<script id="product-variants-json" type="application/json">
+  {{ product.variants | json }}
+</script>
+
+<script>
+  // Swap Main Image
+  function swapImage(thumb) {
+    document.getElementById('VaMainImage').src = thumb.dataset.full;
+    document.querySelectorAll('.va-thumb').forEach(el => el.classList.remove('active'));
+    thumb.classList.add('active');
+  }
+
+  // Quantity Picker
+  function updateQty(change) {
+    let input = document.getElementById('Quantity');
+    let newVal = parseInt(input.value) + change;
+    if (newVal >= 1) {
+      input.value = newVal;
+    }
+  }
+
+  // Variant Selection
+  document.querySelectorAll('.va-option-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      // Manage active state
+      let siblings = this.parentNode.querySelectorAll('.va-option-pill');
+      siblings.forEach(s => s.classList.remove('active'));
+      this.classList.add('active');
+
+      // Get current selected options
+      let selectedOptions = [];
+      document.querySelectorAll('.va-option-group').forEach(group => {
+        let activePill = group.querySelector('.va-option-pill.active');
+        if (activePill) {
+          selectedOptions.push(activePill.dataset.value);
+        }
+      });
+
+      // Find matching variant
+      let variants = JSON.parse(document.getElementById('product-variants-json').textContent);
+      let matchedVariant = variants.find(v => {
+        return v.options.every((opt, index) => opt === selectedOptions[index]);
+      });
+
+      if (matchedVariant) {
+        document.getElementById('VariantId').value = matchedVariant.id;
+        
+        // Update price (basic format, could be improved with store money format)
+        document.querySelector('.product-price').textContent = '£' + (matchedVariant.price / 100).toFixed(2);
+        
+        // Update image if variant has one
+        if (matchedVariant.featured_image) {
+          document.getElementById('VaMainImage').src = matchedVariant.featured_image.src;
+        }
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {

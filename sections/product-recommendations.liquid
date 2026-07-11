@@ -7,36 +7,53 @@
     padding: 0 24px;
   }
 
+  .va-recs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 32px;
+  }
+
   .va-recs-title {
     font-family: 'Outfit', sans-serif;
     font-size: 28px;
     font-weight: 800;
     color: #fff;
-    margin-bottom: 32px;
-    text-align: center;
+    margin: 0;
   }
+  
+  .va-recs-subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-top: 8px;
+  }
+
+  .va-recs-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: #C5A880;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .va-recs-link:hover { text-decoration: underline; }
 
   .va-recs-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
 
   .va-rec-card {
-    background: #131110;
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 16px;
-    overflow: hidden;
+    background: transparent;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s;
     display: flex;
     flex-direction: column;
   }
 
   .va-rec-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.4);
-    border-color: rgba(197,168,128,0.3);
   }
 
   .va-rec-img {
@@ -44,18 +61,19 @@
     aspect-ratio: 1;
     object-fit: cover;
     background: #1a1714;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.05);
   }
 
   .va-rec-info {
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
   }
 
   .va-rec-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #fff;
     margin: 0 0 8px;
@@ -64,10 +82,9 @@
 
   .va-rec-price {
     font-family: 'Outfit', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: #C5A880;
-    margin-top: auto;
   }
 
   @media (max-width: 900px) {
@@ -76,14 +93,22 @@
   }
   @media (max-width: 500px) {
     .va-recs-grid { grid-template-columns: 1fr; }
+    .va-recs-header { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
 </style>
 
 <div class="va-recs-section"
-  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4&intent=related">
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=3&intent=related">
   
   {% if recommendations.performed and recommendations.products_count > 0 %}
-    <h2 class="va-recs-title">You May Also Like</h2>
+    <div class="va-recs-header">
+      <div>
+        <h2 class="va-recs-title">Complete the Look</h2>
+        <div class="va-recs-subtitle">Curated pairings to style your companion.</div>
+      </div>
+      <a href="/collections/all" class="va-recs-link">View Entire Collection →</a>
+    </div>
+    
     <div class="va-recs-grid">
       {% for product in recommendations.products %}
         <a href="{{ product.url }}" class="va-rec-card">
