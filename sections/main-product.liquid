@@ -80,12 +80,32 @@
     margin-bottom: 0;
   }
 
-  .btn-primary {
+  .va-btn-cart {
     width: 100%; 
     padding: 16px; 
-    background: #C5A880; 
-    color: #0c0a09; 
-    border: none; 
+    background: transparent !important; 
+    color: #C5A880 !important; 
+    border: 1px solid #C5A880 !important; 
+    border-radius: 8px; 
+    font-weight: 800; 
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 12px;
+  }
+
+  .va-btn-cart:hover {
+    background: rgba(197,168,128,0.1) !important;
+  }
+
+  .va-btn-checkout {
+    width: 100%; 
+    padding: 16px; 
+    background: #C5A880 !important; 
+    color: #0c0a09 !important; 
+    border: none !important; 
     border-radius: 8px; 
     font-weight: 800; 
     font-size: 15px;
@@ -93,16 +113,11 @@
     letter-spacing: 1px;
     cursor: pointer;
     transition: opacity 0.2s, transform 0.1s;
-    margin-bottom: 12px;
   }
 
-  .btn-primary:hover {
+  .va-btn-checkout:hover {
     opacity: 0.9;
     transform: translateY(-1px);
-  }
-
-  .shopify-payment-button__button {
-    border-radius: 8px !important;
   }
 
   /* ── Description ── */
@@ -130,7 +145,7 @@
   
   <!-- Media Carousel -->
   <div class="va-product-media-wrap">
-    <div class="va-product-carousel">
+    <div class="va-product-carousel" style="gap: 10px;">
       {% for media in product.media %}
         <div class="va-media-item">
           {% if media.media_type == 'image' %}
@@ -141,6 +156,11 @@
         </div>
       {% endfor %}
     </div>
+    {% if product.media.size > 1 %}
+      <div style="text-align: center; color: #888; font-size: 11px; padding: 10px; text-transform: uppercase; letter-spacing: 1px;">
+        ← Swipe for more images →
+      </div>
+    {% endif %}
   </div>
 
   <!-- Details -->
@@ -152,8 +172,8 @@
     <div class="va-buy-block">
       {% form 'product', product %}
         <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-        <button type="submit" class="btn-primary ajax-add-to-cart">Add to Cart</button>
-        {{ form | payment_button }}
+        <button type="submit" name="add" class="va-btn-cart">Add to Cart</button>
+        <button type="submit" name="return_to" value="/checkout" class="va-btn-checkout">Proceed to Checkout</button>
       {% endform %}
     </div>
 
@@ -166,8 +186,8 @@
     <div class="va-buy-block bottom">
       {% form 'product', product %}
         <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-        <button type="submit" class="btn-primary ajax-add-to-cart">Add to Cart</button>
-        {{ form | payment_button }}
+        <button type="submit" name="add" class="va-btn-cart">Add to Cart</button>
+        <button type="submit" name="return_to" value="/checkout" class="va-btn-checkout">Proceed to Checkout</button>
       {% endform %}
     </div>
 
