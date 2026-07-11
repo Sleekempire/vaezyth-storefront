@@ -1,25 +1,48 @@
 <style>
-  .btn-nav-action:hover {
-    background: rgba(255,255,255,0.2) !important;
-    border-color: rgba(255,255,255,0.4) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  .btn-nav-action {
+    color: #4A5D4E !important;
   }
+  .btn-nav-action:hover {
+    color: #FF7A42 !important;
+    transform: translateY(-1px);
+  }
+  .nav-link {
+    color: #555 !important;
+    text-transform: none !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    letter-spacing: normal !important;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: #4A5D4E !important;
+  }
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #4A5D4E;
+  }
+  
   @media (max-width: 900px) {
     .site-header { padding: 16px 20px !important; }
-    .mobile-menu-toggle { display: block !important; }
+    .mobile-menu-toggle { display: block !important; color: #4A5D4E !important; }
     .nav-links { 
       display: none !important; 
       position: absolute; 
       top: 100%; 
       left: 0; 
       width: 100%; 
-      background: #1c1917; 
+      background: #ffffff; 
       flex-direction: column; 
       padding: 24px !important; 
       border-radius: 0 0 16px 16px; 
-      border: none !important; 
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border: 1px solid #e0ddd7 !important; 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       z-index: 200;
     }
     .nav-links.active { display: flex !important; }
@@ -34,23 +57,30 @@
     {% if settings.logo != blank %}
       <img src="{{ settings.logo | img_url: 'master' }}" alt="{{ shop.name }}" style="max-height: 40px; width: auto; object-fit: contain;">
     {% else %}
-      <span class="brand-logo-text" style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -1px; color: #ffffff;">VAEZYTH</span>
+      <span class="brand-logo-text" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: #4A5D4E;">Pawfect</span>
     {% endif %}
   </a>
 </div>
-<div class="nav-links" id="NavLinks" style="display: flex; gap: 40px; align-items: center;">
-  <a href="/" class="nav-link" style="text-decoration: none; color: #ffffff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Home</a>
-  <a href="/collections/all" class="nav-link" style="text-decoration: none; color: #ffffff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Catalog</a>
-  <a href="/pages/contact" class="nav-link" style="text-decoration: none; color: #ffffff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Contact</a>
+
+<div class="nav-links" id="NavLinks" style="display: flex; gap: 32px; align-items: center; flex: 2; justify-content: center;">
+  <a href="/" class="nav-link" style="text-decoration: none;">Shop All</a>
+  <a href="/collections/dogs" class="nav-link active" style="text-decoration: none;">Dogs</a>
+  <a href="/collections/cats" class="nav-link" style="text-decoration: none;">Cats</a>
+  <a href="/collections/new-arrivals" class="nav-link" style="text-decoration: none;">New Arrivals</a>
 </div>
+
 <div class="nav-actions" style="display: flex; gap: 16px; flex: 1; justify-content: flex-end; align-items: center;">
-  <!-- Account Login -->
-  <a href="/pages/my-account" class="btn-nav-action" style="display: flex; align-items: center; justify-content: center; color: #ffffff; text-decoration: none; padding: 8px;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+  <!-- Search -->
+  <a href="/search" class="btn-nav-action" style="display: flex; align-items: center; justify-content: center; text-decoration: none; padding: 8px; transition: all 0.2s;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
   </a>
   <!-- Cart Toggle -->
-  <button class="btn-nav-action cart-toggle-btn" style="position: relative; background: transparent; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #ffffff; transition: color 0.3s; padding: 8px;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-    <span class="badge-cart-count" id="cart-item-count" style="position: absolute; top: -4px; right: -8px; background: #C5A880; color: #fff; border-radius: 50%; font-size: 10px; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-weight: bold;">0</span>
+  <button class="btn-nav-action cart-toggle-btn" style="position: relative; background: transparent; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; padding: 8px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+    <span class="badge-cart-count" id="cart-item-count" style="position: absolute; top: 0px; right: 0px; background: #FF7A42; color: #fff; border-radius: 50%; font-size: 10px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-weight: bold;">0</span>
   </button>
+  <!-- Account Login -->
+  <a href="/pages/my-account" class="btn-nav-action" style="display: flex; align-items: center; justify-content: center; text-decoration: none; padding: 8px; transition: all 0.2s;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+  </a>
 </div>
