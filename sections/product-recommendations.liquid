@@ -129,8 +129,14 @@
 
     <div class="va-look-grid" id="va-look-grid">
 
-      {% comment %} FALLBACK: Show other products from the frontpage collection {% endcomment %}
-      {% assign fallback_products = collections.frontpage.products | default: collections.all.products %}
+      {% comment %} FALLBACK: Find ANY collection that has products {% endcomment %}
+      {% assign fallback_products = nil %}
+      {% for c in collections %}
+        {% if c.products.size > 0 %}
+          {% assign fallback_products = c.products %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
       {% assign count = 0 %}
       {% for p in fallback_products %}
         {% unless p.id == product.id %}
