@@ -1,413 +1,438 @@
 {% comment %} Vaezyth – Main Product Section {% endcomment %}
 
 <style>
-  /* ── Page Wrapper ── */
-  .vp-page {
-    background: #FAF8F5;
-    padding: 48px 0 80px;
+  /* ── Reset & Base ── */
+  .vp-wrap {
+    background: #faf8f4;
+    padding: 32px 0 80px;
     font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1a201c;
   }
-  .vp-container {
-    max-width: 1200px;
+  .vp-inner {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 32px;
   }
 
   /* ── Breadcrumb ── */
-  .vp-breadcrumb {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 32px;
-    letter-spacing: 0.3px;
+  .vp-crumb {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 28px;
+    letter-spacing: 0.2px;
   }
-  .vp-breadcrumb a { color: #888; text-decoration: none; }
-  .vp-breadcrumb a:hover { color: #4A5D4E; }
-  .vp-breadcrumb span { color: #333; font-weight: 600; }
+  .vp-crumb a { color: #999; text-decoration: none; }
+  .vp-crumb a:hover { color: #555; }
 
-  /* ── Two Column Grid ── */
-  .vp-grid {
+  /* ── Two-column layout ── */
+  .vp-cols {
     display: grid;
-    grid-template-columns: 55% 45%;
-    gap: 64px;
+    grid-template-columns: 56% 44%;
+    gap: 56px;
     align-items: start;
   }
 
-  /* ── Gallery ── */
-  .vp-gallery { display: flex; flex-direction: column; gap: 16px; }
+  /* ─────── LEFT: Gallery ─────── */
+  .vp-gallery { display: flex; flex-direction: column; gap: 14px; }
 
-  .vp-main-img-wrap {
+  .vp-main-wrap {
     width: 100%;
-    aspect-ratio: 1;
-    border-radius: 20px;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
     overflow: hidden;
-    background: #f0eee9;
+    background: #ede9e2;
   }
-  .vp-main-img {
+  #VpMainImg {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
     display: block;
+    transition: transform 0.4s ease;
   }
-  .vp-main-img-wrap:hover .vp-main-img { transform: scale(1.03); }
+  .vp-main-wrap:hover #VpMainImg { transform: scale(1.04); }
 
-  .vp-thumbs {
-    display: flex;
+  .vp-thumbs-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
   }
-  .vp-thumbs::-webkit-scrollbar { display: none; }
-
   .vp-thumb {
-    flex: 0 0 calc(25% - 8px);
     aspect-ratio: 1;
     border-radius: 10px;
     object-fit: cover;
     cursor: pointer;
-    border: 2px solid transparent;
-    background: #f0eee9;
+    border: 2.5px solid transparent;
+    background: #ede9e2;
     transition: border-color 0.2s;
+    width: 100%;
+    display: block;
   }
   .vp-thumb.active,
-  .vp-thumb:hover { border-color: #FF7A42; }
+  .vp-thumb:hover { border-color: #d97706; }
 
-  /* ── Product Info ── */
-  .vp-info { display: flex; flex-direction: column; }
+  /* ─────── RIGHT: Info ─────── */
+  .vp-info-col { padding-top: 4px; }
 
-  .vp-title {
+  .vp-prod-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 36px;
+    font-size: 34px;
     font-weight: 700;
     line-height: 1.2;
     color: #1a201c;
-    margin: 0 0 20px;
+    margin: 0 0 14px;
   }
 
-  .vp-meta-row {
+  /* Stars + Price row */
+  .vp-rating-price {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
   }
-  .vp-price {
-    font-family: 'Outfit', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #3b4d40;
-  }
-  .vp-compare-price {
-    font-size: 16px;
-    color: #aaa;
-    text-decoration: line-through;
-  }
-  .vp-reviews {
+  .vp-stars-wrap {
     display: flex;
     align-items: center;
     gap: 6px;
+  }
+  .vp-star { color: #f59e0b; font-size: 15px; }
+  .vp-rating-count {
     font-size: 13px;
     color: #777;
-    padding-left: 16px;
-    border-left: 1px solid #e0ddd7;
   }
-  .vp-stars { color: #FF7A42; letter-spacing: 2px; }
-
-  .vp-divider {
-    height: 1px;
-    background: #e8e4de;
-    margin: 24px 0;
+  .vp-price-tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a201c;
+    margin-left: auto;
+  }
+  .vp-compare-tag {
+    font-size: 14px;
+    color: #bbb;
+    text-decoration: line-through;
+    margin-left: 6px;
+    font-weight: 400;
   }
 
+  /* Short description */
   .vp-short-desc {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 28px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #666;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e8e3da;
+    padding-bottom: 24px;
   }
 
   /* ── Options ── */
-  .vp-option-group { margin-bottom: 24px; }
-  .vp-option-label {
+  .vp-opt-block { margin-bottom: 20px; }
+  .vp-opt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .vp-opt-name {
     font-size: 13px;
     font-weight: 700;
     color: #1a201c;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
   }
-  .vp-option-selected {
+  .vp-opt-selected {
     font-weight: 400;
-    color: #777;
+    color: #888;
+    font-size: 13px;
   }
-  .vp-option-values {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  /* Text pills */
-  .vp-pill {
-    padding: 10px 22px;
-    border: 1.5px solid #dcd7ce;
-    border-radius: 8px;
-    color: #444;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    background: #fff;
-    transition: all 0.2s;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
-  .vp-pill:hover { border-color: #4A5D4E; color: #4A5D4E; }
-  .vp-pill.active {
-    border-color: #4A5D4E;
-    background: #4A5D4E;
-    color: #fff;
-  }
-
-  /* Color swatches */
-  .vp-swatch {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 3px solid transparent;
-    box-shadow: 0 0 0 1.5px #dcd7ce;
-    transition: box-shadow 0.2s;
-    padding: 0;
-  }
-  .vp-swatch:hover { box-shadow: 0 0 0 2px #4A5D4E; }
-  .vp-swatch.active { box-shadow: 0 0 0 2.5px #4A5D4E; border-color: white; }
-
-  /* ── Buy Row ── */
-  .vp-buy-row {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 32px;
-    align-items: stretch;
-  }
-  .vp-qty-picker {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    border: 1.5px solid #e0ddd7;
-    border-radius: 50px;
-    overflow: hidden;
-    height: 54px;
-    flex-shrink: 0;
-  }
-  .vp-qty-btn {
-    background: none;
-    border: none;
-    color: #333;
-    font-size: 20px;
-    cursor: pointer;
-    width: 44px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s;
-    font-weight: 300;
-  }
-  .vp-qty-btn:hover { background: #f5f3ef; }
-  .vp-qty-input {
-    background: none;
-    border: none;
-    color: #1a201c;
-    font-size: 16px;
-    font-weight: 700;
-    width: 44px;
-    text-align: center;
-    -moz-appearance: textfield;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
-  .vp-qty-input::-webkit-outer-spin-button,
-  .vp-qty-input::-webkit-inner-spin-button { -webkit-appearance: none; }
-
-  .vp-btn-cart {
-    flex: 1;
-    height: 54px;
-    background: #FF7A42;
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 16px;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .vp-btn-cart:hover {
-    background: #e86930;
-    transform: translateY(-1px);
-  }
-
-  /* ── Trust Badges ── */
-  .vp-trust {
-    display: flex;
-    gap: 0;
-    border: 1.5px solid #e8e4de;
-    border-radius: 14px;
-    overflow: hidden;
-    margin-bottom: 36px;
-  }
-  .vp-trust-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 8px;
-    text-align: center;
-    gap: 8px;
-    border-right: 1.5px solid #e8e4de;
-  }
-  .vp-trust-item:last-child { border-right: none; }
-  .vp-trust-icon { color: #4A5D4E; }
-  .vp-trust-label {
+  .vp-size-guide {
     font-size: 11px;
     font-weight: 700;
     color: #4A5D4E;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    line-height: 1.3;
+    text-decoration: none;
+  }
+  .vp-size-guide:hover { text-decoration: underline; }
+
+  .vp-opt-values { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* Text pills */
+  .vp-size-pill {
+    padding: 8px 18px;
+    border: 1.5px solid #d5d0c8;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .vp-size-pill:hover { border-color: #4A5D4E; color: #4A5D4E; }
+  .vp-size-pill.active {
+    border-color: #1a201c;
+    background: #1a201c;
+    color: #fff;
   }
 
-  /* ── Full Description ── */
-  .vp-full-desc {
-    border-top: 1px solid #e8e4de;
-    padding-top: 32px;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #555;
+  /* Color swatches */
+  .vp-color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    box-shadow: 0 0 0 1.5px #ccc;
+    transition: box-shadow 0.18s;
+    padding: 0;
+    display: inline-block;
   }
-  .vp-full-desc img, .vp-full-desc iframe { display: none !important; }
-  .vp-full-desc p { margin-bottom: 14px; }
-  .vp-full-desc ul { padding-left: 20px; margin-bottom: 14px; }
-  .vp-full-desc li { margin-bottom: 6px; }
-  .vp-full-desc h2,
-  .vp-full-desc h3 {
-    font-size: 18px;
+  .vp-color-swatch:hover { box-shadow: 0 0 0 2px #4A5D4E; }
+  .vp-color-swatch.active {
+    box-shadow: 0 0 0 2.5px #1a201c;
+    border-color: #faf8f4;
+  }
+
+  /* ── Qty + ATC row ── */
+  .vp-atc-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+    margin-bottom: 28px;
+    margin-top: 24px;
+  }
+  .vp-qty {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #dcd7ce;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #fff;
+    flex-shrink: 0;
+  }
+  .vp-qty-btn {
+    background: none;
+    border: none;
+    width: 40px;
+    height: 52px;
+    font-size: 20px;
+    font-weight: 300;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .vp-qty-btn:hover { background: #f3f0eb; }
+  .vp-qty-val {
+    width: 36px;
+    text-align: center;
+    font-size: 15px;
     font-weight: 700;
     color: #1a201c;
-    margin: 20px 0 10px;
+    border: none;
+    background: none;
+    -moz-appearance: textfield;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .vp-qty-val::-webkit-outer-spin-button,
+  .vp-qty-val::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  .vp-atc-btn {
+    flex: 1;
+    height: 52px;
+    background: #FF7A42;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background 0.2s, transform 0.12s;
+  }
+  .vp-atc-btn:hover {
+    background: #e86a30;
+    transform: translateY(-1px);
+  }
+
+  /* ── Trust badges ── */
+  .vp-trust {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1.5px solid #e8e3da;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+  .vp-trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 7px;
+    padding: 18px 8px;
+    border-right: 1.5px solid #e8e3da;
+  }
+  .vp-trust-item:last-child { border-right: none; }
+  .vp-trust-svg { color: #4A5D4E; }
+  .vp-trust-text {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #4A5D4E;
+    line-height: 1.4;
+  }
+
+  /* ── Full description ── */
+  .vp-full-desc {
+    border-top: 1px solid #e8e3da;
+    padding-top: 28px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #555;
+  }
+  .vp-full-desc img,
+  .vp-full-desc iframe { display: none !important; }
+  .vp-full-desc p { margin-bottom: 12px; }
+  .vp-full-desc ul { padding-left: 18px; margin-bottom: 12px; }
+  .vp-full-desc li { margin-bottom: 5px; }
+  .vp-full-desc h2,
+  .vp-full-desc h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a201c;
+    margin: 18px 0 8px;
   }
 
   /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .vp-container { padding: 0 20px; }
-    .vp-grid { grid-template-columns: 1fr; gap: 32px; }
-    .vp-title { font-size: 28px; }
-    .vp-price { font-size: 24px; }
-    .vp-buy-row { flex-direction: column; }
-    .vp-qty-picker { width: 100%; justify-content: center; }
-    .vp-trust { flex-wrap: wrap; }
-    .vp-trust-item { flex: 1 0 45%; border-right: none; border-bottom: 1.5px solid #e8e4de; }
-    .vp-trust-item:nth-child(odd) { border-right: 1.5px solid #e8e4de; }
-    .vp-trust-item:last-child { border-bottom: none; }
+  @media (max-width: 880px) {
+    .vp-inner { padding: 0 20px; }
+    .vp-cols {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .vp-prod-title { font-size: 26px; }
+    .vp-price-tag { font-size: 22px; }
+    .vp-atc-row { flex-direction: column; }
+    .vp-qty { width: 100%; justify-content: space-between; }
   }
-  @media (max-width: 500px) {
-    .vp-page { padding: 24px 0 60px; }
-    .vp-thumb { flex: 0 0 calc(33.333% - 7px); }
+  @media (max-width: 480px) {
+    .vp-thumbs-row { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .vp-trust { grid-template-columns: 1fr 1fr; }
+    .vp-trust-item:nth-child(2) { border-right: none; }
+    .vp-trust-item:nth-child(1),
+    .vp-trust-item:nth-child(2) {
+      border-bottom: 1.5px solid #e8e3da;
+    }
+    .vp-trust-item:last-child { grid-column: span 2; border-right: none; }
   }
 </style>
 
-<div class="vp-page">
-  <div class="vp-container">
+<div class="vp-wrap">
+  <div class="vp-inner">
 
     <!-- Breadcrumb -->
-    <div class="vp-breadcrumb">
-      <a href="/">Shop</a>
-      &nbsp;/&nbsp;
-      <a href="{{ collection.url | default: '/collections/all' }}">{{ collection.title | default: 'All Products' }}</a>
-      &nbsp;/&nbsp;
-      <span>{{ product.title | truncate: 30 }}</span>
+    <div class="vp-crumb">
+      <a href="/">Shop</a> /
+      <a href="{{ collection.url | default: '/collections/all' }}">{{ collection.title | default: 'Products' }}</a> /
+      {{ product.title | truncate: 30 }}
     </div>
 
-    <div class="vp-grid">
+    <div class="vp-cols">
 
-      <!-- ── Gallery ── -->
+      <!-- ══ LEFT: Gallery ══ -->
       <div class="vp-gallery">
-        <div class="vp-main-img-wrap">
-          <img id="VpMainImage" class="vp-main-img"
+        <div class="vp-main-wrap">
+          <img id="VpMainImg"
                src="{{ product.featured_image | img_url: '1024x1024' }}"
                alt="{{ product.title | escape }}">
         </div>
 
-        {% if product.media.size > 1 %}
-        <div class="vp-thumbs">
+        {% if product.media.size > 0 %}
+        <div class="vp-thumbs-row">
+          {% assign shown = 0 %}
           {% for media in product.media %}
-            {% if media.media_type == 'image' %}
+            {% if media.media_type == 'image' and shown < 4 %}
               <img class="vp-thumb {% if forloop.first %}active{% endif %}"
                    src="{{ media | img_url: '300x300', crop: 'center' }}"
                    data-full="{{ media | img_url: '1024x1024' }}"
                    alt="{{ media.alt | default: product.title | escape }}"
-                   onclick="vpSwapImage(this)">
+                   onclick="vpSwap(this)">
+              {% assign shown = shown | plus: 1 %}
             {% endif %}
           {% endfor %}
         </div>
         {% endif %}
       </div>
 
-      <!-- ── Product Info ── -->
-      <div class="vp-info">
+      <!-- ══ RIGHT: Info ══ -->
+      <div class="vp-info-col">
 
-        <h1 class="vp-title">{{ product.title }}</h1>
+        <h1 class="vp-prod-title">{{ product.title }}</h1>
 
-        <div class="vp-meta-row">
-          <div>
-            <span class="vp-price" id="VpPrice">{{ product.price | money }}</span>
-            {% if product.compare_at_price > product.price %}
-              <span class="vp-compare-price">{{ product.compare_at_price | money }}</span>
-            {% endif %}
+        <!-- Stars + Price -->
+        <div class="vp-rating-price">
+          <div class="vp-stars-wrap">
+            <span class="vp-star">★★★★★</span>
+            <span class="vp-rating-count">4.8/5 (124 reviews)</span>
           </div>
-          <div class="vp-reviews">
-            <span class="vp-stars">★★★★★</span>
-            <span>4.8 &nbsp;(124 reviews)</span>
+          <div>
+            <span class="vp-price-tag" id="VpPrice">{{ product.price | money }}</span>
+            {% if product.compare_at_price > product.price %}
+              <span class="vp-compare-tag">{{ product.compare_at_price | money }}</span>
+            {% endif %}
           </div>
         </div>
 
-        <div class="vp-divider"></div>
-
-        <p class="vp-short-desc">{{ product.description | strip_html | truncatewords: 35 }}</p>
+        <!-- Short description -->
+        <div class="vp-short-desc">
+          {{ product.description | strip_html | truncatewords: 40 }}
+        </div>
 
         {% form 'product', product %}
           <input type="hidden" name="id" id="VpVariantId" value="{{ product.variants.first.id }}">
 
+          <!-- Variant Options -->
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
-              <div class="vp-option-group">
-                <div class="vp-option-label">
-                  {{ option.name }}:&nbsp;<span class="vp-option-selected" id="VpOptionLabel{{ forloop.index }}">{{ option.selected_value }}</span>
-                </div>
-                <div class="vp-option-values">
-                  {% assign d_name = option.name | downcase %}
-                  {% for value in option.values %}
-                    {% assign is_color = false %}
-                    {% if d_name contains 'color' or d_name contains 'colour' %}
-                      {% assign is_color = true %}
-                    {% endif %}
+              {% assign d_name = option.name | downcase %}
+              {% assign is_color = false %}
+              {% if d_name contains 'color' or d_name contains 'colour' %}
+                {% assign is_color = true %}
+              {% endif %}
 
+              <div class="vp-opt-block">
+                <div class="vp-opt-header">
+                  <span class="vp-opt-name">
+                    {{ option.name }}: <span class="vp-opt-selected" id="VpLabel{{ forloop.index }}">{{ option.selected_value }}</span>
+                  </span>
+                  {% if option.name == 'Size' or option.name == 'Length' %}
+                    <a href="#" class="vp-size-guide">Size Guide</a>
+                  {% endif %}
+                </div>
+                <div class="vp-opt-values">
+                  {% for value in option.values %}
                     {% if is_color %}
                       <button type="button"
-                              class="vp-swatch {% if option.selected_value == value %}active{% endif %}"
+                              class="vp-color-swatch {% if option.selected_value == value %}active{% endif %}"
                               style="background-color: {{ value | downcase | remove: ' ' }};"
                               data-value="{{ value | escape }}"
-                              data-option-index="{{ forloop.parentloop.index }}"
+                              data-opt="{{ forloop.parentloop.index }}"
                               title="{{ value }}"
-                              onclick="vpSelectOption(this, {{ forloop.parentloop.index }})">
+                              onclick="vpPick(this, {{ forloop.parentloop.index }})">
                       </button>
                     {% else %}
                       <button type="button"
-                              class="vp-pill {% if option.selected_value == value %}active{% endif %}"
+                              class="vp-size-pill {% if option.selected_value == value %}active{% endif %}"
                               data-value="{{ value | escape }}"
-                              data-option-index="{{ forloop.parentloop.index }}"
-                              onclick="vpSelectOption(this, {{ forloop.parentloop.index }})">
+                              data-opt="{{ forloop.parentloop.index }}"
+                              onclick="vpPick(this, {{ forloop.parentloop.index }})">
                         {{ value }}
                       </button>
                     {% endif %}
@@ -417,14 +442,14 @@
             {% endfor %}
           {% endunless %}
 
-          <!-- Quantity + Add to Cart -->
-          <div class="vp-buy-row">
-            <div class="vp-qty-picker">
-              <button type="button" class="vp-qty-btn" onclick="vpUpdateQty(-1)">−</button>
-              <input type="number" class="vp-qty-input" name="quantity" id="VpQuantity" value="1" min="1">
-              <button type="button" class="vp-qty-btn" onclick="vpUpdateQty(1)">+</button>
+          <!-- Qty + Add to Cart -->
+          <div class="vp-atc-row">
+            <div class="vp-qty">
+              <button type="button" class="vp-qty-btn" onclick="vpQty(-1)">−</button>
+              <input type="number" class="vp-qty-val" name="quantity" id="VpQty" value="1" min="1">
+              <button type="button" class="vp-qty-btn" onclick="vpQty(1)">+</button>
             </div>
-            <button type="submit" name="add" class="vp-btn-cart">Add to Cart</button>
+            <button type="submit" name="add" class="vp-atc-btn">Add to Cart</button>
           </div>
 
         {% endform %}
@@ -432,91 +457,70 @@
         <!-- Trust Badges -->
         <div class="vp-trust">
           <div class="vp-trust-item">
-            <div class="vp-trust-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+            <div class="vp-trust-svg">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
             </div>
-            <div class="vp-trust-label">Eco-Friendly<br>Materials</div>
+            <div class="vp-trust-text">Eco-friendly<br>veg leather</div>
           </div>
           <div class="vp-trust-item">
-            <div class="vp-trust-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <div class="vp-trust-svg">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
-            <div class="vp-trust-label">Premium<br>Quality</div>
+            <div class="vp-trust-text">Reinforced<br>stitching</div>
           </div>
           <div class="vp-trust-item">
-            <div class="vp-trust-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <div class="vp-trust-svg">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </div>
-            <div class="vp-trust-label">Secure<br>Checkout</div>
+            <div class="vp-trust-text">Solid brass<br>hardware</div>
           </div>
         </div>
 
         <!-- Full Description -->
-        <div class="vp-full-desc">
-          {{ product.description }}
-        </div>
+        <div class="vp-full-desc">{{ product.description }}</div>
 
-      </div>
-    </div>
-  </div>
-</div>
+      </div><!-- /info -->
+    </div><!-- /cols -->
+  </div><!-- /inner -->
+</div><!-- /wrap -->
 
-<script id="vp-variants-json" type="application/json">
-  {{ product.variants | json }}
-</script>
+<script id="vp-json" type="application/json">{{ product.variants | json }}</script>
 
 <script>
-  function vpSwapImage(thumb) {
-    document.getElementById('VpMainImage').src = thumb.dataset.full;
+  function vpSwap(el) {
+    document.getElementById('VpMainImg').src = el.dataset.full;
     document.querySelectorAll('.vp-thumb').forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
-  }
-
-  function vpUpdateQty(delta) {
-    const input = document.getElementById('VpQuantity');
-    const newVal = Math.max(1, parseInt(input.value) + delta);
-    input.value = newVal;
-  }
-
-  function vpSelectOption(el, optionIndex) {
-    // Toggle active state
-    const group = el.closest('.vp-option-values');
-    group.querySelectorAll('.vp-pill, .vp-swatch').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
+  }
 
-    // Update label
-    const labelEl = document.getElementById('VpOptionLabel' + optionIndex);
-    if (labelEl) labelEl.textContent = el.dataset.value;
+  function vpQty(d) {
+    const inp = document.getElementById('VpQty');
+    inp.value = Math.max(1, parseInt(inp.value || 1) + d);
+  }
 
-    // Collect all selected options
-    const selectedOptions = [];
-    document.querySelectorAll('.vp-option-group').forEach(group => {
-      const active = group.querySelector('.vp-pill.active, .vp-swatch.active');
-      selectedOptions.push(active ? active.dataset.value : '');
+  function vpPick(el, optIdx) {
+    el.closest('.vp-opt-values').querySelectorAll('.vp-size-pill, .vp-color-swatch').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    const label = document.getElementById('VpLabel' + optIdx);
+    if (label) label.textContent = el.dataset.value;
+
+    const selected = [];
+    document.querySelectorAll('.vp-opt-block').forEach(g => {
+      const a = g.querySelector('.active');
+      selected.push(a ? a.dataset.value : null);
     });
 
-    // Match variant
-    const variants = JSON.parse(document.getElementById('vp-variants-json').textContent);
-    const match = variants.find(v => v.options.every((opt, i) => opt === selectedOptions[i]));
+    const variants = JSON.parse(document.getElementById('vp-json').textContent);
+    const match = variants.find(v => v.options.every((o, i) => o === selected[i]));
     if (match) {
       document.getElementById('VpVariantId').value = match.id;
-      // Update price
-      const priceEl = document.getElementById('VpPrice');
-      if (priceEl) {
-        const amount = (match.price / 100).toFixed(2);
-        priceEl.textContent = '£' + amount;
-      }
-      // Update image if variant has one
-      if (match.featured_image) {
-        document.getElementById('VpMainImage').src = match.featured_image.src;
-      }
+      const p = document.getElementById('VpPrice');
+      if (p) p.textContent = '£' + (match.price / 100).toFixed(2);
+      if (match.featured_image) document.getElementById('VpMainImg').src = match.featured_image.src;
     }
   }
 </script>
 
 {% schema %}
-{
-  "name": "Main Product",
-  "settings": []
-}
+{ "name": "Main Product", "settings": [] }
 {% endschema %}
