@@ -172,8 +172,48 @@
           {% endfor %}
           
           {% if paginate.pages > 1 %}
-            <div class="pagination" style="grid-column: 1 / -1; display: flex; justify-content: center; gap: 12px; margin-top: 60px;">
-              {{ paginate | default_pagination }}
+            <style>
+              .pagination {
+                grid-column: 1 / -1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                margin-top: 60px;
+                font-family: 'Plus Jakarta Sans', sans-serif;
+              }
+              .pagination span, .pagination a {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 40px;
+                height: 40px;
+                padding: 0 12px;
+                border-radius: 50px;
+                font-size: 14px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: all 0.2s ease;
+              }
+              .pagination a {
+                background: #fff;
+                color: #555;
+                border: 1px solid #e0e0e0;
+              }
+              .pagination a:hover {
+                background: #f6f5f0;
+                color: #111;
+                border-color: #ccc;
+              }
+              .pagination .current {
+                background: #4A5D4E; /* Signature dark green */
+                color: #fff;
+                border: 1px solid #4A5D4E;
+              }
+              .pagination .deco { display: none; } /* Hide raw ellipses if necessary */
+            </style>
+            <div class="pagination">
+              {{ paginate | default_pagination: next: 'Next &rarr;', previous: '&larr; Prev' }}
             </div>
           {% endif %}
         {% endpaginate %}
