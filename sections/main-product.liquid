@@ -639,15 +639,17 @@
         <!-- Full Description -->
         <div class="vp-full-desc">
           {% assign desc = product.description %}
+          {% assign final_desc = desc %}
+          
           {% if desc contains 'Packing List' %}
             {% assign desc_parts = desc | split: 'Packing List' %}
-            {{ desc_parts[0] }}
+            {% assign final_desc = desc_parts[0] %}
           {% elsif desc contains 'Packing list' %}
             {% assign desc_parts = desc | split: 'Packing list' %}
-            {{ desc_parts[0] }}
-          {% else %}
-            {{ desc }}
+            {% assign final_desc = desc_parts[0] %}
           {% endif %}
+          
+          {{ final_desc | replace: '<p>&nbsp;</p>', '' | replace: '<p><br></p>', '' | replace: '<p><br/></p>', '' | replace: '<br><br><br>', '<br>' | replace: '<br><br>', '<br>' }}
         </div>
 
       </div>
