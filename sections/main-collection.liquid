@@ -10,6 +10,12 @@
         </div>
         <p style="font-size: 12px; color: #666; margin-bottom: 24px;">Refine your search</p>
         
+        <!-- Search Input -->
+        <div style="margin-bottom: 24px; position: relative;">
+          <input type="text" id="catalogueSearch" placeholder="Search catalogue..." style="width: 100%; box-sizing: border-box; padding: 10px 14px 10px 32px; border: 1px solid #ccc; border-radius: 8px; font-size: 13px; outline: none; background: #fff;" oninput="applyFilters()">
+          <svg style="position: absolute; left: 10px; top: 11px; color: #888;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        
         <!-- Pet Type -->
         <h4 style="font-size: 13px; font-weight: 700; color: #2a5a5a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
@@ -256,6 +262,7 @@
     const maxPrice = parseInt(document.getElementById('priceRange').value) || 500;
     const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(cb => cb.value);
     const selectedCategories = Array.from(document.querySelectorAll('.filter-category.active-cat')).map(span => span.getAttribute('data-value'));
+    const searchQuery = (document.getElementById('catalogueSearch').value || '').toLowerCase().trim();
 
     document.querySelectorAll('.premium-card').forEach(card => {
       const price = parseFloat(card.getAttribute('data-price')) || 0;
@@ -266,8 +273,9 @@
       let isPriceValid = price <= maxPrice;
       let isTypeValid = selectedTypes.length === 0 || selectedTypes.some(t => type.includes(t) || tags.includes(t) || title.includes(t));
       let isCatValid = selectedCategories.length === 0 || selectedCategories.some(c => type.includes(c) || tags.includes(c) || title.includes(c));
+      let isSearchValid = searchQuery === '' || title.includes(searchQuery) || tags.includes(searchQuery);
 
-      if (isPriceValid && isTypeValid && isCatValid) {
+      if (isPriceValid && isTypeValid && isCatValid && isSearchValid) {
         card.style.display = 'flex';
       } else {
         card.style.display = 'none';
@@ -280,6 +288,7 @@
     document.querySelectorAll('.filter-category').forEach(span => span.classList.remove('active-cat'));
     document.getElementById('priceRange').value = 500;
     document.getElementById('priceDisplay').innerText = '$500+';
+    document.getElementById('catalogueSearch').value = '';
     applyFilters();
   }
 

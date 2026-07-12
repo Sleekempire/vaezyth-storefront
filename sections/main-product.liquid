@@ -384,16 +384,16 @@
   .vp-sticky-atc {
     display: none;
     position: fixed;
-    bottom: 0;
+    top: 72px;
     left: 0;
     right: 0;
     z-index: 300;
     background: #fff;
-    border-top: 1px solid #e8e3da;
+    border-bottom: 1px solid #e8e3da;
     padding: 12px 20px;
     gap: 12px;
     align-items: center;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   }
   .vp-sticky-info { flex: 1; overflow: hidden; }
   .vp-sticky-name {
@@ -641,8 +641,11 @@
     <div class="vp-sticky-name">{{ product.title }}</div>
     <div class="vp-sticky-price" id="VpStickyPrice">{{ product.price | money }}</div>
   </div>
-  <button class="vp-sticky-btn" onclick="document.getElementById('VpAtcBtn').click()">
+  <button class="vp-sticky-btn" onclick="document.getElementById('VpAtcBtn').click()" style="padding: 12px 14px; font-size: 12px;">
     Add to Cart
+  </button>
+  <button class="vp-sticky-btn" onclick="window.location.href='/checkout'" style="background:#111; padding: 12px 14px; font-size: 12px;">
+    Checkout
   </button>
 </div>
 
