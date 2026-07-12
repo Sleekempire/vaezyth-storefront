@@ -570,9 +570,18 @@
                 <div class="vp-opt-values">
                   {% for value in option.values %}
                     {% if is_color %}
+                      {% assign swatch_bg = value | downcase | remove: ' ' %}
+                      {% assign variant_img = blank %}
+                      {% for v in product.variants %}
+                        {% if v.options contains value and v.featured_image %}
+                          {% assign variant_img = v.featured_image | img_url: '60x60', crop: 'center' %}
+                          {% break %}
+                        {% endif %}
+                      {% endfor %}
+
                       <button type="button"
                               class="vp-color-swatch {% if option.selected_value == value %}active{% endif %}"
-                              style="background-color: {{ value | downcase | remove: ' ' }};"
+                              style="{% if variant_img != blank %}background-image: url('{{ variant_img }}'); background-size: cover;{% else %}background-color: {{ swatch_bg }};{% endif %}"
                               data-value="{{ value | escape }}"
                               data-opt="{{ forloop.parentloop.index }}"
                               title="{{ value }}"
