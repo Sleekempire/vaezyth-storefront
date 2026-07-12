@@ -1,30 +1,89 @@
 {% comment %} Vaezyth – Main Product Section {% endcomment %}
 
 <style>
-  /* ── Reset & Base ── */
+  /* ════════════════════════════
+     BASE
+  ════════════════════════════ */
   .vp-wrap {
     background: #faf8f4;
-    padding: 32px 0 80px;
+    padding: 0 0 60px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #1a201c;
   }
+
+  /* ════════════════════════════
+     STICKY MOBILE TOP BAR
+  ════════════════════════════ */
+  .vp-mobile-topbar {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: #faf8f4;
+    border-bottom: 1px solid #e8e3da;
+    padding: 12px 20px;
+    align-items: center;
+    gap: 12px;
+  }
+  .vp-mobile-back {
+    display: flex;
+    align-items: center;
+    color: #4A5D4E;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    gap: 4px;
+  }
+  .vp-mobile-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a201c;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .vp-mobile-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3b4d40;
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════════
+     PAGE CONTAINER
+  ════════════════════════════ */
   .vp-inner {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 32px;
   }
 
-  /* ── Breadcrumb ── */
+  /* ════════════════════════════
+     BREADCRUMB (desktop)
+  ════════════════════════════ */
   .vp-crumb {
     font-size: 11px;
-    color: #999;
-    margin-bottom: 28px;
+    color: #aaa;
+    padding: 24px 0 28px;
     letter-spacing: 0.2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
   }
-  .vp-crumb a { color: #999; text-decoration: none; }
-  .vp-crumb a:hover { color: #555; }
+  .vp-crumb a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .vp-crumb a:hover { color: #4A5D4E; }
+  .vp-crumb-sep { color: #ccc; }
+  .vp-crumb-current { color: #555; font-weight: 600; }
 
-  /* ── Two-column layout ── */
+  /* ════════════════════════════
+     TWO-COLUMN LAYOUT
+  ════════════════════════════ */
   .vp-cols {
     display: grid;
     grid-template-columns: 56% 44%;
@@ -32,15 +91,18 @@
     align-items: start;
   }
 
-  /* ─────── LEFT: Gallery ─────── */
+  /* ════════════════════════════
+     GALLERY
+  ════════════════════════════ */
   .vp-gallery { display: flex; flex-direction: column; gap: 14px; }
 
   .vp-main-wrap {
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 16px;
+    border-radius: 18px;
     overflow: hidden;
     background: #ede9e2;
+    position: relative;
   }
   #VpMainImg {
     width: 100%;
@@ -49,7 +111,23 @@
     display: block;
     transition: transform 0.4s ease;
   }
-  .vp-main-wrap:hover #VpMainImg { transform: scale(1.04); }
+  .vp-main-wrap:hover #VpMainImg { transform: scale(1.03); }
+
+  /* Mobile swipe indicator */
+  .vp-swipe-hint {
+    display: none;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    pointer-events: none;
+  }
 
   .vp-thumbs-row {
     display: grid;
@@ -63,43 +141,37 @@
     cursor: pointer;
     border: 2.5px solid transparent;
     background: #ede9e2;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.15s;
     width: 100%;
     display: block;
   }
-  .vp-thumb.active,
-  .vp-thumb:hover { border-color: #d97706; }
+  .vp-thumb:hover { transform: scale(1.03); }
+  .vp-thumb.active { border-color: #d97706; }
 
-  /* ─────── RIGHT: Info ─────── */
+  /* ════════════════════════════
+     PRODUCT INFO
+  ════════════════════════════ */
   .vp-info-col { padding-top: 4px; }
 
   .vp-prod-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 34px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 1.2;
     color: #1a201c;
-    margin: 0 0 14px;
+    margin: 0 0 16px;
   }
 
-  /* Stars + Price row */
+  /* Stars + Price */
   .vp-rating-price {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 10px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
-  .vp-stars-wrap {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .vp-star { color: #f59e0b; font-size: 15px; }
-  .vp-rating-count {
-    font-size: 13px;
-    color: #777;
-  }
+  .vp-stars { color: #f59e0b; font-size: 15px; letter-spacing: 2px; }
+  .vp-review-count { font-size: 13px; color: #888; }
   .vp-price-tag {
     font-family: 'Outfit', sans-serif;
     font-size: 26px;
@@ -112,20 +184,21 @@
     color: #bbb;
     text-decoration: line-through;
     margin-left: 6px;
-    font-weight: 400;
   }
 
-  /* Short description */
+  .vp-divider { height: 1px; background: #e8e3da; margin: 20px 0; }
+
+  /* Short desc */
   .vp-short-desc {
-    font-size: 13.5px;
-    line-height: 1.65;
+    font-size: 14px;
+    line-height: 1.7;
     color: #666;
     margin-bottom: 24px;
-    border-bottom: 1px solid #e8e3da;
-    padding-bottom: 24px;
   }
 
-  /* ── Options ── */
+  /* ════════════════════════════
+     OPTIONS
+  ════════════════════════════ */
   .vp-opt-block { margin-bottom: 20px; }
   .vp-opt-header {
     display: flex;
@@ -138,11 +211,7 @@
     font-weight: 700;
     color: #1a201c;
   }
-  .vp-opt-selected {
-    font-weight: 400;
-    color: #888;
-    font-size: 13px;
-  }
+  .vp-opt-selected { font-weight: 400; color: #888; }
   .vp-size-guide {
     font-size: 11px;
     font-weight: 700;
@@ -152,10 +221,9 @@
     text-decoration: none;
   }
   .vp-size-guide:hover { text-decoration: underline; }
-
   .vp-opt-values { display: flex; flex-wrap: wrap; gap: 8px; }
 
-  /* Text pills */
+  /* Size pills */
   .vp-size-pill {
     padding: 8px 18px;
     border: 1.5px solid #d5d0c8;
@@ -177,29 +245,29 @@
 
   /* Color swatches */
   .vp-color-swatch {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid transparent;
     box-shadow: 0 0 0 1.5px #ccc;
-    transition: box-shadow 0.18s;
+    transition: box-shadow 0.18s, transform 0.15s;
     padding: 0;
-    display: inline-block;
   }
-  .vp-color-swatch:hover { box-shadow: 0 0 0 2px #4A5D4E; }
+  .vp-color-swatch:hover { transform: scale(1.1); box-shadow: 0 0 0 2px #4A5D4E; }
   .vp-color-swatch.active {
     box-shadow: 0 0 0 2.5px #1a201c;
     border-color: #faf8f4;
   }
 
-  /* ── Qty + ATC row ── */
+  /* ════════════════════════════
+     QTY + ADD TO CART
+  ════════════════════════════ */
   .vp-atc-row {
     display: flex;
     gap: 12px;
     align-items: stretch;
-    margin-bottom: 28px;
-    margin-top: 24px;
+    margin: 24px 0 28px;
   }
   .vp-qty {
     display: flex;
@@ -213,7 +281,7 @@
   .vp-qty-btn {
     background: none;
     border: none;
-    width: 40px;
+    width: 42px;
     height: 52px;
     font-size: 20px;
     font-weight: 300;
@@ -249,32 +317,30 @@
     font-size: 16px;
     font-weight: 800;
     cursor: pointer;
-    letter-spacing: 0.2px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     transition: background 0.2s, transform 0.12s;
+    letter-spacing: 0.2px;
   }
-  .vp-atc-btn:hover {
-    background: #e86a30;
-    transform: translateY(-1px);
-  }
+  .vp-atc-btn:hover { background: #e86a30; transform: translateY(-1px); }
+  .vp-atc-btn:active { transform: translateY(0); }
 
-  /* ── Trust badges ── */
+  /* ════════════════════════════
+     TRUST BADGES
+  ════════════════════════════ */
   .vp-trust {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
     border: 1.5px solid #e8e3da;
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
   .vp-trust-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    gap: 7px;
+    gap: 8px;
     padding: 18px 8px;
     border-right: 1.5px solid #e8e3da;
   }
@@ -289,7 +355,9 @@
     line-height: 1.4;
   }
 
-  /* ── Full description ── */
+  /* ════════════════════════════
+     FULL DESCRIPTION
+  ════════════════════════════ */
   .vp-full-desc {
     border-top: 1px solid #e8e3da;
     padding-top: 28px;
@@ -310,78 +378,163 @@
     margin: 18px 0 8px;
   }
 
-  /* ── Responsive ── */
-  @media (max-width: 880px) {
-    .vp-inner { padding: 0 20px; }
+  /* ════════════════════════════
+     STICKY MOBILE ATC BAR
+  ════════════════════════════ */
+  .vp-sticky-atc {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    background: #fff;
+    border-top: 1px solid #e8e3da;
+    padding: 12px 20px;
+    gap: 12px;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  }
+  .vp-sticky-info { flex: 1; overflow: hidden; }
+  .vp-sticky-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a201c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .vp-sticky-price { font-size: 12px; color: #777; }
+  .vp-sticky-btn {
+    background: #FF7A42;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════════
+     RESPONSIVE — TABLET
+  ════════════════════════════ */
+  @media (max-width: 900px) {
+    .vp-inner { padding: 0 24px; }
     .vp-cols {
       grid-template-columns: 1fr;
       gap: 28px;
     }
     .vp-prod-title { font-size: 26px; }
     .vp-price-tag { font-size: 22px; }
+    .vp-crumb { padding: 16px 0 20px; }
+  }
+
+  /* ════════════════════════════
+     RESPONSIVE — MOBILE
+  ════════════════════════════ */
+  @media (max-width: 600px) {
+    .vp-inner { padding: 0 16px; }
+    .vp-crumb { display: none; }
+
+    /* Show sticky top bar instead */
+    .vp-mobile-topbar { display: flex; }
+
+    /* Full-bleed main image on mobile */
+    .vp-main-wrap { border-radius: 12px; }
+    .vp-swipe-hint { display: block; }
+
+    .vp-prod-title { font-size: 22px; margin-bottom: 12px; }
+    .vp-price-tag { font-size: 20px; }
+    .vp-review-count { font-size: 12px; }
+    .vp-short-desc { font-size: 13px; }
+
+    .vp-size-pill { padding: 7px 14px; font-size: 12px; }
+    .vp-color-swatch { width: 30px; height: 30px; }
+
+    /* Stack qty + ATC vertically */
     .vp-atc-row { flex-direction: column; }
     .vp-qty { width: 100%; justify-content: space-between; }
-  }
-  @media (max-width: 480px) {
-    .vp-thumbs-row { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .vp-atc-btn { width: 100%; }
+
+    /* Sticky ATC bar at bottom */
+    .vp-sticky-atc { display: flex; }
+    .vp-wrap { padding-bottom: 80px; }
+
+    /* Thumbnails: 4 in a row but smaller */
+    .vp-thumbs-row { gap: 6px; }
+
+    /* Trust badges: 1 per row on very small */
     .vp-trust { grid-template-columns: 1fr 1fr; }
-    .vp-trust-item:nth-child(2) { border-right: none; }
     .vp-trust-item:nth-child(1),
-    .vp-trust-item:nth-child(2) {
-      border-bottom: 1.5px solid #e8e3da;
-    }
-    .vp-trust-item:last-child { grid-column: span 2; border-right: none; }
+    .vp-trust-item:nth-child(2) { border-bottom: 1.5px solid #e8e3da; }
+    .vp-trust-item:nth-child(2) { border-right: none; }
+    .vp-trust-item:last-child { grid-column: span 2; }
   }
 </style>
+
+<!-- ═══════════ STICKY MOBILE TOP BAR ═══════════ -->
+<div class="vp-mobile-topbar">
+  <a href="{{ collection.url | default: '/collections/all' }}" class="vp-mobile-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+  <div class="vp-mobile-title">{{ product.title }}</div>
+  <div class="vp-mobile-price">{{ product.price | money }}</div>
+</div>
 
 <div class="vp-wrap">
   <div class="vp-inner">
 
-    <!-- Breadcrumb -->
-    <div class="vp-crumb">
-      <a href="/">Shop</a> /
-      <a href="{{ collection.url | default: '/collections/all' }}">{{ collection.title | default: 'Products' }}</a> /
-      {{ product.title | truncate: 30 }}
-    </div>
+    <!-- ─── BREADCRUMB (desktop) ─── -->
+    <nav class="vp-crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="vp-crumb-sep">/</span>
+      <a href="{{ collection.url | default: '/collections/all' }}">{{ collection.title | default: 'All Products' }}</a>
+      <span class="vp-crumb-sep">/</span>
+      <span class="vp-crumb-current">{{ product.title | truncate: 40 }}</span>
+    </nav>
 
     <div class="vp-cols">
 
-      <!-- ══ LEFT: Gallery ══ -->
+      <!-- ══════════ GALLERY ══════════ -->
       <div class="vp-gallery">
         <div class="vp-main-wrap">
           <img id="VpMainImg"
                src="{{ product.featured_image | img_url: '1024x1024' }}"
                alt="{{ product.title | escape }}">
+          <div class="vp-swipe-hint">Tap thumbnails to switch</div>
         </div>
 
-        {% if product.media.size > 0 %}
-        <div class="vp-thumbs-row">
-          {% assign shown = 0 %}
-          {% for media in product.media %}
-            {% if media.media_type == 'image' and shown < 4 %}
-              <img class="vp-thumb {% if forloop.first %}active{% endif %}"
-                   src="{{ media | img_url: '300x300', crop: 'center' }}"
-                   data-full="{{ media | img_url: '1024x1024' }}"
-                   alt="{{ media.alt | default: product.title | escape }}"
-                   onclick="vpSwap(this)">
-              {% assign shown = shown | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-        </div>
+        {% if product.media.size > 1 %}
+          <div class="vp-thumbs-row">
+            {% assign shown = 0 %}
+            {% for media in product.media %}
+              {% if media.media_type == 'image' and shown < 4 %}
+                <img class="vp-thumb {% if forloop.first %}active{% endif %}"
+                     src="{{ media | img_url: '300x300', crop: 'center' }}"
+                     data-full="{{ media | img_url: '1024x1024' }}"
+                     alt="{{ media.alt | default: product.title | escape }}"
+                     onclick="vpSwap(this)">
+                {% assign shown = shown | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          </div>
         {% endif %}
       </div>
 
-      <!-- ══ RIGHT: Info ══ -->
+      <!-- ══════════ PRODUCT INFO ══════════ -->
       <div class="vp-info-col">
 
         <h1 class="vp-prod-title">{{ product.title }}</h1>
 
         <!-- Stars + Price -->
         <div class="vp-rating-price">
-          <div class="vp-stars-wrap">
-            <span class="vp-star">★★★★★</span>
-            <span class="vp-rating-count">4.8/5 (124 reviews)</span>
-          </div>
+          <span class="vp-stars">★★★★★</span>
+          <span class="vp-review-count">4.8/5 &nbsp;(124 reviews)</span>
           <div>
             <span class="vp-price-tag" id="VpPrice">{{ product.price | money }}</span>
             {% if product.compare_at_price > product.price %}
@@ -390,15 +543,13 @@
           </div>
         </div>
 
-        <!-- Short description -->
-        <div class="vp-short-desc">
-          {{ product.description | strip_html | truncatewords: 40 }}
-        </div>
+        <div class="vp-divider"></div>
+
+        <p class="vp-short-desc">{{ product.description | strip_html | truncatewords: 40 }}</p>
 
         {% form 'product', product %}
           <input type="hidden" name="id" id="VpVariantId" value="{{ product.variants.first.id }}">
 
-          <!-- Variant Options -->
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
               {% assign d_name = option.name | downcase %}
@@ -410,7 +561,7 @@
               <div class="vp-opt-block">
                 <div class="vp-opt-header">
                   <span class="vp-opt-name">
-                    {{ option.name }}: <span class="vp-opt-selected" id="VpLabel{{ forloop.index }}">{{ option.selected_value }}</span>
+                    {{ option.name }}:&nbsp;<span class="vp-opt-selected" id="VpLabel{{ forloop.index }}">{{ option.selected_value }}</span>
                   </span>
                   {% if option.name == 'Size' or option.name == 'Length' %}
                     <a href="#" class="vp-size-guide">Size Guide</a>
@@ -442,14 +593,14 @@
             {% endfor %}
           {% endunless %}
 
-          <!-- Qty + Add to Cart -->
+          <!-- Qty + ATC -->
           <div class="vp-atc-row">
             <div class="vp-qty">
               <button type="button" class="vp-qty-btn" onclick="vpQty(-1)">−</button>
               <input type="number" class="vp-qty-val" name="quantity" id="VpQty" value="1" min="1">
               <button type="button" class="vp-qty-btn" onclick="vpQty(1)">+</button>
             </div>
-            <button type="submit" name="add" class="vp-atc-btn">Add to Cart</button>
+            <button type="submit" name="add" class="vp-atc-btn" id="VpAtcBtn">Add to Cart</button>
           </div>
 
         {% endform %}
@@ -479,28 +630,44 @@
         <!-- Full Description -->
         <div class="vp-full-desc">{{ product.description }}</div>
 
-      </div><!-- /info -->
-    </div><!-- /cols -->
-  </div><!-- /inner -->
-</div><!-- /wrap -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ STICKY MOBILE ATC BAR ═══════════ -->
+<div class="vp-sticky-atc" id="VpStickyBar">
+  <div class="vp-sticky-info">
+    <div class="vp-sticky-name">{{ product.title }}</div>
+    <div class="vp-sticky-price" id="VpStickyPrice">{{ product.price | money }}</div>
+  </div>
+  <button class="vp-sticky-btn" onclick="document.getElementById('VpAtcBtn').click()">
+    Add to Cart
+  </button>
+</div>
 
 <script id="vp-json" type="application/json">{{ product.variants | json }}</script>
 
 <script>
+  // Swap main image on thumbnail click
   function vpSwap(el) {
     document.getElementById('VpMainImg').src = el.dataset.full;
     document.querySelectorAll('.vp-thumb').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
   }
 
+  // Quantity controls
   function vpQty(d) {
     const inp = document.getElementById('VpQty');
     inp.value = Math.max(1, parseInt(inp.value || 1) + d);
   }
 
+  // Variant picker
   function vpPick(el, optIdx) {
-    el.closest('.vp-opt-values').querySelectorAll('.vp-size-pill, .vp-color-swatch').forEach(b => b.classList.remove('active'));
+    el.closest('.vp-opt-values').querySelectorAll('.vp-size-pill, .vp-color-swatch')
+      .forEach(b => b.classList.remove('active'));
     el.classList.add('active');
+
     const label = document.getElementById('VpLabel' + optIdx);
     if (label) label.textContent = el.dataset.value;
 
@@ -514,11 +681,26 @@
     const match = variants.find(v => v.options.every((o, i) => o === selected[i]));
     if (match) {
       document.getElementById('VpVariantId').value = match.id;
+      const price = '£' + (match.price / 100).toFixed(2);
       const p = document.getElementById('VpPrice');
-      if (p) p.textContent = '£' + (match.price / 100).toFixed(2);
+      const sp = document.getElementById('VpStickyPrice');
+      if (p) p.textContent = price;
+      if (sp) sp.textContent = price;
       if (match.featured_image) document.getElementById('VpMainImg').src = match.featured_image.src;
     }
   }
+
+  // Hide sticky bar when ATC button is visible
+  (function() {
+    const atcBtn = document.getElementById('VpAtcBtn');
+    const stickyBar = document.getElementById('VpStickyBar');
+    if (!atcBtn || !stickyBar) return;
+    const obs = new IntersectionObserver(([e]) => {
+      stickyBar.style.opacity = e.isIntersecting ? '0' : '1';
+      stickyBar.style.pointerEvents = e.isIntersecting ? 'none' : 'all';
+    }, { threshold: 0.5 });
+    obs.observe(atcBtn);
+  })();
 </script>
 
 {% schema %}

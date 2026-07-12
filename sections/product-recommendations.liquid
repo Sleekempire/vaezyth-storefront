@@ -9,17 +9,16 @@
   .va-look-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 56px 32px 0;
     border-top: 1px solid #e8e3da;
-    padding-top: 56px;
   }
 
-  /* ── Header row ── */
   .va-look-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 28px;
+    gap: 16px;
   }
   .va-look-titles h2 {
     font-family: 'Outfit', sans-serif;
@@ -39,20 +38,15 @@
     color: #4A5D4E;
     text-decoration: none;
     white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 4px;
   }
   .va-look-all:hover { text-decoration: underline; }
 
-  /* ── 3-column grid ── */
   .va-look-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
 
-  /* ── Card ── */
   .va-look-card {
     text-decoration: none;
     color: inherit;
@@ -98,10 +92,7 @@
     transition: background 0.2s, color 0.2s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
-  .va-look-cart-btn:hover {
-    background: #FF7A42;
-    color: #fff;
-  }
+  .va-look-cart-btn:hover { background: #FF7A42; color: #fff; }
 
   .va-look-card-title {
     font-size: 14px;
@@ -121,74 +112,64 @@
     .va-look-inner { padding: 40px 20px 0; }
     .va-look-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .va-look-titles h2 { font-size: 20px; }
-  }
-  @media (max-width: 400px) {
-    .va-look-grid { grid-template-columns: 1fr; }
+    .va-look-header { flex-direction: column; align-items: flex-start; }
   }
 </style>
 
 <div class="va-look-section">
-  <div class="va-look-inner"
-       id="va-recs-root"
-       data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=3&intent=related">
+  <div class="va-look-inner">
 
-    {% if recommendations.performed and recommendations.products_count > 0 %}
-      <div class="va-look-header">
-        <div class="va-look-titles">
-          <h2>Complete the Look</h2>
-          <p>Curated pairings to style your companion.</p>
-        </div>
-        <a href="/collections/all" class="va-look-all">View Entire Collection &rarr;</a>
+    <div class="va-look-header">
+      <div class="va-look-titles">
+        <h2>Complete the Look</h2>
+        <p>Curated pairings to style your companion.</p>
       </div>
+      <a href="/collections/all" class="va-look-all">View Entire Collection &rarr;</a>
+    </div>
 
-      <div class="va-look-grid">
-        {% for rec in recommendations.products %}
-          <a href="{{ rec.url }}" class="va-look-card">
-            <div class="va-look-img-wrap">
-              <img class="va-look-img"
-                   src="{{ rec.featured_image | img_url: '600x600', crop: 'center' }}"
-                   alt="{{ rec.title | escape }}"
-                   loading="lazy">
-              <button class="va-look-cart-btn"
-                      onclick="vaQuickAdd(event, '{{ rec.variants.first.id }}')"
-                      title="Quick add">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                </svg>
-              </button>
-            </div>
-            <div class="va-look-card-title">{{ rec.title }}</div>
-            <div class="va-look-card-price">{{ rec.price | money }}</div>
-          </a>
-        {% endfor %}
-      </div>
-    {% endif %}
+    <div class="va-look-grid" id="va-look-grid">
 
+      {% comment %} FALLBACK: Show other products from the same collection {% endcomment %}
+      {% assign fallback_products = collection.products | default: collections.all.products %}
+      {% assign count = 0 %}
+      {% for p in fallback_products %}
+        {% unless p.id == product.id %}
+          {% if count < 3 %}
+            <a href="{{ p.url }}" class="va-look-card">
+              <div class="va-look-img-wrap">
+                <img class="va-look-img"
+                     src="{{ p.featured_image | img_url: '600x600', crop: 'center' }}"
+                     alt="{{ p.title | escape }}"
+                     loading="lazy">
+                <button class="va-look-cart-btn"
+                        onclick="vaQuickAdd(event, '{{ p.variants.first.id }}')"
+                        title="Quick add">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="va-look-card-title">{{ p.title }}</div>
+              <div class="va-look-card-price">{{ p.price | money }}</div>
+            </a>
+            {% assign count = count | plus: 1 %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+
+    </div>
   </div>
 </div>
 
 <script>
-  // Fetch Shopify recommendations via AJAX
-  (function() {
-    const root = document.getElementById('va-recs-root');
-    if (!root || !root.dataset.url) return;
-    fetch(root.dataset.url)
-      .then(r => r.text())
-      .then(html => {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const fresh = doc.getElementById('va-recs-root');
-        if (fresh && fresh.innerHTML.trim()) {
-          root.innerHTML = fresh.innerHTML;
-        }
-      })
-      .catch(() => {});
-  })();
-
-  // Quick add to cart
   function vaQuickAdd(e, variantId) {
     e.preventDefault();
     e.stopPropagation();
+    const btn = e.currentTarget;
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+    btn.style.background = '#4A5D4E';
+    btn.style.color = '#fff';
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -196,9 +177,12 @@
     })
     .then(r => r.json())
     .then(() => {
-      // Trigger cart drawer if available
       if (typeof openCartDrawer === 'function') openCartDrawer();
-      else window.location.href = '/cart';
+      setTimeout(() => {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>';
+        btn.style.background = 'rgba(255,255,255,0.92)';
+        btn.style.color = '#333';
+      }, 1500);
     })
     .catch(() => {});
   }
