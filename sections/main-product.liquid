@@ -628,7 +628,18 @@
         </div>
 
         <!-- Full Description -->
-        <div class="vp-full-desc">{{ product.description }}</div>
+        <div class="vp-full-desc">
+          {% assign desc = product.description %}
+          {% if desc contains 'Packing List' %}
+            {% assign desc_parts = desc | split: 'Packing List' %}
+            {{ desc_parts[0] }}
+          {% elsif desc contains 'Packing list' %}
+            {% assign desc_parts = desc | split: 'Packing list' %}
+            {{ desc_parts[0] }}
+          {% else %}
+            {{ desc }}
+          {% endif %}
+        </div>
 
       </div>
     </div>
