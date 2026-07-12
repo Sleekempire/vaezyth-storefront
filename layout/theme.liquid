@@ -11,11 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   </head>
-  <body class="template-{{ template | handleize }}">
-    <div class="fade-in">
+  <body class="template-{{ template | handleize }}" style="margin: 0;">
+    <div class="fade-in" style="display: flex; flex-direction: column; min-height: 100vh;">
       {% section 'header' %}
       
-      <main role="main" id="MainContent">
+      <main role="main" id="MainContent" style="flex: 1 0 auto;">
         {{ content_for_layout }}
       </main>
 
