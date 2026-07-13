@@ -1,150 +1,355 @@
 <style>
-  .masonry-app-container {
-    padding-top: 80px;
-    padding-bottom: 80px;
+  .bs-section {
+    padding: 64px 0;
+    background: #f5f2ee;
   }
-  .masonry-grid-wrapper {
+  .bs-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .bs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+  }
+  .bs-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .bs-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #C5A880;
+  }
+  .bs-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #131110;
+    margin: 0;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .bs-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bs-shop-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #e0dbd4;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #131110;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .bs-shop-btn:hover { background: #f0ebe4; border-color: #c9b99d; }
+  .bs-shop-btn svg { transition: transform 0.2s; }
+  .bs-shop-btn:hover svg { transform: translateX(2px); }
+  .bs-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #e0dbd4;
+    background: #fff;
+    color: #666;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .bs-nav-btn:hover { background: #f0ebe4; }
+  .bs-nav-btn.active { background: #C5A880; border-color: #C5A880; color: #fff; }
+
+  /* Carousel */
+  .bs-carousel-viewport {
+    overflow: hidden;
+    position: relative;
+  }
+  .bs-carousel-track {
     display: flex;
     gap: 24px;
-    align-items: flex-end;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .masonry-col-1 { flex: 1.2; }
-  .masonry-col-2, .masonry-col-3 { flex: 1; display: flex; flex-direction: column; }
-  .masonry-header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
-  .masonry-title { font-family: 'Outfit', serif; font-size: 48px; font-weight: normal; color: #131110; margin: 0; letter-spacing: -1px; }
-  
+  .bs-card {
+    flex: 0 0 calc(33.333% - 16px);
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  .bs-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+  }
+  .bs-card-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    position: relative;
+    background: #f4f1ed;
+  }
+  .bs-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .bs-card:hover .bs-card-image img {
+    transform: scale(1.04);
+  }
+  .bs-card-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #131110;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .bs-card-cart-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    background: #131110;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    border: none;
+    z-index: 2;
+  }
+  .bs-card-cart-btn:hover { background: #C5A880; transform: scale(1.08); }
+  .bs-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .bs-card-category {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #C5A880;
+  }
+  .bs-card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #131110;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .bs-card-desc {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bs-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #f0ebe4;
+  }
+  .bs-card-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #131110;
+  }
+  .bs-card-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #C5A880;
+  }
+
   @media (max-width: 900px) {
-    .masonry-app-container { padding-top: 40px !important; padding-bottom: 40px !important; padding-left: 20px !important; padding-right: 20px !important; }
-    
-    /* Make it a horizontal carousel on mobile */
-    .masonry-grid-wrapper { 
-      flex-direction: row !important; 
-      align-items: stretch !important; 
-      gap: 16px !important; 
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 24px;
-    }
-    .masonry-grid-wrapper::-webkit-scrollbar { display: none; }
-    
-    .masonry-col-1, .masonry-col-2, .masonry-col-3 { 
-      flex: 0 0 85% !important; 
-      width: 85% !important; 
-      scroll-snap-align: center;
-    }
-    
-    .masonry-header-flex { flex-direction: column; align-items: flex-start !important; gap: 16px; margin-bottom: 32px !important; }
-    .masonry-title { font-size: 32px !important; }
-    .masonry-card { height: 400px !important; padding: 24px !important; }
+    .bs-section { padding: 40px 0; }
+    .bs-container { padding: 0 20px; }
+    .bs-title { font-size: 28px !important; }
+    .bs-header { flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    .bs-card { flex: 0 0 calc(80vw - 40px); }
   }
 </style>
+
 {% assign products = collections[section.settings.collection].products %}
-<div class="masonry-app-container">
-  <div class="masonry-header-flex">
-    <h2 class="masonry-title">
-      {{ section.settings.title }}
-    </h2>
-    <a href="{{ collections[section.settings.collection].url }}" style="background: transparent; border: 1px solid #ddd; padding: 10px 24px; border-radius: 50px; font-size: 11px; font-weight: 700; cursor: pointer; text-decoration: none; color: #131110; display: inline-flex; align-items: center; gap: 8px; transition: background 0.3s;">
-      SHOP COLLECTION
-      <span style="background: #131110; color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px;">↗</span>
-    </a>
-  </div>
 
-  <div class="masonry-grid-wrapper">
-    <!-- Left Column: Tall Black Card -->
-    <div class="masonry-col-1">
-      <a href="{{ products[0].url }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 600px; background: #fff; border-radius: 24px; padding: 32px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 24px rgba(0,0,0,0.04);">
-        <div style="color: #131110; position: relative; z-index: 2;">
-          <p style="font-size: 10px; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; color: #8C7A5D;">Explore Collections</p>
-          <p style="font-size: 14px; font-weight: bold;">{{ 'now' | date: "%d/%m/%y" }}</p>
-        </div>
-        
-        <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin: 24px 0; overflow: hidden; border-radius: 16px; background: #f8f8f8;">
-          <img src="{{ products[0].featured_image | img_url: '800x' }}" alt="{{ products[0].title | escape }}" style="width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; padding: 24px;" onerror="this.style.display='none'" />
-        </div>
+<div class="bs-section">
+  <div class="bs-container">
 
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #131110; position: relative; z-index: 2;">
-          <div style="flex: 1; padding-right: 16px;">
-            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; margin-bottom: 4px; font-weight: 700;">{{ products[0].title }}</h4>
-            <p style="font-size: 12px; color: #666;">Price - {{ products[0].price | money }}</p>
-          </div>
-          <div style="width: 40px; height: 40px; background: #131110; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Middle Column: Medium Black Card -->
-    <div class="masonry-col-2">
-      <div style="margin-bottom: 24px; padding: 0 8px;">
-        <p style="font-size: 10px; font-weight: bold; color: #8C7A5D; letter-spacing: 1px; margin-bottom: 8px;">EST 2026</p>
-        <p style="font-size: 12px; color: #666; line-height: 1.6;">Our collection of modern, timeless, and smart pet gear is designed to add warmth, comfort, and beauty to your home.</p>
+    <div class="bs-header">
+      <div class="bs-header-left">
+        <span class="bs-label">Curation of the Month</span>
+        <h2 class="bs-title">{{ section.settings.title }}</h2>
       </div>
-      <a href="{{ products[1].url }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 440px; background: #fff; border-radius: 24px; padding: 24px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 24px rgba(0,0,0,0.04);">
-        <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; overflow: hidden; border-radius: 16px; background: #f8f8f8;">
-          <img src="{{ products[1].featured_image | img_url: '600x' }}" alt="{{ products[1].title | escape }}" style="width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; padding: 16px;" onerror="this.style.display='none'" />
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #131110;">
-          <div style="flex: 1; padding-right: 12px;">
-            <h4 style="font-family: 'Outfit', sans-serif; font-size: 16px; margin-bottom: 4px; font-weight: 700;">{{ products[1].title }}</h4>
-            <p style="font-size: 12px; color: #666;">Price - {{ products[1].price | money }}</p>
-          </div>
-          <div style="width: 36px; height: 36px; background: #131110; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Right Column: Small Black Card -->
-    <div class="masonry-col-3">
-      <div class="carousel-nav-arrows" style="display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 24px;">
-        <button onclick="scrollMasonry(-1)" style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #666;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <div class="bs-header-right">
+        <a href="{{ collections[section.settings.collection].url }}" class="bs-shop-btn">
+          Shop Collection
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="bs-nav-btn" id="bs-prev" onclick="bsScroll(-1)" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <button onclick="scrollMasonry(1)" style="width: 32px; height: 32px; border-radius: 50%; border: none; background: #C5A880; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        <button class="bs-nav-btn active" id="bs-next" onclick="bsScroll(1)" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
-      <a href="{{ products[2].url }}" class="masonry-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 280px; background: #fff; border-radius: 24px; padding: 24px; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 24px rgba(0,0,0,0.04);">
-        <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; background: #f8f8f8; border-radius: 16px; padding: 16px;">
-          <img src="{{ products[2].featured_image | img_url: '400x' }}" alt="{{ products[2].title | escape }}" style="width: 100%; height: 100%; max-height: 120px; object-fit: contain; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; color: #131110;">
-          <div style="flex: 1; padding-right: 12px;">
-            <h4 style="font-family: 'Outfit', sans-serif; font-size: 14px; margin-bottom: 2px; font-weight: 700;">{{ products[2].title }}</h4>
-            <p style="font-size: 11px; color: #666;">Price - {{ products[2].price | money }}</p>
-          </div>
-          <div style="width: 32px; height: 32px; background: #131110; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          </div>
-        </div>
-      </a>
     </div>
+
+    <div class="bs-carousel-viewport" id="bs-viewport">
+      <div class="bs-carousel-track" id="bs-track">
+
+        {% assign categories = "Safety & Home,Grooming,Toys & Play,Home Comfort,Accessories,Wellness" | split: "," %}
+        {% assign ratings = "4.9,4.8,4.7,4.9,4.8,4.7" | split: "," %}
+        {% assign badges = "New Arrival,Best Seller,Staff Pick,New Arrival,Best Seller,Staff Pick" | split: "," %}
+
+        {% for product in products limit: 9 %}
+          {% assign cat_index = forloop.index0 | modulo: 6 %}
+          {% assign cat = categories[cat_index] %}
+          {% assign rating = ratings[cat_index] %}
+          {% assign badge = badges[cat_index] %}
+          <a href="{{ product.url }}" class="bs-card">
+            <div class="bs-card-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" loading="lazy" />
+              {% endif %}
+              <span class="bs-card-badge">{{ badge }}</span>
+              <button class="bs-card-cart-btn" onclick="event.preventDefault(); addToCartBs('{{ product.variants.first.id }}', this);" aria-label="Add to cart">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </button>
+            </div>
+            <div class="bs-card-body">
+              <span class="bs-card-category">{{ cat }}</span>
+              <h3 class="bs-card-title">{{ product.title | truncatewords: 6 }}</h3>
+              <p class="bs-card-desc">{{ product.description | strip_html | strip_newlines | replace: '&nbsp;', ' ' | truncatewords: 16 }}</p>
+              <div class="bs-card-footer">
+                <span class="bs-card-price">{{ product.price | money }}</span>
+                <span class="bs-card-rating">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="#C5A880" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  {{ rating }}
+                </span>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-  function scrollMasonry(direction) {
-    const wrapper = document.querySelector('.masonry-grid-wrapper');
-    if (wrapper) {
-      // Get the width of one card plus the gap
-      const cardWidth = wrapper.querySelector('.masonry-col-1').offsetWidth;
-      const gap = 16;
-      const scrollAmount = cardWidth + gap;
-      wrapper.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-    }
+(function() {
+  var track = document.getElementById('bs-track');
+  var viewport = document.getElementById('bs-viewport');
+  var currentIndex = 0;
+  var visibleCards = 3;
+
+  function getCardWidth() {
+    var card = track.querySelector('.bs-card');
+    if (!card) return 0;
+    var style = window.getComputedStyle(card);
+    return card.offsetWidth + parseInt(style.marginRight || 0) + 24; // 24 = gap
   }
+
+  function getTotalCards() {
+    return track.querySelectorAll('.bs-card').length;
+  }
+
+  function updateCarousel() {
+    var cardW = getCardWidth();
+    track.style.transform = 'translateX(-' + (currentIndex * cardW) + 'px)';
+
+    var total = getTotalCards();
+    var maxIndex = Math.max(0, total - visibleCards);
+
+    document.getElementById('bs-prev').classList.toggle('active', currentIndex > 0);
+    document.getElementById('bs-next').classList.toggle('active', currentIndex < maxIndex);
+  }
+
+  window.bsScroll = function(dir) {
+    var total = getTotalCards();
+    var maxIndex = Math.max(0, total - visibleCards);
+    currentIndex = Math.max(0, Math.min(currentIndex + dir, maxIndex));
+    updateCarousel();
+  };
+
+  // Responsive: 1 card on mobile
+  function checkBreakpoint() {
+    visibleCards = window.innerWidth < 900 ? 1 : 3;
+    var total = getTotalCards();
+    var maxIndex = Math.max(0, total - visibleCards);
+    currentIndex = Math.min(currentIndex, maxIndex);
+    updateCarousel();
+  }
+
+  window.addEventListener('resize', checkBreakpoint);
+  checkBreakpoint();
+})();
+
+function addToCartBs(variantId, btn) {
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+  btn.style.background = '#C5A880';
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: variantId, quantity: 1 })
+  }).then(function() {
+    setTimeout(function() {
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>';
+      btn.style.background = '#131110';
+      var cartCount = document.querySelector('.cart-count');
+      if (cartCount) cartCount.textContent = parseInt(cartCount.textContent || 0) + 1;
+    }, 1800);
+  });
+}
 </script>
 
 {% schema %}
 {
-  "name": "Masonry Products",
+  "name": "Best Sellers Carousel",
   "settings": [
     {
       "type": "text",
@@ -160,7 +365,7 @@
   ],
   "presets": [
     {
-      "name": "Masonry Products Grid"
+      "name": "Best Sellers Carousel"
     }
   ]
 }
