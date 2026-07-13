@@ -8,23 +8,23 @@
       
       <!-- Left Column -->
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-        <div style="width: 120px; height: 120px; background-color: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 10px 24px rgba(0,0,0,0.10);">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <div style="width: 72px; height: 72px; background-color: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.10);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
           </svg>
         </div>
-        <p style="font-size: 10px; color: #666; line-height: 1.6; max-width: 260px; text-transform: uppercase; letter-spacing: 0.5px;">
+        <p style="font-size: 9px; color: #666; line-height: 1.5; max-width: 240px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
           {{ section.settings.left_text }}<br><br>
-          <a href="mailto:info@vaezyth.com" style="color: #111; font-weight: 800; font-size: 13px; text-decoration: none; border-bottom: 2px solid #111; padding-bottom: 2px;">info@vaezyth.com</a>
+          <a href="mailto:info@vaezyth.com" style="color: #111; font-weight: 800; font-size: 12px; text-decoration: none; border-bottom: 1.5px solid #111; padding-bottom: 1px;">info@vaezyth.com</a>
         </p>
       </div>
 
       <!-- Right Column: Contact Form -->
-      <div class="contact-form-wrapper" style="background: #fff; padding: 28px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+      <div class="contact-form-wrapper" style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
         {% form 'contact' %}
           {% if form.posted_successfully? %}
-            <div style="background: #111; color: #fff; padding: 14px; border-radius: 50px; margin-bottom: 20px; text-align: center; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+            <div style="background: #111; color: #fff; padding: 12px; border-radius: 50px; margin-bottom: 16px; text-align: center; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
               Thanks for reaching out! We'll get back to you soon.
             </div>
           {% endif %}
@@ -33,18 +33,18 @@
 
           <div class="contact-form-row">
             <div style="display: flex; flex-direction: column;">
-              <input type="text" id="ContactFormName" name="contact[name]" placeholder="Name" style="padding: 14px 20px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; outline: none; background: transparent; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#111'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+              <input type="text" id="ContactFormName" name="contact[name]" placeholder="Name" style="padding: 10px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; outline: none; background: transparent; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#111'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
             </div>
             <div style="display: flex; flex-direction: column;">
-              <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email *" required style="padding: 14px 20px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; outline: none; background: transparent; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#111'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+              <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email *" required style="padding: 10px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; outline: none; background: transparent; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#111'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
             </div>
           </div>
           
-          <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
-            <textarea rows="4" id="ContactFormMessage" name="contact[body]" placeholder="Message *" required style="padding: 18px; border: 1px solid rgba(0,0,0,0.1); border-radius: 20px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; outline: none; background: transparent; resize: vertical; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#111'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'"></textarea>
+          <div style="display: flex; flex-direction: column; margin-bottom: 16px;">
+            <textarea rows="3" id="ContactFormMessage" name="contact[body]" placeholder="Message *" required style="padding: 12px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; outline: none; background: transparent; resize: vertical; transition: border-color 0.3s ease;" onfocus="this.style.borderColor='#111'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'"></textarea>
           </div>
 
-          <button type="submit" style="width: 100%; background: #111; color: #fff; padding: 16px; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+          <button type="submit" style="width: 100%; background: #111; color: #fff; padding: 12px; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
             Send Message
           </button>
         {% endform %}
@@ -55,24 +55,24 @@
 </div>
 
 <style>
-  .split-contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 32px; align-items: start; }
-  .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .split-contact-title { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 600; color: #111; text-align: center; margin-bottom: 24px; }
-  .split-contact-container { padding: 36px 5% 40px; }
-  .contact-form-wrapper { background: #fff; padding: 28px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+  .split-contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; align-items: start; }
+  .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .split-contact-title { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; color: #111; text-align: center; margin-bottom: 16px; }
+  .split-contact-container { padding: 24px 5% 28px; }
+  .contact-form-wrapper { background: #fff; padding: 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
 
   @media (max-width: 900px) {
-    .split-contact-container { padding: 28px 5% 32px !important; }
+    .split-contact-container { padding: 20px 5% 24px !important; }
     .split-contact-grid {
       grid-template-columns: 1fr !important;
-      gap: 24px !important;
+      gap: 16px !important;
     }
     .contact-form-row {
       grid-template-columns: 1fr !important;
-      gap: 12px !important;
+      gap: 10px !important;
     }
-    .split-contact-title { font-size: 22px !important; margin-bottom: 20px !important; }
-    .contact-form-wrapper { padding: 20px !important; }
+    .split-contact-title { font-size: 18px !important; margin-bottom: 14px !important; }
+    .contact-form-wrapper { padding: 16px !important; }
   }
 </style>
 
