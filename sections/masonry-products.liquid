@@ -356,10 +356,25 @@ function cfAddToCart(variantId, btn) {
   fetch('/cart/add.js', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({id: variantId, quantity: 1})
+    body: JSON.stringify({
+      items: [{
+        id: parseInt(variantId),
+        quantity: 1
+      }]
+    })
+  }).then(function(res) {
+    return res.json();
   }).then(function() {
-    var cc = document.querySelector('.cart-count');
-    if (cc) cc.textContent = parseInt(cc.textContent || 0) + 1;
+    var cb = document.querySelector('.cart-toggle-btn');
+    if (cb) cb.click();
+    setTimeout(function() {
+      btn.innerHTML = orig;
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2000);
+  }).catch(function(err) {
+    console.error('Error adding to cart:', err);
     setTimeout(function() {
       btn.innerHTML = orig;
       btn.style.background = '';
