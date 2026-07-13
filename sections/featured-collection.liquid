@@ -19,7 +19,7 @@
   }
   .bento-title { font-family: 'Outfit', serif; font-size: 48px; font-weight: normal; color: #131110; margin: 0 0 16px; letter-spacing: -1px; }
   .bento-container { padding-top: 80px; padding-bottom: 80px; }
-  .bento-dark-card { background: #282828; border-radius: 24px; padding: 40px; color: #fff; display: flex; align-items: center; gap: 24px; flex: 1; }
+  .bento-dark-card { background: #fff; border-radius: 24px; padding: 40px; color: #131110; display: flex; align-items: center; gap: 24px; flex: 1; }
   .bento-large-card { background: #fff; border-radius: 24px; padding: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
   
   @media (max-width: 900px) {
@@ -51,8 +51,8 @@
       {% assign product_1 = target_collection.products[3] %}
       <div class="bento-hover-card bento-large-card">
         <a href="{{ product_1.url }}" style="text-decoration: none; color: inherit; display: block; width: 100%;">
-          <div style="height: 320px; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; border-radius: 16px; overflow: hidden;">
-            <img src="{{ product_1.featured_image | img_url: '800x' }}" alt="{{ product_1.title | escape }}" style="height: 100%; width: 100%; object-fit: cover;" onerror="this.style.display='none'" />
+          <div style="height: 320px; display: flex; align-items: center; justify-content: center; margin-bottom: 32px; border-radius: 16px; overflow: hidden; background: #f8f8f8;">
+            <img src="{{ product_1.featured_image | img_url: '800x' }}" alt="{{ product_1.title | escape }}" style="height: 100%; width: 100%; object-fit: contain; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
           </div>
           <h3 style="font-family: 'Outfit', serif; font-size: 24px; font-weight: normal; margin-bottom: 16px; color: #131110;">{{ product_1.title }}</h3>
           <p style="font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 32px; max-width: 80%; margin-left: auto; margin-right: auto;">
@@ -77,13 +77,13 @@
               <p style="font-size: 12px; color: #aaa; line-height: 1.6; margin-bottom: 24px;">
                 {{ product_2.description | strip_html | truncatewords: 15 }}
               </p>
-              <span style="font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #fff; padding-bottom: 2px;">
+              <span style="font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid #131110; padding-bottom: 2px;">
                 Add to Cart <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </span>
             </a>
           </div>
-          <div style="width: 160px; height: 180px; background: #fff; border-radius: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
-            <img src="{{ product_2.featured_image | img_url: '600x' }}" alt="{{ product_2.title | escape }}" style="height: 100%; width: 100%; object-fit: cover;" onerror="this.style.display='none'" />
+          <div style="width: 160px; height: 180px; background: #f8f8f8; border-radius: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+            <img src="{{ product_2.featured_image | img_url: '600x' }}" alt="{{ product_2.title | escape }}" style="height: 100%; width: 100%; object-fit: contain; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
           </div>
         </div>
 
@@ -94,8 +94,8 @@
           {% assign product_3 = target_collection.products[2] %}
           <div class="bento-hover-card" style="background: #fff; border-radius: 24px; padding: 32px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
             <a href="{{ product_3.url }}" style="text-decoration: none; color: inherit;">
-              <div style="height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border-radius: 16px; overflow: hidden;">
-                <img src="{{ product_3.featured_image | img_url: '600x' }}" alt="{{ product_3.title | escape }}" style="height: 100%; width: 100%; object-fit: cover;" onerror="this.style.display='none'" />
+              <div style="height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; border-radius: 16px; overflow: hidden; background: #f8f8f8;">
+                <img src="{{ product_3.featured_image | img_url: '600x' }}" alt="{{ product_3.title | escape }}" style="height: 100%; width: 100%; object-fit: contain; mix-blend-mode: multiply;" onerror="this.style.display='none'" />
               </div>
               <h3 style="font-family: 'Outfit', serif; font-size: 16px; font-weight: normal; margin-bottom: 12px; color: #131110;">{{ product_3.title }}</h3>
               <p style="font-size: 11px; color: #888; margin-bottom: 24px; line-height: 1.5;">
