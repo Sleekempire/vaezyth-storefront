@@ -349,22 +349,39 @@
 
 function cfAddToCart(variantId, btn) {
   var orig = btn.innerHTML;
-  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Added!';
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Adding...';
   btn.style.background = '#4A6741';
   btn.style.color = '#fff';
   btn.style.borderColor = '#4A6741';
+
+  var formData = new FormData();
+  formData.append('id', variantId);
+  formData.append('quantity', '1');
+
   fetch('/cart/add.js', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      items: [{
-        id: parseInt(variantId),
-        quantity: 1
-      }]
-    })
-  }).then(function(res) {
+    body: formData
+  })
+  .then(function(res) {
+    if (!res.ok) {
+      throw new Error('Add to cart failed: ' + res.status);
+    }
     return res.json();
-  }).then(function() {
+  })
+  .then(function(item) {
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Added!';
+    // Update cart count badge
+    fetch('/cart.js')
+      .then(function(r) { return r.json(); })
+      .then(function(cart) {
+        var badge = document.getElementById('cart-item-count');
+        if (badge) {
+          badge.textContent = cart.item_count;
+          badge.style.display = cart.item_count > 0 ? 'flex' : 'none';
+        }
+      });
+    // Open cart drawer
     var cb = document.querySelector('.cart-toggle-btn');
     if (cb) cb.click();
     setTimeout(function() {
@@ -372,14 +389,20 @@ function cfAddToCart(variantId, btn) {
       btn.style.background = '';
       btn.style.color = '';
       btn.style.borderColor = '';
+      btn.disabled = false;
     }, 2000);
-  }).catch(function(err) {
+  })
+  .catch(function(err) {
     console.error('Error adding to cart:', err);
+    btn.innerHTML = 'Error - Try Again';
+    btn.style.background = '#c0392b';
+    btn.style.borderColor = '#c0392b';
     setTimeout(function() {
       btn.innerHTML = orig;
       btn.style.background = '';
       btn.style.color = '';
       btn.style.borderColor = '';
+      btn.disabled = false;
     }, 2000);
   });
 }
