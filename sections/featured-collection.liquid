@@ -3,7 +3,7 @@
 
 <style>
   .cl-section {
-    padding: 60px 0;
+    padding: 32px 0 40px;
     background: #f5f2ee;
   }
   .cl-inner {
@@ -14,37 +14,37 @@
   }
   .cl-header {
     text-align: center;
-    max-width: 600px;
-    margin: 0 auto 40px;
+    max-width: 520px;
+    margin: 0 auto 20px;
   }
   .cl-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #8C7A5D;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
   }
   .cl-desc {
     font-size: 13px;
     color: #666;
-    line-height: 1.6;
-    margin: 8px 0 0;
+    line-height: 1.5;
+    margin: 6px 0 0;
   }
-  
+
   /* Bento Grid */
   .cl-grid {
     display: grid;
     grid-template-columns: 1fr 1.1fr;
-    gap: 24px;
+    gap: 16px;
     align-items: stretch;
   }
-  
-  /* Left Tall Card */
+
+  /* Left Tall Card — Collars & Leashes */
   .cl-left-card {
     background: #fff;
-    border-radius: 32px;
-    padding: 40px;
+    border-radius: 24px;
+    padding: 28px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -58,28 +58,28 @@
     box-shadow: 0 12px 32px rgba(0,0,0,0.06);
   }
   .cl-card-header {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   .cl-card-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 500;
     color: #1a1a1a;
-    margin: 0 0 12px;
+    margin: 0 0 8px;
     letter-spacing: -0.5px;
   }
   .cl-card-text {
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
   }
   .cl-left-img-wrapper {
     position: relative;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     aspect-ratio: 16 / 10;
-    background: #f8f8f8;
+    background: #f0ece6;
   }
   .cl-left-img-wrapper img {
     width: 100%;
@@ -88,17 +88,17 @@
   }
   .cl-arrow-btn {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
-    width: 44px;
-    height: 44px;
+    bottom: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: #4A5D4E;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 16px;
     transition: background 0.2s;
   }
   .cl-left-card:hover .cl-arrow-btn {
@@ -109,18 +109,18 @@
   .cl-right-col {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
   }
-  
-  /* Right Top Wide Card */
+
+  /* Right Top Wide Card — Beds & Mats */
   .cl-wide-card {
     background: #f0ebe4;
-    border-radius: 32px;
-    padding: 32px 40px;
+    border-radius: 24px;
+    padding: 24px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: 16px;
     text-decoration: none;
     color: inherit;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -143,26 +143,26 @@
     border-radius: 50px;
     background: #fff;
     color: #666;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     border: 1px solid rgba(0,0,0,0.05);
   }
   .cl-wide-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #1a1a1a;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
   }
   .cl-wide-text {
-    font-size: 13px;
+    font-size: 12px;
     color: #666;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
   }
   .cl-wide-img-wrapper {
-    width: 140px;
-    height: 140px;
-    border-radius: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
     overflow: hidden;
     background: #fff;
     flex-shrink: 0;
@@ -177,19 +177,19 @@
   .cl-split-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 16px;
     flex: 1;
   }
-  
-  /* Pink Card */
+
+  /* Pink Card — Bowls & Feeding */
   .cl-pink-card {
     background: #f7ebe3;
-    border-radius: 32px;
-    padding: 32px;
+    border-radius: 24px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 16px;
+    gap: 12px;
     text-decoration: none;
     color: inherit;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -199,30 +199,30 @@
     box-shadow: 0 12px 32px rgba(0,0,0,0.06);
   }
   .cl-icon-leaf {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     color: #8C7A5D;
   }
   .cl-split-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #1a1a1a;
     margin: 0;
   }
   .cl-split-text {
-    font-size: 13px;
+    font-size: 12px;
     color: #666;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
   }
 
-  /* Green Card */
+  /* Green Card — Accessories */
   .cl-green-card {
     background: #3a4b3d;
     color: #fff;
-    border-radius: 32px;
-    padding: 32px;
+    border-radius: 24px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -235,16 +235,16 @@
   }
   .cl-green-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
     color: #fff;
   }
   .cl-green-text {
-    font-size: 13px;
+    font-size: 12px;
     color: #cbd5e1;
-    line-height: 1.5;
-    margin: 0 0 16px;
+    line-height: 1.4;
+    margin: 0 0 12px;
   }
   .cl-green-line {
     width: 40px;
@@ -254,57 +254,55 @@
 
   @media (max-width: 900px) {
     .cl-section {
-      padding: 40px 0;
+      padding: 28px 0 32px;
     }
     .cl-grid {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 12px;
     }
     .cl-split-row {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 12px;
     }
     .cl-left-card, .cl-wide-card, .cl-pink-card, .cl-green-card {
-      padding: 24px;
-      border-radius: 24px;
+      padding: 20px;
+      border-radius: 20px;
     }
     .cl-card-title {
-      font-size: 24px;
+      font-size: 22px;
     }
     .cl-wide-card {
       flex-direction: column-reverse;
       align-items: flex-start;
-      gap: 16px;
+      gap: 12px;
     }
     .cl-wide-img-wrapper {
       width: 100%;
-      height: 180px;
+      height: 160px;
     }
   }
 </style>
 
 <div class="cl-section">
   <div class="cl-inner">
-    
+
     <div class="cl-header">
       <span class="cl-label">Curated Living</span>
-      <h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; color: #1a1a1a; margin: 0;">{{ section.settings.title }}</h2>
-      <p class="cl-desc">Handpicked collections designed to integrate seamlessly into your home's architecture while providing unrivaled pet comfort.</p>
+      <p class="cl-desc">Handpicked collections designed to integrate seamlessly into your home while providing unrivaled pet comfort.</p>
     </div>
 
     <div class="cl-grid">
-      <!-- Left Card (Sage Series) -->
-      {% assign product_left = products[0] %}
-      <a href="{{ product_left.url | default: '#' }}" class="cl-left-card">
+      <!-- Left Card — Collars & Leashes -->
+      <a href="/collections/collars-leashes" class="cl-left-card">
         <div class="cl-card-header">
-          <h3 class="cl-card-title">The Sage Series</h3>
-          <p class="cl-card-text">Earthy tones and calming textures for the peaceful pup.</p>
+          <h3 class="cl-card-title">Collars & Leashes</h3>
+          <p class="cl-card-text">Premium walking gear built for comfort and durability.</p>
         </div>
         <div class="cl-left-img-wrapper">
-          {% if product_left.featured_image != blank %}
-            <img src="{{ product_left.featured_image | img_url: '800x' }}" alt="{{ product_left.title | escape }}" loading="lazy" />
+          {% if products[0].featured_image != blank %}
+            <img src="{{ products[0].featured_image | img_url: '800x' }}" alt="Collars & Leashes" loading="lazy" />
           {% else %}
-            <img src="{{ 'pet_bed_1783288663556.png' | asset_url }}" alt="Sage Series Bed" loading="lazy" />
+            <div style="width:100%;height:100%;background:#e8e4de;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;">Collars & Leashes</div>
           {% endif %}
           <div class="cl-arrow-btn">↗</div>
         </div>
@@ -312,42 +310,42 @@
 
       <!-- Right Column -->
       <div class="cl-right-col">
-        <!-- Right Top Wide Card (Smart Care) -->
-        {% assign product_wide = products[1] %}
-        <a href="{{ product_wide.url | default: '#' }}" class="cl-wide-card">
+        <!-- Right Top Wide Card — Beds & Mats -->
+        <a href="/collections/beds-mats" class="cl-wide-card">
           <div class="cl-wide-info">
-            <span class="cl-badge">Tech-Enabled</span>
-            <h3 class="cl-wide-title">Smart Care</h3>
-            <p class="cl-wide-text">Automated solutions for busy modern families.</p>
+            <span class="cl-badge">Comfort Range</span>
+            <h3 class="cl-wide-title">Beds & Mats</h3>
+            <p class="cl-wide-text">Cozy resting spots designed for ultimate relaxation.</p>
           </div>
           <div class="cl-wide-img-wrapper">
-            {% if product_wide.featured_image != blank %}
-              <img src="{{ product_wide.featured_image | img_url: '600x' }}" alt="{{ product_wide.title | escape }}" loading="lazy" />
+            {% if products[1].featured_image != blank %}
+              <img src="{{ products[1].featured_image | img_url: '600x' }}" alt="Beds & Mats" loading="lazy" />
             {% else %}
-              <img src="{{ 'pet_feeder_1783288672520.png' | asset_url }}" alt="Smart Care Feeder" loading="lazy" />
+              <div style="width:100%;height:100%;background:#e8e4de;display:flex;align-items:center;justify-content:center;color:#999;font-size:13px;">Beds & Mats</div>
             {% endif %}
           </div>
         </a>
 
         <!-- Right Bottom split -->
         <div class="cl-split-row">
-          <!-- Pink Card (Sustainable) -->
-          {% assign product_pink = products[2] %}
-          <a href="{{ product_pink.url | default: '/collections/all' }}" class="cl-pink-card">
+          <!-- Pink Card — Bowls & Feeding -->
+          <a href="/collections/bowls-feeding" class="cl-pink-card">
             <svg class="cl-icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 22c1.25-6.7 5.85-11.75 12.35-13M12.35 9c2.8 1.45 4.5 4.5 4.5 7.5 0 2.2-1.8 4-4 4-2.5 0-4.65-2-4.65-4.5 0-3.3 3.65-7 4.15-7z"/>
-              <path d="M12.35 9c2.5-4 7-6 9.65-7-1.25 5.5-3.3 9-6.3 11"/>
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+              <line x1="6" y1="1" x2="6" y2="4"/>
+              <line x1="10" y1="1" x2="10" y2="4"/>
+              <line x1="14" y1="1" x2="14" y2="4"/>
             </svg>
-            <h3 class="cl-split-title">Sustainable</h3>
-            <p class="cl-split-text">100% recycled materials used across this entire range.</p>
+            <h3 class="cl-split-title">Bowls & Feeding</h3>
+            <p class="cl-split-text">Stylish feeding solutions for every mealtime.</p>
           </a>
 
-          <!-- Green Card (Travel Pro) -->
-          {% assign product_green = products[3] %}
-          <a href="{{ product_green.url | default: '/collections/all' }}" class="cl-green-card">
+          <!-- Green Card — Accessories -->
+          <a href="/collections/accessories" class="cl-green-card">
             <div>
-              <h3 class="cl-green-title">Travel Pro</h3>
-              <p class="cl-green-text">Durability that survives every adventure.</p>
+              <h3 class="cl-green-title">Accessories</h3>
+              <p class="cl-green-text">Fun extras to elevate your pet's lifestyle.</p>
             </div>
             <div class="cl-green-line"></div>
           </a>
