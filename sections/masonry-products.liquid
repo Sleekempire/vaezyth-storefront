@@ -3,10 +3,10 @@
     padding: 64px 0;
     background: #f5f2ee;
   }
-  .bs-container {
-    max-width: 1280px;
+  .bs-inner {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 24px;
   }
   .bs-header {
     display: flex;
@@ -102,7 +102,7 @@
   }
   .bs-card-image {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     position: relative;
     background: #f4f1ed;
@@ -206,7 +206,7 @@
 
   @media (max-width: 900px) {
     .bs-section { padding: 40px 0; }
-    .bs-container { padding: 0 20px; }
+    .bs-inner { padding: 0 20px; }
     .bs-title { font-size: 28px !important; }
     .bs-header { flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
     .bs-card { flex: 0 0 calc(80vw - 40px); }
@@ -216,7 +216,7 @@
 {% assign products = collections[section.settings.collection].products %}
 
 <div class="bs-section">
-  <div class="bs-container">
+  <div class="bs-inner">
 
     <div class="bs-header">
       <div class="bs-header-left">
