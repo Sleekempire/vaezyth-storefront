@@ -1,0 +1,243 @@
+<style>
+  .sp-wrap {
+    background: #faf8f4;
+    padding: 60px 5% 80px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1a201c;
+  }
+  .sp-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .sp-badge {
+    display: inline-block;
+    background: #4A5D4E;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+  }
+  .sp-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #1a201c;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .sp-subtitle {
+    font-size: 15px;
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 560px;
+  }
+
+  /* Policy Sections */
+  .sp-section {
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid #e8e3da;
+  }
+  .sp-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .sp-section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a201c;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sp-section-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #f0eee9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4A5D4E;
+    flex-shrink: 0;
+  }
+  .sp-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #555;
+  }
+  .sp-text ul {
+    padding-left: 20px;
+    margin: 12px 0;
+  }
+  .sp-text li {
+    margin-bottom: 8px;
+  }
+  .sp-text strong {
+    color: #1a201c;
+  }
+
+  /* Highlight Box */
+  .sp-highlight {
+    background: #f0eee9;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 16px;
+    border-left: 4px solid #4A5D4E;
+  }
+  .sp-highlight p {
+    margin: 0;
+    font-size: 14px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  /* CTA */
+  .sp-cta {
+    text-align: center;
+    margin-top: 48px;
+    padding: 24px 32px;
+    background: #1c1917;
+    border-radius: 12px;
+    color: #fff;
+  }
+  .sp-cta h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .sp-cta p {
+    font-size: 14px;
+    color: #aaa;
+    margin: 0 0 20px;
+  }
+  .sp-cta a {
+    display: inline-block;
+    background: #4A5D4E;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .sp-cta a:hover { opacity: 0.85; }
+
+  @media (max-width: 600px) {
+    .sp-wrap { padding: 40px 5% 60px; }
+    .sp-title { font-size: 28px; }
+    .sp-cta { padding: 28px 20px; }
+    .sp-cta h3 { font-size: 18px; }
+  }
+</style>
+
+<div class="sp-wrap">
+  <div class="sp-inner">
+
+    <span class="sp-badge">Delivery Info</span>
+    <h1 class="sp-title">Shipping Information</h1>
+    <p class="sp-subtitle">We deliver premium pet products right to your door with care and speed.</p>
+
+    <!-- Section 1: Delivery Timeframes -->
+    <div class="sp-section">
+      <h2 class="sp-section-title">
+        <span class="sp-section-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </span>
+        Delivery Timeframes
+      </h2>
+      <div class="sp-text">
+        <p>We work diligently to ensure your order reaches you as fast as possible:</p>
+        <ul>
+          <li><strong>UK Standard Delivery:</strong> 3–5 business days (Free on orders over £30)</li>
+          <li><strong>UK Express Delivery:</strong> 1–2 business days (£4.99)</li>
+          <li><strong>International Shipping:</strong> 7–14 business days (varies by location)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 2: Order Processing -->
+    <div class="sp-section">
+      <h2 class="sp-section-title">
+        <span class="sp-section-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </span>
+        Order Processing
+      </h2>
+      <div class="sp-text">
+        <p>Our warehouse team works quickly to get your products packed:</p>
+        <ul>
+          <li>Orders placed before <strong>2:00 PM GMT</strong> are dispatched the same business day.</li>
+          <li>Orders placed after 2:00 PM or on weekends will be dispatched the next business day.</li>
+          <li>You will receive a tracking number via email once your order has shipped.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 3: Shipping Costs -->
+    <div class="sp-section">
+      <h2 class="sp-section-title">
+        <span class="sp-section-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        </span>
+        Shipping Costs
+      </h2>
+      <div class="sp-text">
+        <p>We offer competitive shipping rates tailored to your region:</p>
+        <ul>
+          <li><strong>Free Standard Shipping:</strong> On all UK orders over £30.</li>
+          <li><strong>UK Standard:</strong> £2.99</li>
+          <li><strong>UK Express:</strong> £4.99</li>
+          <li><strong>Europe:</strong> £6.99</li>
+          <li><strong>Rest of World:</strong> £9.99</li>
+        </ul>
+        <div class="sp-highlight">
+          <p><strong>Eco-Friendly Packaging:</strong> All orders are carefully packed with sustainable, eco-friendly materials to ensure your pet's new products arrive in perfect condition while minimizing our environmental impact.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Tracking Your Order -->
+    <div class="sp-section">
+      <h2 class="sp-section-title">
+        <span class="sp-section-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        Tracking Your Order
+      </h2>
+      <div class="sp-text">
+        <p>Keep an eye on your shipment every step of the way:</p>
+        <ul>
+          <li>Once dispatched, you'll receive a confirmation email with a tracking link.</li>
+          <li>Track your order anytime through our website or the carrier's portal.</li>
+          <li>If you haven't received tracking information within 48 hours of your order, please reach out to us.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="sp-cta">
+      <h3>Need help with your delivery?</h3>
+      <p>Our support team is here to help with any shipping or delivery concerns.</p>
+      <a href="/pages/contact">Contact Support</a>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shipping Info",
+  "settings": []
+}
+{% endschema %}
