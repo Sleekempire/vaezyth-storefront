@@ -202,16 +202,41 @@
   }
   .cf-nav-btn:hover, .cf-nav-btn.active { background: #4A6741; border-color: #4A6741; color: #fff; }
 
-  @media (max-width: 900px) {
+  /* Responsive Breakpoints */
+  @media (max-width: 1100px) {
+    .cf-card {
+      flex: 0 0 calc(33.333% - 11px);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .cf-card {
+      flex: 0 0 calc(50% - 8px);
+    }
+  }
+
+  @media (max-width: 600px) {
     .cf-section { padding: 32px 0 40px; }
     .cf-inner { padding: 0 16px; }
     .cf-title { font-size: 20px; }
-    .cf-card { flex: 0 0 calc(72vw - 16px); }
-    .cf-card-title { font-size: 13px; }
-    .cf-card-price { font-size: 15px; }
-  }
-  @media (max-width: 480px) {
-    .cf-card { flex: 0 0 calc(85vw - 16px); }
+    .cf-viewport {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .cf-viewport::-webkit-scrollbar { display: none; }
+    .cf-track {
+      transform: none !important;
+      gap: 12px;
+    }
+    .cf-card {
+      flex: 0 0 calc(80% - 6px) !important;
+      scroll-snap-align: start;
+    }
+    .cf-nav {
+      display: none !important;
+    }
   }
 </style>
 
@@ -305,7 +330,15 @@
 
   function responsive() {
     var w = window.innerWidth;
-    perView = w < 480 ? 1 : w < 900 ? 2 : 4;
+    if (w <= 600) {
+      perView = 1;
+    } else if (w <= 800) {
+      perView = 2;
+    } else if (w <= 1100) {
+      perView = 3;
+    } else {
+      perView = 4;
+    }
     idx = Math.min(idx, maxIdx());
     update();
   }
