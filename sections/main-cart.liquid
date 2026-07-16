@@ -616,51 +616,51 @@
 
       </div>
 
-      <!-- Complete the Look section -->
-      <div class="cp-upsell-section">
-        <h3 class="cp-upsell-title">Complete the Look</h3>
-        
-        <div class="cp-upsell-grid">
-          {% assign upsell_descriptions = "Quiet-flow Ceramic | Charcoal,Lavender & Neem | All-Natural,Solid Oak | Porcelain Bowls,Weighted | Sage Green" | split: "," %}
-          
-          {% for product in collections['all'].products limit: 4 %}
-            {% assign desc_index = forloop.index0 %}
-            {% assign product_desc = upsell_descriptions[desc_index] %}
-            
-            <div class="cp-upsell-card" style="display: flex; flex-direction: column;">
-              <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block; flex-grow: 1; position: relative; z-index: 2;">
-                <!-- Image -->
-                <div class="cp-upsell-img-wrap">
-                  {% if product.featured_image %}
-                    <img src="{{ product.featured_image | img_url: '300x' }}" alt="{{ product.title | escape }}" loading="lazy" />
-                  {% endif %}
-                </div>
-
-                <!-- Info -->
-                <div class="cp-upsell-body" style="padding: 16px 16px 8px;">
-                  <div class="cp-upsell-meta">
-                    <h4 class="cp-upsell-item-title">{{ product.title }}</h4>
-                    <span class="cp-upsell-item-price">{{ product.price | money_without_trailing_zeros }}</span>
-                  </div>
-                  <p class="cp-upsell-desc">{{ product_desc }}</p>
-                </div>
-              </a>
-
-              <!-- Add to Cart Button -->
-              <div style="padding: 0 16px 16px; margin-top: auto; position: relative; z-index: 5;">
-                <form action="/cart/add" method="post" style="margin: 0;">
-                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-                  <button type="submit" style="width: 100%; padding: 10px; background: #4A5D4E; color: #fff; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                    Add to Cart
-                  </button>
-                </form>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
     {% endif %}
+
+    <!-- Complete the Look section -->
+    <div class="cp-upsell-section">
+      <h3 class="cp-upsell-title">Complete the Look</h3>
+      
+      <div class="cp-upsell-grid">
+        {% assign upsell_descriptions = "Quiet-flow Ceramic | Charcoal,Lavender & Neem | All-Natural,Solid Oak | Porcelain Bowls,Weighted | Sage Green" | split: "," %}
+        
+        {% for product in collections['all'].products limit: 4 %}
+          {% assign desc_index = forloop.index0 %}
+          {% assign product_desc = upsell_descriptions[desc_index] %}
+          
+          <div class="cp-upsell-card" style="display: flex; flex-direction: column;">
+            <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block; flex-grow: 1; position: relative; z-index: 2;">
+              <!-- Image -->
+              <div class="cp-upsell-img-wrap">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: '300x' }}" alt="{{ product.title | escape }}" loading="lazy" />
+                {% endif %}
+              </div>
+
+              <!-- Info -->
+              <div class="cp-upsell-body" style="padding: 16px 16px 8px;">
+                <div class="cp-upsell-meta">
+                  <h4 class="cp-upsell-item-title">{{ product.title }}</h4>
+                  <span class="cp-upsell-item-price">{{ product.price | money_without_trailing_zeros }}</span>
+                </div>
+                <p class="cp-upsell-desc">{{ product_desc }}</p>
+              </div>
+            </a>
+
+            <!-- Add to Cart Button -->
+            <div style="padding: 0 16px 16px; margin-top: auto; position: relative; z-index: 5;">
+              <form action="/cart/add" method="post" style="margin: 0;">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                <button type="submit" style="width: 100%; padding: 10px; background: #4A5D4E; color: #fff; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                  Add to Cart
+                </button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
 
   </div>
 </div>
