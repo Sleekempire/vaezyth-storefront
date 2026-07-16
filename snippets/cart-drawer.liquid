@@ -1,23 +1,380 @@
+<style>
+  #CartDrawer {
+    position: absolute;
+    top: 0;
+    right: -420px;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background-color: #faf8f4;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.08);
+    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .cart-header {
+    padding: 20px 24px;
+    background: #fff;
+    border-bottom: 1px solid #f0ece6;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .cart-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: -8px;
+    color: #4A5D4E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+  .cart-close-btn:hover {
+    background: #f5f1ec;
+  }
+  .cart-header-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a201c;
+    margin: 0;
+    flex: 1;
+  }
+  
+  /* Progress Bar */
+  .cart-progress-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px 20px 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    border: 1px solid #f0ece6;
+  }
+  .cart-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .cart-progress-title {
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+  }
+  .cart-progress-status {
+    font-size: 11px;
+    font-weight: 700;
+    color: #4A5D4E;
+  }
+  .cart-progress-bar-track {
+    height: 6px;
+    background: #eae6df;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .cart-progress-bar-fill {
+    height: 100%;
+    background: #4A5D4E;
+    width: 0%;
+    border-radius: 3px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cart-progress-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #555;
+    font-weight: 500;
+  }
+  .cart-progress-footer svg {
+    color: #4A5D4E;
+  }
+
+  /* Cart Items Grid */
+  #CartDrawerItems {
+    padding: 8px 20px 24px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  /* Item Cards */
+  .cart-item-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    border: 1px solid #f0ece6;
+    position: relative;
+    margin-bottom: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cart-item-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  }
+  .cart-card-remove {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b0aba4;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+  }
+  .cart-card-remove:hover {
+    color: #c0392b;
+    background: #fdf2f2;
+  }
+  .cart-card-img {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: #faf8f4;
+    flex-shrink: 0;
+    border: 1px solid #f5f1ec;
+  }
+  .cart-card-info-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .cart-card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1c1917;
+    margin: 0 0 3px;
+    padding-right: 24px;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+  .cart-card-title:hover {
+    color: #4A5D4E;
+  }
+  .cart-card-variant {
+    font-size: 11px;
+    color: #8c867e;
+    margin: 0;
+  }
+  .cart-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 10px;
+  }
+  .cart-card-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #8C7A5D;
+  }
+  
+  /* Qty Controls */
+  .cart-card-qty {
+    display: flex;
+    align-items: center;
+    background: #f5f1ec;
+    border-radius: 30px;
+    padding: 2px;
+  }
+  .cart-qty-btn-card {
+    border: none;
+    background: none;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 13px;
+    color: #666;
+    border-radius: 50%;
+    transition: background 0.15s;
+  }
+  .cart-qty-btn-card:hover {
+    background: #fff;
+    color: #1c1917;
+  }
+  .cart-qty-val-card {
+    width: 24px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1c1917;
+  }
+
+  /* Bottom Area */
+  .cart-drawer-footer {
+    border-top: 1px solid #f0ece6;
+    background: #faf8f4;
+  }
+  .cart-summary-table {
+    padding: 16px 24px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cart-summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+  }
+  .cart-summary-line.bold {
+    color: #1c1917;
+    font-weight: 700;
+  }
+
+  /* Sticky Footer Checkout Panel */
+  .cart-checkout-sticky-panel {
+    padding: 0 20px 20px;
+    background: #faf8f4;
+  }
+  .cart-checkout-sticky-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+    border: 1px solid #f0ece6;
+  }
+  .cart-sticky-total-label {
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 0.8px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .cart-sticky-total-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #4A5D4E;
+  }
+  .checkout-submit-btn {
+    background: #4A5D4E;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .checkout-submit-btn:hover {
+    background: #3d4e41;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 93, 78, 0.15);
+  }
+  .checkout-submit-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Scrollbar override */
+  #CartDrawerItems::-webkit-scrollbar {
+    width: 6px;
+  }
+  #CartDrawerItems::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #CartDrawerItems::-webkit-scrollbar-thumb {
+    background: #eae6df;
+    border-radius: 10px;
+  }
+  #CartDrawerItems::-webkit-scrollbar-thumb:hover {
+    background: #dcd7ce;
+  }
+</style>
+
 <div id="CartDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.5); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;">
-  <div id="CartDrawer" style="position: absolute; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100%; background-color: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; pointer-events: auto;">
-    <div style="padding: 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-      <h3 style="margin: 0; font-size: 20px;">Your Cart</h3>
-      <button class="cart-close-btn" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+  <div id="CartDrawer">
+    <!-- Header -->
+    <div class="cart-header">
+      <button class="cart-close-btn" aria-label="Close cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h3 class="cart-header-title">Your Basket</h3>
     </div>
-    
-    <div id="CartDrawerItems" style="padding: 24px; flex: 1; overflow-y: auto;">
-      <!-- AJAX items will be injected here -->
-      <p style="color: #777;">Your cart is loading...</p>
-    </div>
-    
-    <div style="padding: 24px; border-top: 1px solid #eee; background: #fafafa;">
-      <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-bottom: 16px;">
-        <span>Total</span>
-        <span id="CartDrawerTotal">£0.00</span>
+
+    <!-- Free Shipping Progress -->
+    <div class="cart-progress-card" id="CartProgressCard" style="display: none;">
+      <div class="cart-progress-header">
+        <span class="cart-progress-title">Free Shipping Progress</span>
+        <span class="cart-progress-status" id="CartProgressRemaining">£15.00 away</span>
       </div>
-      <form action="/checkout" method="post" novalidate>
-        <button type="submit" style="width: 100%; padding: 16px; background: #1c1917; color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase;">Checkout</button>
-      </form>
+      <div class="cart-progress-bar-track">
+        <div class="cart-progress-bar-fill" id="CartProgressBar"></div>
+      </div>
+      <div class="cart-progress-footer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <span id="CartProgressText">Add more to unlock free delivery!</span>
+      </div>
+    </div>
+    
+    <!-- Items container -->
+    <div id="CartDrawerItems">
+      <p style="color: #777; text-align: center; margin-top: 40px;">Your cart is loading...</p>
+    </div>
+    
+    <!-- Footer / Summary area -->
+    <div class="cart-drawer-footer" id="CartDrawerFooter" style="display: none;">
+      <div class="cart-summary-table">
+        <div class="cart-summary-line">
+          <span>Subtotal</span>
+          <span id="CartSummarySubtotal">£0.00</span>
+        </div>
+        <div class="cart-summary-line">
+          <span>Delivery</span>
+          <span id="CartSummaryDelivery">£0.00</span>
+        </div>
+      </div>
+      
+      <!-- Checkout Sticky Panel -->
+      <div class="cart-checkout-sticky-panel">
+        <div class="cart-checkout-sticky-card">
+          <div>
+            <span class="cart-sticky-total-label">Total Amount</span>
+            <span id="CartDrawerTotal" class="cart-sticky-total-price">£0.00</span>
+          </div>
+          <form action="/checkout" method="post" novalidate style="margin: 0;">
+            <button type="submit" name="checkout" class="checkout-submit-btn">
+              <span>Proceed to Checkout</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
