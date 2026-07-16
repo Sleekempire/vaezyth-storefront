@@ -82,6 +82,10 @@
     color: #555;
     margin: 0 0 2px;
     line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .luxury-upsell-price {
     font-size: 11px;
@@ -206,15 +210,16 @@
     color: #555;
   }
 
-  /* Bottom Summary Bar */
+  /* Bottom Summary Bar - Full Width Stretch */
   .luxury-bottom-bar {
     position: relative;
-    margin-top: 48px;
+    margin-top: 60px;
     background: #fbfaf8;
-    border: 1px solid #e6e3dd;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.01);
-    padding: 24px 40px;
+    border-top: 1px solid #e6e3dd;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 40px 40px 0 0;
+    padding: 32px 10%;
   }
   .luxury-bottom-inner {
     max-width: 1200px;
