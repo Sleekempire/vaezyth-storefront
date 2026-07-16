@@ -24,6 +24,6 @@
     
     {% include 'cart-drawer' %}
     
-    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme.js' | asset_url }}&v={{ 'now' | date: '%N' }}" defer="defer"></script>
   </body>
 </html>
