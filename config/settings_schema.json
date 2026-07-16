@@ -38,5 +38,61 @@
         "default": "work_sans_n6"
       }
     ]
+  },
+  {
+    "name": "Checkout",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "checkout_logo_image",
+        "label": "Logo image"
+      },
+      {
+        "type": "select",
+        "id": "checkout_logo_position",
+        "label": "Logo position",
+        "default": "left",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Center" },
+          { "value": "right", "label": "Right" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "checkout_logo_size",
+        "label": "Logo size",
+        "default": "medium",
+        "options": [
+          { "value": "small", "label": "Small" },
+          { "value": "medium", "label": "Medium" },
+          { "value": "large", "label": "Large" }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "checkout_background_color",
+        "label": "Main area background color",
+        "default": "#faf8f4"
+      },
+      {
+        "type": "color",
+        "id": "checkout_sidebar_background_color",
+        "label": "Sidebar background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "checkout_accent_color",
+        "label": "Accent color",
+        "default": "#4A5D4E"
+      },
+      {
+        "type": "color",
+        "id": "checkout_button_color",
+        "label": "Button color",
+        "default": "#ff7a45"
+      }
+    ]
   }
 ]

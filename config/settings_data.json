@@ -12,6 +12,13 @@
     "color_primary": "#1c1917",
     "color_secondary": "#ffffff",
     "color_background": "#FAF7F2",
+    "checkout_logo_image": "shopify://shop_images/logo_for_brand.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_background_color": "#faf8f4",
+    "checkout_sidebar_background_color": "#ffffff",
+    "checkout_accent_color": "#4A5D4E",
+    "checkout_button_color": "#ff7a45",
     "sections": {
       "header": {
         "type": "header",
@@ -38,7 +45,14 @@
     "Default": {
       "color_primary": "#1c1917",
       "color_secondary": "#ffffff",
-      "color_background": "#FAF7F2"
+      "color_background": "#FAF7F2",
+      "checkout_logo_image": "shopify://shop_images/logo_for_brand.png",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "medium",
+      "checkout_background_color": "#faf8f4",
+      "checkout_sidebar_background_color": "#ffffff",
+      "checkout_accent_color": "#4A5D4E",
+      "checkout_button_color": "#ff7a45"
     }
   }
 }
