@@ -1,0 +1,263 @@
+<style>
+  .cart-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1a201c;
+  }
+  .cart-page h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .cart-page .cart-count-label {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 32px;
+  }
+  .cart-empty {
+    text-align: center;
+    padding: 60px 0;
+  }
+  .cart-empty p {
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 24px;
+  }
+  .cart-empty a {
+    display: inline-block;
+    background: #1c1917;
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.2s;
+  }
+  .cart-empty a:hover { opacity: 0.85; }
+
+  /* Cart Table */
+  .cart-items { width: 100%; border-collapse: collapse; }
+  .cart-items thead th {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    padding: 0 0 16px;
+    text-align: left;
+    border-bottom: 1px solid #e8e3da;
+  }
+  .cart-items thead th:last-child { text-align: right; }
+  .cart-items tbody td {
+    padding: 20px 0;
+    border-bottom: 1px solid #f0ece6;
+    vertical-align: middle;
+  }
+  .cart-item-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .cart-item-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: #f5f1ec;
+  }
+  .cart-item-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .cart-item-title:hover { color: #4A5D4E; }
+  .cart-item-variant {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+  }
+  .cart-item-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  .cart-qty-wrap {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid #e0dbd4;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .cart-qty-btn {
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .cart-qty-btn:hover { background: #f5f1ec; }
+  .cart-qty-val {
+    width: 36px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    border-left: 1.5px solid #e0dbd4;
+    border-right: 1.5px solid #e0dbd4;
+    background: transparent;
+    padding: 0;
+    height: 32px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .cart-item-remove {
+    background: none;
+    border: none;
+    color: #c0392b;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 8px;
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .cart-item-total {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: right;
+  }
+
+  /* Footer / Summary */
+  .cart-summary {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .cart-subtotal {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .cart-note {
+    font-size: 12px;
+    color: #888;
+  }
+  .cart-checkout-btn {
+    display: inline-block;
+    background: #1c1917;
+    color: #fff;
+    padding: 16px 48px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+  .cart-checkout-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  @media (max-width: 600px) {
+    .cart-page { padding: 24px 16px 60px; }
+    .cart-page h1 { font-size: 22px; }
+    .cart-item-img { width: 60px; height: 60px; }
+    .cart-items thead { display: none; }
+    .cart-items tbody td { display: block; padding: 8px 0; border: none; }
+    .cart-items tbody tr { border-bottom: 1px solid #f0ece6; padding: 16px 0; display: block; }
+    .cart-item-total { text-align: left; }
+    .cart-summary { align-items: center; }
+  }
+</style>
+
+<div class="cart-page">
+  <h1>Your Cart</h1>
+
+  {% if cart.item_count == 0 %}
+    <div class="cart-empty">
+      <p>Your cart is currently empty.</p>
+      <a href="/collections/all">Continue Shopping</a>
+    </div>
+  {% else %}
+    <p class="cart-count-label">{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} in your cart</p>
+
+    <form action="/cart" method="post" novalidate>
+      <table class="cart-items">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th style="text-align:right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr>
+              <td>
+                <div class="cart-item-info">
+                  {% if item.image %}
+                    <img src="{{ item.image | img_url: '160x' }}" alt="{{ item.title | escape }}" class="cart-item-img" loading="lazy" />
+                  {% endif %}
+                  <div>
+                    <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                    {% unless item.variant.title == 'Default Title' %}
+                      <div class="cart-item-variant">{{ item.variant.title }}</div>
+                    {% endunless %}
+                    <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-item-remove">Remove</a>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="cart-item-price">{{ item.price | money }}</span>
+              </td>
+              <td>
+                <div class="cart-qty-wrap">
+                  <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" class="cart-qty-btn">−</a>
+                  <input type="text" name="updates[]" value="{{ item.quantity }}" class="cart-qty-val" readonly />
+                  <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" class="cart-qty-btn">+</a>
+                </div>
+              </td>
+              <td class="cart-item-total">{{ item.line_price | money }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="cart-summary">
+        <div class="cart-subtotal">Subtotal: {{ cart.total_price | money }}</div>
+        <p class="cart-note">Shipping & taxes calculated at checkout.</p>
+        <button type="submit" name="checkout" class="cart-checkout-btn">Checkout</button>
+      </div>
+    </form>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}
