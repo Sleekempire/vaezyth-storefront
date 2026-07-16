@@ -434,7 +434,31 @@
       text-align: right;
     }
     .cp-upsell-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .cp-upsell-card {
+      border-radius: 8px;
+    }
+    .cp-upsell-body {
+      padding: 10px 10px 4px !important;
+    }
+    .cp-upsell-item-title {
+      font-size: 11px !important;
+    }
+    .cp-upsell-item-price {
+      font-size: 11px !important;
+    }
+    .cp-upsell-desc {
+      font-size: 9px !important;
+      line-height: 1.25;
+    }
+    .cp-upsell-btn-wrapper {
+      padding: 0 10px 10px !important;
+    }
+    .cp-upsell-card-atc {
+      padding: 8px !important;
+      font-size: 10px !important;
     }
   }
 </style>
@@ -649,10 +673,10 @@
             </a>
 
             <!-- Add to Cart Button -->
-            <div style="padding: 0 16px 16px; margin-top: auto; position: relative; z-index: 5;">
+            <div class="cp-upsell-btn-wrapper" style="padding: 0 16px 16px; margin-top: auto; position: relative; z-index: 5;">
               <form action="/cart/add" method="post" style="margin: 0;">
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-                <button type="submit" style="width: 100%; padding: 10px; background: #4A5D4E; color: #fff; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                <button type="submit" class="cp-upsell-card-atc" style="width: 100%; padding: 10px; background: #4A5D4E; color: #fff; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
                   Add to Cart
                 </button>
               </form>
