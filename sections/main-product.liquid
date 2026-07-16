@@ -545,8 +545,6 @@
 
         <div class="vp-divider"></div>
 
-        <p class="vp-short-desc">{{ product.description | strip_html | truncatewords: 40 }}</p>
-
         {% form 'product', product %}
           <input type="hidden" name="id" id="VpVariantId" value="{{ product.variants.first.id }}">
 
