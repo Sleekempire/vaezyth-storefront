@@ -328,6 +328,7 @@
     position: relative;
     box-shadow: 0 4px 12px rgba(0,0,0,0.01);
     transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
   }
   .cp-upsell-card:hover {
     transform: translateY(-2px);
@@ -350,6 +351,7 @@
     right: 12px;
     width: 32px;
     height: 32px;
+    z-index: 10;
     background: #fff;
     border-radius: 50%;
     display: flex;
@@ -633,7 +635,7 @@
                 </button>
               </form>
 
-              <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;">
+              <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; position: relative; z-index: 2;">
                 <!-- Image -->
                 <div class="cp-upsell-img-wrap">
                   {% if product.featured_image %}
