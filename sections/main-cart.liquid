@@ -626,16 +626,8 @@
             {% assign desc_index = forloop.index0 %}
             {% assign product_desc = upsell_descriptions[desc_index] %}
             
-            <div class="cp-upsell-card">
-              <!-- Quick Add Button -->
-              <form action="/cart/add" method="post" style="margin: 0;">
-                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-                <button type="submit" class="cp-upsell-quick-add" aria-label="Add to bag">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                </button>
-              </form>
-
-              <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; position: relative; z-index: 2;">
+            <div class="cp-upsell-card" style="display: flex; flex-direction: column;">
+              <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block; flex-grow: 1; position: relative; z-index: 2;">
                 <!-- Image -->
                 <div class="cp-upsell-img-wrap">
                   {% if product.featured_image %}
@@ -644,7 +636,7 @@
                 </div>
 
                 <!-- Info -->
-                <div class="cp-upsell-body">
+                <div class="cp-upsell-body" style="padding: 16px 16px 8px;">
                   <div class="cp-upsell-meta">
                     <h4 class="cp-upsell-item-title">{{ product.title }}</h4>
                     <span class="cp-upsell-item-price">{{ product.price | money_without_trailing_zeros }}</span>
@@ -652,6 +644,16 @@
                   <p class="cp-upsell-desc">{{ product_desc }}</p>
                 </div>
               </a>
+
+              <!-- Add to Cart Button -->
+              <div style="padding: 0 16px 16px; margin-top: auto; position: relative; z-index: 5;">
+                <form action="/cart/add" method="post" style="margin: 0;">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  <button type="submit" style="width: 100%; padding: 10px; background: #4A5D4E; color: #fff; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                    Add to Cart
+                  </button>
+                </form>
+              </div>
             </div>
           {% endfor %}
         </div>
