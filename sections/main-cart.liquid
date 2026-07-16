@@ -462,9 +462,9 @@
               <div class="luxury-item-card">
                 <!-- Image + Rating Column -->
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; width: 90px;">
-                  <div class="luxury-item-img-wrap" style="margin-bottom: 0;">
+                  <a href="{{ item.url }}" class="luxury-item-img-wrap" style="margin-bottom: 0; display: block;">
                     <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.title | escape }}" class="luxury-item-img" />
-                  </div>
+                  </a>
                   <!-- Rating -->
                   {% assign rating_mod = item.product.id | modulo: 5 %}
                   {% if rating_mod == 0 %}
@@ -633,21 +633,23 @@
                 </button>
               </form>
 
-              <!-- Image -->
-              <div class="cp-upsell-img-wrap">
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | img_url: '300x' }}" alt="{{ product.title | escape }}" loading="lazy" />
-                {% endif %}
-              </div>
-
-              <!-- Info -->
-              <div class="cp-upsell-body">
-                <div class="cp-upsell-meta">
-                  <h4 class="cp-upsell-item-title">{{ product.title }}</h4>
-                  <span class="cp-upsell-item-price">{{ product.price | money_without_trailing_zeros }}</span>
+              <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block;">
+                <!-- Image -->
+                <div class="cp-upsell-img-wrap">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | img_url: '300x' }}" alt="{{ product.title | escape }}" loading="lazy" />
+                  {% endif %}
                 </div>
-                <p class="cp-upsell-desc">{{ product_desc }}</p>
-              </div>
+
+                <!-- Info -->
+                <div class="cp-upsell-body">
+                  <div class="cp-upsell-meta">
+                    <h4 class="cp-upsell-item-title">{{ product.title }}</h4>
+                    <span class="cp-upsell-item-price">{{ product.price | money_without_trailing_zeros }}</span>
+                  </div>
+                  <p class="cp-upsell-desc">{{ product_desc }}</p>
+                </div>
+              </a>
             </div>
           {% endfor %}
         </div>
