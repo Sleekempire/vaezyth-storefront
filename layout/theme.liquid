@@ -26,5 +26,21 @@
     {% include 'cart-drawer' %}
     
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    <!-- Begin Google Customer Reviews Badge -->
+    <script id='merchantWidgetScript' src="https://www.gstatic.com/shopping/merchant/merchantwidget.js" defer></script>
+    <script>
+      merchantWidgetScript.addEventListener('load', function () {
+        merchantwidget.start({
+          "merchant_id": 5826438944,
+          "position": "BOTTOM_RIGHT"
+        });
+      });
+    </script>
+    <style>
+      /* To hide the Google Badge, uncomment the line below: */
+      /* #gts-badge, .gts-badge { display: none !important; } */
+    </style>
+    <!-- End Google Customer Reviews Badge -->
   </body>
 </html>
