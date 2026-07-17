@@ -64,6 +64,7 @@
     color: inherit;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
+    cursor: pointer;
   }
   .cf-card:hover {
     box-shadow: 0 12px 36px rgba(0,0,0,0.10);
@@ -275,7 +276,7 @@
           {% assign btype = badge_types[bi] %}
           {% assign blabel = badge_labels[bi] %}
           {% assign rating_str = ratings_list[bi] %}
-          <div class="cf-card">
+          <div class="cf-card" onclick="if (!event.target.closest('.cf-atc-btn') && !event.target.closest('.cf-wishlist-btn')) window.location.href='{{ product.url }}';">
             <div class="cf-card-img-wrap">
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" loading="lazy" />
