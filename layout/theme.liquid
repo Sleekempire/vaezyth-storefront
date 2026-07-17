@@ -42,5 +42,25 @@
       #gts-badge, .gts-badge { display: none !important; }
     </style>
     <!-- End Google Customer Reviews Badge -->
+
+    {% if request.path contains '/orders/' or request.path contains '/thank' or request.path contains '/thank_you' %}
+      <!-- Begin Google Customer Reviews Opt-in -->
+      <script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+      <script>
+        window.renderOptIn = function() {
+          window.gapi.load('surveyoptin', function() {
+            window.gapi.surveyoptin.render({
+              // REQUIRED FIELDS
+              "merchant_id": 5826438944,
+              "order_id": "{{ order.name | default: checkout.order_name | escape }}",
+              "email": "{{ order.email | default: checkout.email }}",
+              "delivery_country": "{{ order.shipping_address.country_code | default: checkout.shipping_address.country_code }}",
+              "estimated_delivery_date": "{{ 'now' | date: '%s' | plus: 864000 | date: '%Y-%m-%d' }}"
+            });
+          });
+        }
+      </script>
+      <!-- End Google Customer Reviews Opt-in -->
+    {% endif %}
   </body>
 </html>
